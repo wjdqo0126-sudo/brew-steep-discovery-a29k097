@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brew & Steep - Coffee & Tea Discovery & Timer</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#FAF6F0',
+                            100: '#F4ECE1',
+                            200: '#E7D7C1',
+                            300: '#D5BD9D',
+                            400: '#C2A177',
+                            500: '#A78051',
+                            600: '#8A643B',
+                            700: '#6E4C2C',
+                            800: '#523720',
+                            900: '#382314',
+                            gold: '#D4AF37',
+                            tea: '#4A6B53'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'Noto Sans KR', 'Noto Sans JP', 'Noto Sans SC', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans KR', 'Noto Sans JP', 'Noto Sans SC', sans-serif;
+            background-color: #0f0c08;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        .glass-header {
+            background: rgba(15, 12, 8, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .glass-card {
+            background: rgba(28, 23, 18, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(167, 128, 81, 0.2);
+        }
+
+        .hero-bg {
+            background: linear-gradient(180deg, rgba(15, 12, 8, 0.4) 0%, rgba(15, 12, 8, 0.95) 100%), 
+                        url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat fixed;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF 0%, #E7D7C1 40%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0c08;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #382314;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #A78051;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-200">
+
+    <header class="fixed top-0 left-0 right-0 z-50 glass-header transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-brand-500/20 border border-brand-500/40 flex items-center justify-center text-brand-gold group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-mug-hot text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-serif text-xl sm:text-2xl font-bold tracking-wider gold-gradient-text block">BREW & STEEP</span>
+                    <span class="text-[9px] text-gray-400 tracking-widest uppercase block -mt-1">Craft Coffee & Fine Tea</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#quiz" class="nav-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.quiz">취향 찾기</a>
+                <a href="#archive" class="nav-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.archive">아카이브</a>
+                <a href="#timer" class="nav-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.timer">추출 타이머</a>
+                <a href="#guide" class="nav-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.guide">가이드</a>
+            </nav>
+
+            <!-- Language Switcher & Mobile Menu Button -->
+            <div class="flex items-center gap-3 sm:gap-4">
+                <div class="relative inline-block text-left">
+                    <select id="lang-select" onchange="changeLanguage(this.value)" class="bg-brand-900/80 text-brand-200 text-xs sm:text-sm border border-brand-500/30 rounded-lg px-3 py-1.5 focus:outline-none focus:border-brand-gold cursor-pointer font-medium">
+                        <option value="ko">한국어 (KO)</option>
+                        <option value="en">English (EN)</option>
+                        <option value="ja">日本語 (JA)</option>
+                        <option value="zh">中文 (ZH)</option>
+                    </select>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-300 hover:text-white focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-900/95 border-b border-brand-500/20 px-4 pt-2 pb-6 space-y-3 text-center">
+            <a href="#quiz" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-brand-gold font-medium" data-i18n="nav.quiz">취향 찾기</a>
+            <a href="#archive" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-brand-gold font-medium" data-i18n="nav.archive">아카이브</a>
+            <a href="#timer" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-brand-gold font-medium" data-i18n="nav.timer">추출 타이머</a>
+            <a href="#guide" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-brand-gold font-medium" data-i18n="nav.guide">가이드</a>
+        </div>
+    </header>
+
+    <section id="hero" class="hero-bg min-h-screen flex items-center justify-center relative px-4 pt-24 pb-16">
+        <div class="max-w-5xl mx-auto text-center z-10 space-y-8">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-300 text-xs sm:text-sm tracking-wider uppercase font-semibold animate-pulse">
+                <i class="fa-solid fa-sparkles text-brand-gold"></i>
+                <span data-i18n="hero.tagline">Find Your Perfect Brew</span>
+            </div>
+
+            <!-- Main Catchy Headline -->
+            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-extrabold text-white leading-tight tracking-normal">
+                <span data-i18n="hero.title" class="gold-gradient-text block mb-3">당신의 커피 취향은 어떠십니까?</span>
+            </h1>
+
+            <p class="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed" data-i18n="hero.subtitle">
+                산미의 경쾌함부터 고소한 바디감, 차의 은은한 향미까지. 당신만을 위한 섬세한 맞춤 테이스팅 가이드와 스마트 추출 타이머.
+            </p>
+
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#quiz" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-500 to-brand-700 text-white font-semibold text-base shadow-lg shadow-brand-900/50 hover:from-brand-400 hover:to-brand-600 transition-all hover:scale-105 flex items-center justify-center gap-3 border border-brand-400/30">
+                    <span data-i18n="hero.ctaQuiz">내 취향 찾기 시작</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#timer" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card text-brand-200 font-semibold text-base hover:bg-brand-900/60 transition-all hover:text-brand-gold flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-stopwatch text-brand-gold"></i>
+                    <span data-i18n="hero.ctaTimer">추출 타이머 사용하기</span>
+                </a>
+            </div>
+
+            <!-- Feature Badges -->
+            <div class="pt-12 grid grid-cols-2 md:grid-cols-4 gap-4 text-center border-t border-white/10 mt-12">
+                <div class="p-3">
+                    <div class="text-brand-gold text-xl mb-1"><i class="fa-solid fa-compass"></i></div>
+                    <div class="text-sm font-semibold text-gray-200" data-i18n="feat.quiz">맞춤 프로파일링</div>
+                    <div class="text-xs text-gray-400" data-i18n="feat.quizDesc">4단계 알고리즘 분석</div>
+                </div>
+                <div class="p-3">
+                    <div class="text-brand-gold text-xl mb-1"><i class="fa-solid fa-seedling"></i></div>
+                    <div class="text-sm font-semibold text-gray-200" data-i18n="feat.archive">스페셜티 카탈로그</div>
+                    <div class="text-xs text-gray-400" data-i18n="feat.archiveDesc">커피 & 파인 티 12종</div>
+                </div>
+                <div class="p-3">
+                    <div class="text-brand-gold text-xl mb-1"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <div class="text-sm font-semibold text-gray-200" data-i18n="feat.timer">스마트 추출 타이머</div>
+                    <div class="text-xs text-gray-400" data-i18n="feat.timerDesc">프리셋 & 구간 알림</div>
+                </div>
+                <div class="p-3">
+                    <div class="text-brand-gold text-xl mb-1"><i class="fa-solid fa-book-open"></i></div>
+                    <div class="text-sm font-semibold text-gray-200" data-i18n="feat.guide">마스터 추출 레시피</div>
+                    <div class="text-xs text-gray-400" data-i18n="feat.guideDesc">비율 및 온도 가이드</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center hidden sm:block">
+            <a href="#quiz" class="text-gray-400 hover:text-brand-gold transition-colors flex flex-col items-center gap-2">
+                <span class="text-xs uppercase tracking-widest" data-i18n="hero.scroll">SCROLL DOWN</span>
+                <i class="fa-solid fa-chevron-down animate-bounce text-sm"></i>
+            </a>
+        </div>
+    </section>
+
+    <section id="quiz" class="py-24 px-4 relative max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-brand-gold text-xs font-bold tracking-widest uppercase block mb-2" data-i18n="quiz.sectionTitle">INTERACTIVE QUIZ</span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4" data-i18n="quiz.heading">나만의 음료 찾기</h2>
+            <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base" data-i18n="quiz.subheading">몇 가지 간단한 질문에 답하고, 당신의 기분과 입맛에 딱 맞는 원두 또는 찻잎을 추천받아보세요.</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 sm:p-10 relative overflow-hidden shadow-2xl">
+            <!-- Progress Bar -->
+            <div id="quiz-progress-bar-bg" class="w-full bg-gray-800 h-2 rounded-full mb-8 overflow-hidden">
+                <div id="quiz-progress-bar" class="bg-gradient-to-r from-brand-500 to-brand-gold h-full w-1/4 transition-all duration-300"></div>
+            </div>
+
+            <!-- Quiz Questions Box -->
+            <div id="quiz-box">
+                <div class="text-xs font-semibold text-brand-300 uppercase tracking-wider mb-2">
+                    <span data-i18n="quiz.step">Step</span> <span id="quiz-current-step">1</span> / 4
+                </div>
+                <h3 id="quiz-question" class="text-xl sm:text-2xl font-bold text-white mb-6"></h3>
+
+                <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Options injected via JS -->
+                </div>
+            </div>
+
+            <!-- Quiz Result Box (Hidden by default) -->
+            <div id="quiz-result" class="hidden text-center py-6 space-y-6">
+                <div class="w-20 h-20 mx-auto rounded-full bg-brand-500/20 border border-brand-gold flex items-center justify-center text-brand-gold text-3xl animate-bounce">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+                <div>
+                    <span class="text-xs text-brand-300 uppercase tracking-widest font-bold" data-i18n="quiz.resultBadge">RECOMMENDED FOR YOU</span>
+                    <h3 id="result-title" class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1 mb-2"></h3>
+                    <p id="result-desc" class="text-gray-300 max-w-xl mx-auto text-sm sm:text-base leading-relaxed"></p>
+                </div>
+
+                <!-- Tasting Notes Tags -->
+                <div id="result-notes" class="flex flex-wrap justify-center gap-2 py-2">
+                    <!-- Dynamic Notes -->
+                </div>
+
+                <div class="pt-4 flex flex-col sm:flex-row justify-center gap-4">
+                    <button onclick="goToResultTimer()" class="px-6 py-3 rounded-xl bg-brand-500 text-white font-semibold hover:bg-brand-600 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play"></i>
+                        <span data-i18n="quiz.brewNow">이 음료 추출 타이머 시작</span>
+                    </button>
+                    <button onclick="resetQuiz()" class="px-6 py-3 rounded-xl bg-gray-800 text-gray-300 font-semibold hover:bg-gray-700 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span data-i18n="quiz.retry">다시 검사하기</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="archive" class="py-24 px-4 bg-black/40 border-t border-b border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase block mb-2" data-i18n="archive.sectionTitle">CURATED COLLECTION</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4" data-i18n="archive.heading">음료 아카이브</h2>
+                <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base" data-i18n="archive.subheading">엄선된 프리미엄 원두와 최고급 찻잎의 테이스팅 노트와 추출 스펙을 탐색해보세요.</p>
+
+                <!-- Filter Buttons -->
+                <div class="flex justify-center gap-3 mt-8">
+                    <button onclick="filterCatalog('all')" id="btn-filter-all" class="filter-btn active px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-brand-500 text-white border border-brand-400 transition-all">전체 All</button>
+                    <button onclick="filterCatalog('coffee')" id="btn-filter-coffee" class="filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-gray-800/80 text-gray-300 border border-gray-700 hover:border-brand-500 transition-all">커피 Coffee</button>
+                    <button onclick="filterCatalog('tea')" id="btn-filter-tea" class="filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-gray-800/80 text-gray-300 border border-gray-700 hover:border-brand-500 transition-all">차 Tea</button>
+                </div>
+            </div>
+
+            <!-- Cards Grid -->
+            <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamically Populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="timer" class="py-24 px-4 relative max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-brand-gold text-xs font-bold tracking-widest uppercase block mb-2" data-i18n="timer.sectionTitle">PRECISION TIMER</span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4" data-i18n="timer.heading">스마트 추출 타이머</h2>
+            <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base" data-i18n="timer.subheading">완벽한 원두와 찻잎의 맛을 끌어내기 위한 황금 시간. 프리셋 선택 또는 사용자 지정 설정.</p>
+        </div>
+
+        <!-- Timer Card -->
+        <div class="glass-card rounded-3xl p-6 sm:p-12 shadow-2xl border border-brand-500/20">
+            <!-- Preset Selector -->
+            <div class="mb-10">
+                <label class="block text-xs font-semibold text-brand-300 uppercase tracking-widest mb-3 text-center" data-i18n="timer.selectPreset">추출 메뉴 선택 (PRESETS)</label>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2" id="timer-presets">
+                    <!-- Presets injected via JS -->
+                </div>
+            </div>
+
+            <!-- Main Timer Display & SVG Ring -->
+            <div class="flex flex-col items-center justify-center my-8">
+                <div class="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center">
+                    <!-- SVG Progress Circle -->
+                    <svg class="w-full h-full" viewBox="0 0 100 100">
+                        <circle class="text-gray-800 stroke-current" stroke-width="4" cx="50" cy="50" r="42" fill="transparent"></circle>
+                        <circle id="timer-progress" class="progress-ring__circle text-brand-gold stroke-current" stroke-width="4" stroke-linecap="round" cx="50" cy="50" r="42" fill="transparent" stroke-dasharray="263.89" stroke-dashoffset="0"></circle>
+                    </svg>
+
+                    <!-- Center Digital Display -->
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                        <span id="timer-display" class="font-serif text-5xl sm:text-6xl font-bold text-white tracking-tighter">03:00</span>
+                        <span id="timer-step-text" class="text-xs sm:text-sm font-medium text-brand-300 mt-2 px-4 py-1 rounded-full bg-brand-900/60 border border-brand-500/30 max-w-[80%] truncate">준비 완료 (Ready)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timer Controls -->
+            <div class="flex items-center justify-center gap-4 mt-8">
+                <button id="timer-start-btn" onclick="toggleTimer()" class="w-36 py-3.5 rounded-xl bg-gradient-to-r from-brand-500 to-brand-700 hover:from-brand-400 hover:to-brand-600 text-white font-bold text-base shadow-lg transition-all hover:scale-105 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-play" id="timer-icon"></i>
+                    <span id="timer-btn-text" data-i18n="timer.start">시작</span>
+                </button>
+                <button onclick="resetTimer()" class="px-6 py-3.5 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold text-base transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span data-i18n="timer.reset">리셋</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="guide" class="py-24 px-4 bg-black/40 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase block mb-2" data-i18n="guide.sectionTitle">BREWING MASTERCLASS</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4" data-i18n="guide.heading">마스터 추출 가이드</h2>
+                <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base" data-i18n="guide.subheading">기본 원칙만 지키면 당신의 홈카페가 전문 에스프레소 바/찻집이 됩니다.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Golden Ratio -->
+                <div class="glass-card rounded-2xl p-8 hover:border-brand-gold/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/20 text-brand-gold flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-3" data-i18n="guide.card1Title">황금 비율 (Ratio)</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n="guide.card1Desc">
+                        드립 커피는 원두 1g 당 물 15~16g(1:15~16), 차는 잎 2~3g 당 물 200ml가 표준 기준입니다.
+                    </p>
+                    <ul class="text-xs text-brand-300 space-y-2 border-t border-white/10 pt-4">
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>드립: 18g 원두 + 280ml 물</li>
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>잎차: 3g 찻잎 + 250ml 물</li>
+                    </ul>
+                </div>
+
+                <!-- Water Temp -->
+                <div class="glass-card rounded-2xl p-8 hover:border-brand-gold/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/20 text-brand-gold flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-temperature-half"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-3" data-i18n="guide.card2Title">물 온도 (Water Temp)</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n="guide.card2Desc">
+                        약배전 원두 및 홍차는 높은 온도(92~95°C), 녹차는 낮은 온도(70~80°C)에서 쓴맛 없이 향이 살아납니다.
+                    </p>
+                    <ul class="text-xs text-brand-300 space-y-2 border-t border-white/10 pt-4">
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>커피: 91°C ~ 94°C</li>
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>녹차: 75°C / 홍차: 95°C</li>
+                    </ul>
+                </div>
+
+                <!-- Grind Size & Time -->
+                <div class="glass-card rounded-2xl p-8 hover:border-brand-gold/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/20 text-brand-gold flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-wheat-awn"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-3" data-i18n="guide.card3Title">분쇄도 & 시간 (Grind & Time)</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n="guide.card3Desc">
+                        굵게 빻을수록 추출 시간을 길게, 가늘게 빻을수록 짧게 가져가 성분의 과다/미달 추출을 방지합니다.
+                    </p>
+                    <ul class="text-xs text-brand-300 space-y-2 border-t border-white/10 pt-4">
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>에스프레소: 극세립 (25-30초)</li>
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>핸드드립: 중세립 (2분30초)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 px-4 border-t border-white/10 bg-black text-gray-500 text-xs sm:text-sm text-center">
+        <div class="max-w-7xl mx-auto space-y-4">
+            <div class="flex justify-center items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-brand-500/20 border border-brand-500/40 flex items-center justify-center text-brand-gold">
+                    <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <span class="font-serif text-lg font-bold text-white tracking-wider">BREW & STEEP</span>
+            </div>
+            <p data-i18n="footer.copy">© 2026 BREW & STEEP. Craft Coffee & Fine Tea Discovery Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. Multilingual Translations Dictionary ---
+        const i18n = {
+            ko: {
+                nav: { quiz: "취향 찾기", archive: "아카이브", timer: "추출 타이머", guide: "가이드" },
+                hero: {
+                    tagline: "Find Your Perfect Brew",
+                    title: "당신의 커피 취향은 어떠십니까?",
+                    subtitle: "산미의 경쾌함부터 고소한 바디감, 차의 은은한 향미까지. 당신만을 위한 섬세한 맞춤 테이스팅 가이드와 스마트 추출 타이머.",
+                    ctaQuiz: "내 취향 찾기 시작",
+                    ctaTimer: "추출 타이머 사용하기",
+                    scroll: "SCROLL DOWN"
+                },
+                feat: {
+                    quiz: "맞춤 프로파일링", quizDesc: "4단계 알고리즘 분석",
+                    archive: "스페셜티 카탈로그", archiveDesc: "커피 & 파인 티 12종",
+                    timer: "스마트 추출 타이머", timerDesc: "프리셋 & 구간 알림",
+                    guide: "마스터 추출 레시피", guideDesc: "비율 및 온도 가이드"
+                },
+                quiz: {
+                    sectionTitle: "INTERACTIVE QUIZ",
+                    heading: "나만의 음료 찾기",
+                    subheading: "몇 가지 간단한 질문에 답하고, 당신의 기분과 입맛에 딱 맞는 원두 또는 찻잎을 추천받아보세요.",
+                    step: "단계",
+                    resultBadge: "당신만을 위한 추천 음료",
+                    brewNow: "이 음료 추출 타이머 시작",
+                    retry: "다시 검사하기"
+                },
+                archive: {
+                    sectionTitle: "CURATED COLLECTION",
+                    heading: "음료 아카이브",
+                    subheading: "엄선된 프리미엄 원두와 최고급 찻잎의 테이스팅 노트와 추출 스펙을 탐색해보세요."
+                },
+                timer: {
+                    sectionTitle: "PRECISION TIMER",
+                    heading: "스마트 추출 타이머",
+                    subheading: "완벽한 원두와 찻잎의 맛을 끌어내기 위한 황금 시간. 프리셋 선택 또는 사용자 지정 설정.",
+                    selectPreset: "추출 메뉴 선택 (PRESETS)",
+                    start: "시작",
+                    pause: "일시정지",
+                    reset: "리셋"
+                },
+                guide: {
+                    sectionTitle: "BREWING MASTERCLASS",
+                    heading: "마스터 추출 가이드",
+                    subheading: "기본 원칙만 지키면 당신의 홈카페가 전문 에스프레소 바/찻집이 됩니다.",
+                    card1Title: "황금 비율 (Ratio)",
+                    card1Desc: "드립 커피는 원두 1g 당 물 15~16g(1:15~16), 차는 잎 2~3g 당 물 200ml가 표준 기준입니다.",
+                    card2Title: "물 온도 (Water Temp)",
+                    card2Desc: "약배전 원두 및 홍차는 높은 온도(92~95°C), 녹차는 낮은 온도(70~80°C)에서 쓴맛 없이 향이 살아납니다.",
+                    card3Title: "분쇄도 & 시간 (Grind & Time)",
+                    card3Desc: "굵게 빻을수록 추출 시간을 길게, 가늘게 빻을수록 짧게 가져가 성분의 과다/미달 추출을 방지합니다."
+                },
+                footer: {
+                    copy: "© 2026 BREW & STEEP. 커피 & 차 탐색 및 정밀 추출 플랫폼. All rights reserved."
+                }
+            },
+            en: {
+                nav: { quiz: "Taste Quiz", archive: "Archive", timer: "Brew Timer", guide: "Guide" },
+                hero: {
+                    tagline: "Find Your Perfect Brew",
+                    title: "What is your coffee preference?",
+                    subtitle: "From bright acidity to rich nutty notes, or delicate tea aromas. Your personalized tasting guide and precision brew timer.",
+                    ctaQuiz: "Start Preference Quiz",
+                    ctaTimer: "Use Brew Timer",
+                    scroll: "SCROLL DOWN"
+                },
+                feat: {
+                    quiz: "Custom Profile", quizDesc: "4-Step Smart Matching",
+                    archive: "Specialty Catalog", archiveDesc: "12 Curated Coffee & Teas",
+                    timer: "Smart Brew Timer", timerDesc: "Presets & Stage Alerts",
+                    guide: "Master Brewing Guide", guideDesc: "Ratio & Temp Standards"
+                },
+                quiz: {
+                    sectionTitle: "INTERACTIVE QUIZ",
+                    heading: "Find Your Signature Brew",
+                    subheading: "Answer a few simple questions to discover the exact bean or tea leaf profile matching your palate.",
+                    step: "Step",
+                    resultBadge: "RECOMMENDED FOR YOU",
+                    brewNow: "Start Timer For This Brew",
+                    retry: "Retake Quiz"
+                },
+                archive: {
+                    sectionTitle: "CURATED COLLECTION",
+                    heading: "Beverage Archive",
+                    subheading: "Explore tasting notes and extraction specs for premium beans and fine tea leaves."
+                },
+                timer: {
+                    sectionTitle: "PRECISION TIMER",
+                    heading: "Smart Brew Timer",
+                    subheading: "Golden time for unlocking maximum flavor. Choose a preset or customize.",
+                    selectPreset: "SELECT PRESET",
+                    start: "Start",
+                    pause: "Pause",
+                    reset: "Reset"
+                },
+                guide: {
+                    sectionTitle: "BREWING MASTERCLASS",
+                    heading: "Master Extraction Guide",
+                    subheading: "Mastering core fundamentals elevates your home café to specialty standards.",
+                    card1Title: "Golden Ratio",
+                    card1Desc: "Drip coffee uses 1:15-16 bean-to-water ratio; fine tea uses 2-3g leaves per 200ml water.",
+                    card2Title: "Water Temperature",
+                    card2Desc: "Light roast coffee & black tea need 92-95°C; green tea thrives at 70-80°C to prevent bitterness.",
+                    card3Title: "Grind & Timing",
+                    card3Desc: "Coarser grinds require longer steep times; finer grinds require fast extraction."
+                },
+                footer: {
+                    copy: "© 2026 BREW & STEEP. Craft Coffee & Fine Tea Discovery Platform. All rights reserved."
+                }
+            },
+            ja: {
+                nav: { quiz: "好み診断", archive: "アーカイブ", timer: "タイマー", guide: "ガイド" },
+                hero: {
+                    tagline: "Find Your Perfect Brew",
+                    title: "あなたのコーヒーの好みは？",
+                    subtitle: "爽やかな酸味から香ばしいコク、お茶の繊細な香りまで。あなただけのパーソナルテ이스ティングガイドと抽出タイマー。",
+                    ctaQuiz: "診断を始める",
+                    ctaTimer: "タイマーを使う",
+                    scroll: "SCROLL DOWN"
+                },
+                feat: {
+                    quiz: "パーソナル診断", quizDesc: "4ステップ分析",
+                    archive: "スペシャルティカタログ", archiveDesc: "厳選12種の銘柄",
+                    timer: "スマートタイマー", timerDesc: "プリセット＆アラート",
+                    guide: "抽出マスターガイド", guideDesc: "黄金比と温度管理"
+                },
+                quiz: {
+                    sectionTitle: "INTERACTIVE QUIZ",
+                    heading: "お気に入りの一杯を見つける",
+                    subheading: "いくつかの質問に答えるだけで、今の気分にぴったりのコーヒー豆や茶葉をおすすめします。",
+                    step: "ステップ",
+                    resultBadge: "あなたへのおすすめ",
+                    brewNow: "このメニューでタイマー開始",
+                    retry: "もう一度診断する"
+                },
+                archive: {
+                    sectionTitle: "CURATED COLLECTION",
+                    heading: "ドリンク アーカイブ",
+                    subheading: "厳選された豆と茶葉のテイスティングノートと抽出スペックをチェック。"
+                },
+                timer: {
+                    sectionTitle: "PRECISION TIMER",
+                    heading: "スマート抽出タイマー",
+                    subheading: "最高の味わいを引き出す黄金の時間。プリセットを選択して開始。",
+                    selectPreset: "プリセット選択",
+                    start: "スタート",
+                    pause: "一時停止",
+                    reset: "リセット"
+                },
+                guide: {
+                    sectionTitle: "BREWING MASTERCLASS",
+                    heading: "マスター抽出ガイド",
+                    subheading: "基本の原則を守るだけで、ご自宅が本格的なカフェに生まれ変わります。",
+                    card1Title: "黄金比率 (Ratio)",
+                    card1Desc: "ド립コーヒーは豆1gに対してお湯15〜16g、お茶は茶葉2〜3gに対してお湯200mlが標準です。",
+                    card2Title: "お湯の温度 (Temp)",
+                    card2Desc: "浅煎り豆や紅茶は高め(92〜95℃)、日本茶は低め(70〜80℃)で抽出するのがコツです。",
+                    card3Title: "挽き目と時間 (Grind & Time)",
+                    card3Desc: "粗挽きは長めに、細挽きは短時間で抽出してエグみを防ぎます。"
+                },
+                footer: {
+                    copy: "© 2026 BREW & STEEP. Craft Coffee & Fine Tea Discovery Platform. All rights reserved."
+                }
+            },
+            zh: {
+                nav: { quiz: "口味测验", archive: "风味档案", timer: "萃取计时", guide: "冲煮指南" },
+                hero: {
+                    tagline: "Find Your Perfect Brew",
+                    title: "您 preferred 咖啡口味是什么？",
+                    subtitle: "从明亮酸度到浓郁醇厚，亦或高雅茶香。为您量身定制的品鉴指南与精准萃取计时器。",
+                    ctaQuiz: "开始寻找我的专属风味",
+                    ctaTimer: "使用萃取计时器",
+                    scroll: "SCROLL DOWN"
+                },
+                feat: {
+                    quiz: "个性化分析", quizDesc: "4步智能匹配",
+                    archive: "精品典藏", archiveDesc: "12款精选咖啡与名茶",
+                    timer: "智能计时器", timerDesc: "预设与分段提醒",
+                    guide: "大师冲煮指南", guideDesc: "粉水比与水温标准"
+                },
+                quiz: {
+                    sectionTitle: "INTERACTIVE QUIZ",
+                    heading: "寻找您的专属饮品",
+                    subheading: "只需回答几个简单问题，即可探索最符合您此刻味蕾的咖啡豆或茶叶。",
+                    step: "步骤",
+                    resultBadge: "为您推荐",
+                    brewNow: "开始此饮品计时",
+                    retry: "重新测试"
+                },
+                archive: {
+                    sectionTitle: "CURATED COLLECTION",
+                    heading: "饮品风味档案",
+                    subheading: "探索精选咖啡豆与特级茶叶的风味轮与萃取参数。"
+                },
+                timer: {
+                    sectionTitle: "PRECISION TIMER",
+                    heading: "精准萃取计时器",
+                    subheading: "释放极致风味的黄金萃取时间。选择预设或自定义设置。",
+                    selectPreset: "选择预设 (PRESETS)",
+                    start: "开始",
+                    pause: "暂停",
+                    reset: "重置"
+                },
+                guide: {
+                    sectionTitle: "BREWING MASTERCLASS",
+                    heading: "大师冲煮指南",
+                    subheading: "掌握核心萃取要素，在 home café 即可呈现精品酒吧/茶室级风味。",
+                    card1Title: "黄金粉水比",
+                    card1Desc: "手冲咖啡推荐 1:15~16 粉水比；原叶茶推荐 2~3g 茶叶搭配 200ml 水。",
+                    card2Title: "萃取水温",
+                    card2Desc: "浅焙豆与红茶需 92-95°C 高温；绿茶宜用 70-80°C 水温以避免苦涩。",
+                    card3Title: "研磨度与时间",
+                    card3Desc: "颗粒越粗萃取时间需越长；颗粒越细萃取速度宜越快。"
+                },
+                footer: {
+                    copy: "© 2026 BREW & STEEP. Craft Coffee & Fine Tea Discovery Platform. All rights reserved."
+                }
+            }
+        };
+
+        let currentLang = 'ko';
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                const keys = key.split('.');
+                let val = i18n[lang];
+                keys.forEach(k => {
+                    if (val) val = val[k];
+                });
+                if (val) el.textContent = val;
+            });
+            renderQuizStep();
+            renderCatalog();
+        }
+
+        // --- 2. Interactive Preference Quiz Logic ---
+        const quizQuestions = [
+            {
+                q: { ko: "가장 선호하는 음료 카테고리는?", en: "Which category do you prefer?", ja: "どちらのカテゴリが好きですか？", zh: "您更偏好哪种饮品类别？" },
+                options: [
+                    { label: { ko: "커피 (Coffee)", en: "Coffee", ja: "コーヒー (Coffee)", zh: "咖啡 (Coffee)" }, type: "coffee" },
+                    { label: { ko: "티 / 차 (Tea)", en: "Tea", ja: "お茶 (Tea)", zh: "茶 (Tea)" }, type: "tea" }
+                ]
+            },
+            {
+                q: { ko: "어떤 맛의 성향을 원하시나요?", en: "What flavor profile do you lean towards?", ja: " preferred な味の傾向は？", zh: "您喜欢哪种风味走向？" },
+                options: [
+                    { label: { ko: "화사한 산미 & 과일 향미", en: "Bright Acidity & Fruity Notes", ja: "華やかな酸味＆フルーティー", zh: "明亮酸度与果香" }, flavor: "acidic" },
+                    { label: { ko: "고소하고 묵직한 바디감", en: "Nutty, Chocolatey & Deep Body", ja: "香ばしく深みのあるコク", zh: "坚果黑巧与醇厚感" }, flavor: "nutty" }
+                ]
+            },
+            {
+                q: { ko: "카페인에 대한 민감도는 어떠신가요?", en: "How sensitive are you to caffeine?", ja: "カフェインの好みは？", zh: "您对咖啡因的需求如何？" },
+                options: [
+                    { label: { ko: "각성 효과 필요 (일반)", en: "Normal Caffeine", ja: "カフェインが必要", zh: "需要提神 (正常)" }, caf: "high" },
+                    { label: { ko: "부담 없는 낮은 카페인/디카페인", en: "Low / Herbal Caffeine Free", ja: "カフェイン控えめ / ノンカフェイン", zh: "低咖啡因/无咖啡因" }, caf: "low" }
+                ]
+            },
+            {
+                q: { ko: "선호하는 음료 온도와 스타일은?", en: "Preferred serving temperature?", ja: " preferred な温度・スタイルは？", zh: "您偏好的饮用温度？" },
+                options: [
+                    { label: { ko: "따뜻하고 시원한 드립/우림 (Hot/Ice)", en: "Classic Hot / Gentle Iced Drip", ja: "ホット / 丁寧なドリップ", zh: "经典温热/冰滴" }, style: "hot" },
+                    { label: { ko: "강렬하고 짙은 에스프레소/밀크티", en: "Bold Espresso / Rich Milk Tea", ja: "濃厚なエスプレッソ / ミルクティー", zh: "浓缩/奶茶" }, style: "bold" }
+                ]
+            }
+        ];
+
+        let quizAnswers = {};
+        let currentStep = 0;
+
+        function renderQuizStep() {
+            if (currentStep >= quizQuestions.length) return;
+            const qData = quizQuestions[currentStep];
+            document.getElementById('quiz-question').textContent = qData.q[currentLang];
+            document.getElementById('quiz-current-step').textContent = currentStep + 1;
+            
+            const progressPct = ((currentStep + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress-bar').style.width = progressPct + '%';
+
+            const optsContainer = document.getElementById('quiz-options');
+            optsContainer.innerHTML = '';
+
+            qData.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "p-5 rounded-xl border border-gray-700 bg-brand-900/30 hover:bg-brand-500/20 hover:border-brand-gold text-left font-semibold text-white transition-all hover:scale-[1.02] flex items-center justify-between";
+                btn.innerHTML = `<span>${opt.label[currentLang]}</span> <i class="fa-solid fa-chevron-right text-brand-gold text-sm"></i>`;
+                btn.onclick = () => selectQuizOption(opt);
+                optsContainer.appendChild(btn);
+            });
+        }
+
+        function selectQuizOption(opt) {
+            quizAnswers[currentStep] = opt;
+            currentStep++;
+            if (currentStep < quizQuestions.length) {
+                renderQuizStep();
+            } else {
+                showQuizResult();
+            }
+        }
+
+        function showQuizResult() {
+            document.getElementById('quiz-box').classList.add('hidden');
+            document.getElementById('quiz-progress-bar-bg').classList.add('hidden');
+            document.getElementById('quiz-result').classList.remove('hidden');
+
+            const isTea = quizAnswers[0]?.type === 'tea';
+            const isAcidic = quizAnswers[1]?.flavor === 'acidic';
+
+            let recommended;
+            if (isTea) {
+                recommended = isAcidic ? catalogData[3] : catalogData[4]; // Earl Grey or Sencha/Chamomile
+            } else {
+                recommended = isAcidic ? catalogData[0] : catalogData[1]; // Ethiopia Guji or Colombia Huila
+            }
+
+            document.getElementById('result-title').textContent = recommended.name[currentLang];
+            document.getElementById('result-desc').textContent = recommended.desc[currentLang];
+            
+            const notesContainer = document.getElementById('result-notes');
+            notesContainer.innerHTML = '';
+            recommended.notes.forEach(note => {
+                const badge = document.createElement('span');
+                badge.className = "px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/20 border border-brand-500/40 text-brand-gold";
+                badge.textContent = "# " + note;
+                notesContainer.appendChild(badge);
+            });
+
+            window.recommendedPreset = recommended.presetKey;
+        }
+
+        function resetQuiz() {
+            currentStep = 0;
+            quizAnswers = {};
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-box').classList.remove('hidden');
+            document.getElementById('quiz-progress-bar-bg').classList.remove('hidden');
+            renderQuizStep();
+        }
+
+        function goToResultTimer() {
+            if (window.recommendedPreset) {
+                selectPreset(window.recommendedPreset);
+            }
+            window.location.hash = '#timer';
+        }
+
+        // --- 3. Catalog Data & Filtering ---
+        const catalogData = [
+            {
+                type: 'coffee',
+                presetKey: 'pourover',
+                name: { ko: "에티오피아 예가체프 G1", en: "Ethiopia Yirgacheffe G1", ja: "エチオピア イルガチェフェ G1", zh: "埃塞俄比亚 耶加雪菲 G1" },
+                desc: { ko: "자스민의 고결한 꽃향기와 레몬의 청량한 산미, 실크 같은 드라이한 마무리가 매력적입니다.", en: "Elegantly floral with jasmine, lemon zest acidity, and a silky tea-like body.", ja: "ジャスミンの華やかな香りとレモンの爽やかな酸味、シルキーな飲み口。", zh: "优雅的茉莉花香，柠檬般的爽朗酸度与丝滑茶感。" },
+                roast: "Light Roast",
+                temp: "93°C",
+                time: "02:30",
+                notes: ["Jasmine", "Lemon", "Bergamot"]
+            },
+            {
+                type: 'coffee',
+                presetKey: 'frenchpress',
+                name: { ko: "콜롬비아 수프레모 핑카", en: "Colombia Supremo Finca", ja: "コロンビア スプレモ", zh: "哥伦比亚 慧兰 蕙兰" },
+                desc: { ko: "구운 헤이즐넛의 고소함과 밀크 초콜릿의 단맛이 완벽한 균형을 이루는 클래식한 명품 커피.", en: "Classic balance with roasted hazelnut, milk chocolate, and smooth caramel sweetness.", ja: "ローストヘーゼルナッツとミルクチョコレートの甘みが調和したクラシックな味わい。", zh: "烘烤榛果与牛奶巧克力般的甜感，完美平衡。" },
+                roast: "Medium Roast",
+                temp: "91°C",
+                time: "04:00",
+                notes: ["Hazelnut", "Milk Chocolate", "Caramel"]
+            },
+            {
+                type: 'coffee',
+                presetKey: 'espresso',
+                name: { ko: "시그니처 다크 에스프레소 Blend", en: "Signature Dark Espresso Blend", ja: "シグネチャー ダークブレンド", zh: "招牌深焙意式特调" },
+                desc: { ko: "묵직한 묵직함, 스모키한 다크 초콜릿의 여운과 풍부한 크레마를 느낄 수 있는 대표 블렌드.", en: "Deep body with smoky dark chocolate persistence and velvety rich crema.", ja: "重厚なボディ感、スモーキーなダークチョコの余韻と豊かなクレマ。", zh: "醇厚油脂，黑巧克力般的烟熏长韵与沉稳口感。" },
+                roast: "Dark Roast",
+                temp: "90°C",
+                time: "00:30",
+                notes: ["Cacao", "Smoky", "Crema"]
+            },
+            {
+                type: 'tea',
+                presetKey: 'earlgrey',
+                name: { ko: "프리미엄 얼그레이 리저브", en: "Premium Earl Grey Reserve", ja: "プレミアム アールグレイ リザーブ", zh: "特级豪门伯爵红茶" },
+                desc: { ko: "천연 베르가못 오일과 최고급 실론 홍차가 만나 선사하는 그윽하고 화사한 티 타임.", en: "Fine Ceylon black tea infused with cold-pressed natural Italian bergamot oil.", ja: "天然ベルガモットオイルと最高級セイロン紅茶が織りなす華やかな香り。", zh: "萃取意大利天然佛手柑精油与顶级斯里兰卡红茶。" },
+                roast: "Black Tea",
+                temp: "95°C",
+                time: "03:00",
+                notes: ["Bergamot", "Citrus", "Ceylon"]
+            },
+            {
+                type: 'tea',
+                presetKey: 'sencha',
+                name: { ko: "교토 유기농 센차 (녹차)", en: "Kyoto Organic Sencha", ja: "京都 宇治 煎茶", zh: "京都 宇治有机煎茶" },
+                desc: { ko: "첫 잎의 깊은 감칠맛(감미)과 은은한 풀향, 수색이 맑고 깔끔한 최고급 일본 녹차.", en: "Rich umami sweetness, vibrant green color, and refreshing grassy notes.", ja: "一番茶の深いうま味と爽やかな青香、澄んだ色合いが特徴の最高級煎茶。", zh: "首采幼芽，鲜爽甘醇，茶汤澄澈翠绿。" },
+                roast: "Green Tea",
+                temp: "75°C",
+                time: "02:00",
+                notes: ["Umami", "Fresh Grass", "Sweetness"]
+            },
+            {
+                type: 'tea',
+                presetKey: 'chamomile',
+                name: { ko: "카모마일 허브 블렌드", en: "Chamomile Herbal Blend", ja: "カモミール ハーブブレンド", zh: "洋甘菊舒安草本茶" },
+                desc: { ko: "카페인 없이 밤에 편안히 즐길 수 있는 사과 향 가득한 고요한 허브 티.", en: "Caffeine-free soothing herb tea with natural apple aroma and honey floral notes.", ja: "ノンカフェインで夜にぴったり。りんごのような優しい香りのハーブティー。", zh: "无咖啡因，充满清新苹果甜香与蜂蜜花香的舒缓晚安茶。" },
+                roast: "Herbal Tea",
+                temp: "98°C",
+                time: "05:00",
+                notes: ["Honey Apple", "Floral", "Caffeine Free"]
+            }
+        ];
+
+        function renderCatalog(filter = 'all') {
+            const grid = document.getElementById('catalog-grid');
+            grid.innerHTML = '';
+
+            const filtered = catalogData.filter(item => filter === 'all' || item.type === filter);
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-2xl p-6 flex flex-col justify-between hover:scale-[1.02] transition-all duration-300";
+                
+                let iconClass = item.type === 'coffee' ? 'fa-mug-hot text-brand-gold' : 'fa-leaf text-emerald-400';
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-brand-900/80 border border-brand-500/30 text-brand-200 uppercase tracking-wider">${item.roast}</span>
+                            <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-sm">
+                                <i class="fa-solid ${iconClass}"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white mb-2">${item.name[currentLang]}</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-6">${item.desc[currentLang]}</p>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center justify-between text-xs text-gray-300 border-t border-white/10 pt-4 mb-4">
+                            <span><i class="fa-solid fa-temperature-half text-brand-gold mr-1"></i> ${item.temp}</span>
+                            <span><i class="fa-solid fa-clock text-brand-gold mr-1"></i> ${item.time}</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-1.5 mb-4">
+                            ${item.notes.map(n => `<span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-brand-300">#${n}</span>`).join('')}
+                        </div>
+
+                        <button onclick="selectPreset('${item.presetKey}'); window.location.hash='#timer';" class="w-full py-2.5 rounded-xl bg-brand-500/20 border border-brand-500/40 text-brand-gold hover:bg-brand-500 hover:text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-stopwatch"></i> 타이머에 설정하기
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCatalog(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = "filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-gray-800/80 text-gray-300 border border-gray-700 hover:border-brand-500 transition-all";
+            });
+            const activeBtn = document.getElementById(`btn-filter-${category}`);
+            if (activeBtn) {
+                activeBtn.className = "filter-btn active px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-brand-500 text-white border border-brand-400 transition-all";
+            }
+            renderCatalog(category);
+        }
+
+        // --- 4. Smart Timer Engine & Audio Sound simulation ---
+        const timerPresets = [
+            { key: 'pourover', name: 'Hand Drip', duration: 150, step: 'Pour Over (02:30)' },
+            { key: 'espresso', name: 'Espresso', duration: 30, step: 'Extraction (00:30)' },
+            { key: 'frenchpress', name: 'French Press', duration: 240, step: 'Steeping (04:00)' },
+            { key: 'earlgrey', name: 'Earl Grey', duration: 180, step: 'Steeping Tea (03:00)' },
+            { key: 'sencha', name: 'Sencha Tea', duration: 120, step: 'Steeping Tea (02:00)' },
+            { key: 'chamomile', name: 'Chamomile', duration: 300, step: 'Infusing Herb (05:00)' }
+        ];
+
+        let selectedPreset = timerPresets[0];
+        let remainingSeconds = selectedPreset.duration;
+        let timerInterval = null;
+        let isRunning = false;
+        const totalCircleOffset = 263.89; // 2 * PI * 42
+
+        function initPresetsUI() {
+            const container = document.getElementById('timer-presets');
+            container.innerHTML = '';
+
+            timerPresets.forEach(preset => {
+                const btn = document.createElement('button');
+                btn.id = `preset-btn-${preset.key}`;
+                btn.className = `p-3 rounded-xl border text-xs sm:text-sm font-semibold transition-all flex flex-col items-center justify-center gap-1 ${
+                    preset.key === selectedPreset.key
+                        ? 'border-brand-gold bg-brand-500/20 text-brand-gold shadow-md shadow-brand-500/10'
+                        : 'border-gray-800 bg-brand-900/40 text-gray-400 hover:border-gray-700 hover:text-gray-200'
+                }`;
+                btn.onclick = () => selectPreset(preset.key);
+                btn.innerHTML = `<span>${preset.name}</span><span class="text-[10px] opacity-70">${formatTime(preset.duration)}</span>`;
+                container.appendChild(btn);
+            });
+        }
+
+        function selectPreset(key) {
+            const found = timerPresets.find(p => p.key === key);
+            if (!found) return;
+            selectedPreset = found;
+            resetTimer();
+
+            // Update UI buttons
+            timerPresets.forEach(p => {
+                const b = document.getElementById(`preset-btn-${p.key}`);
+                if (b) {
+                    if (p.key === key) {
+                        b.className = 'p-3 rounded-xl border border-brand-gold bg-brand-500/20 text-brand-gold shadow-md shadow-brand-500/10 text-xs sm:text-sm font-semibold transition-all flex flex-col items-center justify-center gap-1';
+                    } else {
+                        b.className = 'p-3 rounded-xl border border-gray-800 bg-brand-900/40 text-gray-400 hover:border-gray-700 hover:text-gray-200 text-xs sm:text-sm font-semibold transition-all flex flex-col items-center justify-center gap-1';
+                    }
+                }
+            });
+        }
+
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const s = (seconds % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        function updateTimerDisplay() {
+            document.getElementById('timer-display').textContent = formatTime(remainingSeconds);
+            document.getElementById('timer-step-text').textContent = isRunning ? selectedPreset.step : "준비 완료 (Ready)";
+
+            const circle = document.getElementById('timer-progress');
+            const pct = remainingSeconds / selectedPreset.duration;
+            const offset = totalCircleOffset * (1 - pct);
+            circle.style.strokeDashoffset = offset;
+        }
+
+        function toggleTimer() {
+            if (isRunning) {
+                pauseTimer();
+            } else {
+                startTimer();
+            }
+        }
+
+        function startTimer() {
+            if (remainingSeconds <= 0) remainingSeconds = selectedPreset.duration;
+            isRunning = true;
+
+            document.getElementById('timer-icon').className = 'fa-solid fa-pause';
+            document.getElementById('timer-btn-text').textContent = i18n[currentLang].timer.pause;
+
+            timerInterval = setInterval(() => {
+                remainingSeconds--;
+                updateTimerDisplay();
+
+                if (remainingSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    isRunning = false;
+                    playChimeSound();
+                    document.getElementById('timer-icon').className = 'fa-solid fa-play';
+                    document.getElementById('timer-btn-text').textContent = i18n[currentLang].timer.start;
+                    document.getElementById('timer-step-text').textContent = "추출 완료! Enjoy Your Brew";
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            document.getElementById('timer-icon').className = 'fa-solid fa-play';
+            document.getElementById('timer-btn-text').textContent = i18n[currentLang].timer.start;
+            document.getElementById('timer-step-text').textContent = "일시정지됨 (Paused)";
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            remainingSeconds = selectedPreset.duration;
+            document.getElementById('timer-icon').className = 'fa-solid fa-play';
+            document.getElementById('timer-btn-text').textContent = i18n[currentLang].timer.start;
+            updateTimerDisplay();
+        }
+
+        // Web Audio API Synth Beep Sound on Completion
+        function playChimeSound() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+                osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.3); // A5
+
+                gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start();
+                osc.stop(ctx.currentTime + 0.8);
+            } catch(e) {
+                console.log('Audio Context not available');
+            }
+        }
+
+        // --- 5. Mobile Menu Toggle ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // --- 6. Initialization on Load ---
+        window.addEventListener('DOMContentLoaded', () => {
+            renderQuizStep();
+            renderCatalog('all');
+            initPresetsUI();
+            updateTimerDisplay();
+        });
+    </script>
+</body>
+</html>
