@@ -277,7 +277,7 @@
                 <span class="text-brand-gold text-xs font-bold tracking-widest uppercase block mb-2" data-i18n="archive.sectionTitle">CURATED COLLECTION</span>
                 <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4" data-i18n="archive.heading">음료 아카이브</h2>
                 <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base" data-i18n="archive.subheading">엄선된 프리미엄 원두와 최고급 찻잎의 테이스팅 노트와 추출 스펙을 탐색해보세요.</p>
-                <p class="text-gray-500 max-w-xl mx-auto text-xs mt-2" data-i18n="archive.purchaseNote">구매 링크는 상품 검색 또는 판매처로 연결됩니다. 상품, 재고, 가격, 배송 가능 지역은 판매처에서 확인하세요.</p>
+                <p class="text-gray-500 max-w-xl mx-auto text-xs mt-2" data-i18n="archive.purchaseNote">구매 링크는 글로벌 상품 검색 또는 판매처로 연결됩니다. 국가별 배송 가능 여부, 재고, 가격과 관세는 판매처에서 확인하세요.</p>
 
                 <!-- Filter Buttons -->
                 <div class="flex justify-center gap-3 mt-8">
@@ -443,11 +443,11 @@
                     sectionTitle: "CURATED COLLECTION",
                     heading: "음료 아카이브",
                     subheading: "엄선된 프리미엄 원두와 최고급 찻잎의 테이스팅 노트와 추출 스펙을 탐색해보세요.",
-                    purchaseNote: "구매 링크는 상품 검색 또는 판매처로 연결됩니다. 상품, 재고, 가격, 배송 가능 지역은 판매처에서 확인하세요.",
+                    purchaseNote: "구매 링크는 글로벌 상품 검색 또는 판매처로 연결됩니다. 국가별 배송 가능 여부, 재고, 가격과 관세는 판매처에서 확인하세요.",
                     shopSearchCoffee: "원두 구매 검색",
                     shopSearchTea: "차 구매 검색",
-                    shopCoffee: "프릳츠 원두몰",
-                    shopTea: "루피시아 공식몰"
+                    shopCoffee: "Square Mile 글로벌 배송",
+                    shopTea: "루피시아 글로벌 스토어"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -502,11 +502,11 @@
                     sectionTitle: "CURATED COLLECTION",
                     heading: "Beverage Archive",
                     subheading: "Explore tasting notes and extraction specs for premium beans and fine tea leaves.",
-                    purchaseNote: "Purchase links open product searches or retailer stores. Confirm item, stock, price, and shipping availability with the retailer.",
-                    shopSearchCoffee: "Search coffee beans",
-                    shopSearchTea: "Search for this tea",
-                    shopCoffee: "Fritz Coffee Shop",
-                    shopTea: "LUPICIA Official Store"
+                    purchaseNote: "Links open international product searches or retailer stores. Check destination availability, stock, price, and import fees with the retailer.",
+                    shopSearchCoffee: "Search globally for beans",
+                    shopSearchTea: "Search globally for this tea",
+                    shopCoffee: "Square Mile Coffee Roasters",
+                    shopTea: "LUPICIA Global Stores"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -561,11 +561,11 @@
                     sectionTitle: "CURATED COLLECTION",
                     heading: "ドリンク アーカイブ",
                     subheading: "厳選された豆と茶葉のテイスティングノートと抽出スペックをチェック。",
-                    purchaseNote: "購入リンクは商品検索または販売店につながります。在庫・価格・配送地域は販売店でご確認ください。",
-                    shopSearchCoffee: "コーヒー豆を検索",
-                    shopSearchTea: "このお茶を検索",
-                    shopCoffee: "フリッツ コーヒー公式店",
-                    shopTea: "ルピシア公式店"
+                    purchaseNote: "購入リンクは世界向け商品検索または販売店につながります。配送先・在庫・価格・関税は販売店でご確認ください。",
+                    shopSearchCoffee: "世界中からコーヒー豆を検索",
+                    shopSearchTea: "世界中からこのお茶を検索",
+                    shopCoffee: "Square Mile Coffee Roasters",
+                    shopTea: "ルピシア海外向けストア"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -620,11 +620,11 @@
                     sectionTitle: "CURATED COLLECTION",
                     heading: "饮品风味档案",
                     subheading: "探索精选咖啡豆与特级茶叶的风味轮与萃取参数。",
-                    purchaseNote: "购买链接将打开商品搜索或商店页面。商品、库存、价格和配送地区请以商家信息为准。",
-                    shopSearchCoffee: "搜索咖啡豆",
-                    shopSearchTea: "搜索这款茶",
-                    shopCoffee: "Fritz 咖啡豆商店",
-                    shopTea: "LUPICIA 官方商店"
+                    purchaseNote: "购买链接将打开全球商品搜索或商店页面。请向商家确认目的地配送、库存、价格和进口税费。",
+                    shopSearchCoffee: "全球搜索咖啡豆",
+                    shopSearchTea: "全球搜索这款茶",
+                    shopCoffee: "Square Mile 咖啡烘焙商",
+                    shopTea: "LUPICIA 全球商店"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -918,11 +918,11 @@
                 
                 let iconClass = item.type === 'coffee' ? 'fa-mug-hot text-brand-gold' : 'fa-leaf text-emerald-400';
                 const isCoffee = item.type === 'coffee';
-                const productQuery = `${item.name.ko} ${isCoffee ? '원두' : '차'}`;
-                const shoppingUrl = `https://search.shopping.naver.com/search/all?query=${encodeURIComponent(productQuery)}`;
+                const productQuery = `${item.name[currentLang]} ${isCoffee ? 'coffee beans' : 'tea'}`;
+                const shoppingUrl = `https://www.google.com/search?tbm=shop&q=${encodeURIComponent(productQuery)}`;
                 const specialtyStoreUrl = isCoffee
-                    ? 'https://fritz.co.kr/product/list.html?cate_no=24'
-                    : 'https://www.lupicia.com/shop/c/c10/?narrow7=11';
+                    ? 'https://shop.squaremilecoffee.com/'
+                    : 'https://www.lupicia.com/global/';
                 const shoppingLabel = isCoffee ? i18n[currentLang].archive.shopSearchCoffee : i18n[currentLang].archive.shopSearchTea;
                 const storeLabel = isCoffee ? i18n[currentLang].archive.shopCoffee : i18n[currentLang].archive.shopTea;
 
@@ -1139,6 +1139,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
