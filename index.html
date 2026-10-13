@@ -822,6 +822,66 @@
                 temp: "98°C",
                 time: "05:00",
                 notes: ["Honey Apple", "Floral", "Caffeine Free"]
+            },
+            {
+                type: 'coffee',
+                presetKey: 'kenya',
+                name: { ko: "케냐 니에리 AA", en: "Kenya Nyeri AA", ja: "ケニア ニエリ AA", zh: "肯尼亚 涅里 AA" },
+                desc: { ko: "블랙커런트와 자몽의 선명한 산미에 흑설탕 같은 단맛이 더해진 케냐 고지대 커피.", en: "Bright blackcurrant and grapefruit acidity balanced by a lingering brown-sugar sweetness.", ja: "カシスとグレープフルーツの明るい酸味に、黒糖のような甘みが続く高地産コーヒー。", zh: "黑加仑与葡萄柚般明亮的酸质，伴随绵长的红糖甜感。" },
+                roast: "Light Roast",
+                temp: "93°C",
+                time: "02:45",
+                notes: ["Blackcurrant", "Grapefruit", "Brown Sugar"]
+            },
+            {
+                type: 'coffee',
+                presetKey: 'brazil',
+                name: { ko: "브라질 세라도 내추럴", en: "Brazil Cerrado Natural", ja: "ブラジル セラード ナチュラル", zh: "巴西 塞拉多 日晒" },
+                desc: { ko: "헤이즐넛과 밀크 초콜릿의 포근한 풍미, 은은한 캐러멜 단맛이 돋보이는 균형 잡힌 원두.", en: "Comforting hazelnut and milk chocolate notes with gentle caramel sweetness and a smooth finish.", ja: "ヘーゼルナッツとミルクチョコレートの風味に、穏やかなキャラメルの甘み。", zh: "榛果与牛奶巧克力的温润风味，带有柔和焦糖甜感与顺滑尾韵。" },
+                roast: "Medium Roast",
+                temp: "92°C",
+                time: "03:00",
+                notes: ["Hazelnut", "Milk Chocolate", "Caramel"]
+            },
+            {
+                type: 'coffee',
+                presetKey: 'guatemala',
+                name: { ko: "과테말라 안티구아", en: "Guatemala Antigua", ja: "グアテマラ アンティグア", zh: "危地马拉 安提瓜" },
+                desc: { ko: "코코아와 구운 아몬드의 깊은 단맛에 오렌지 껍질의 산뜻함이 어우러진 화산 토양 커피.", en: "Cocoa and toasted almond sweetness lifted by a clean orange-peel brightness.", ja: "ココアとローストアーモンドの甘みに、オレンジピールの爽やかさが重なる火山土壌のコーヒー。", zh: "可可与烘烤杏仁的甜香，交织着清新的橙皮风味。" },
+                roast: "Medium Roast",
+                temp: "93°C",
+                time: "02:45",
+                notes: ["Cocoa", "Almond", "Orange"]
+            },
+            {
+                type: 'tea',
+                presetKey: 'assam',
+                name: { ko: "아삼 세컨드 플러시", en: "Assam Second Flush", ja: "アッサム セカンドフラッシュ", zh: "阿萨姆 第二采摘季" },
+                desc: { ko: "맥아와 꿀을 닮은 묵직한 단맛, 우유를 더해도 향이 살아 있는 인도 아삼 홍차.", en: "A full-bodied Indian black tea with malty, honeyed depth that stands up beautifully to milk.", ja: "モルティで蜂蜜のような深いコク。ミルクを加えても香りが際立つインド紅茶。", zh: "醇厚的麦芽与蜂蜜风味，加入牛奶后依然香气饱满的印度红茶。" },
+                roast: "Black Tea",
+                temp: "96°C",
+                time: "04:00",
+                notes: ["Malt", "Honey", "Full-bodied"]
+            },
+            {
+                type: 'tea',
+                presetKey: 'darjeeling',
+                name: { ko: "다르질링 퍼스트 플러시", en: "Darjeeling First Flush", ja: "ダージリン ファーストフラッシュ", zh: "大吉岭 第一采摘季" },
+                desc: { ko: "봄꽃과 머스캣을 연상시키는 섬세한 향, 가볍고 산뜻하게 마무리되는 봄 수확 홍차.", en: "Delicate spring-floral and muscat notes in a light, crisp first-harvest black tea.", ja: "春の花とマスカットを思わせる繊細な香り。軽やかですっきりした春摘み紅茶。", zh: "细腻的春花与麝香葡萄香气，口感轻盈清爽的春摘红茶。" },
+                roast: "Black Tea",
+                temp: "90°C",
+                time: "03:00",
+                notes: ["Muscat", "Spring Floral", "Delicate"]
+            },
+            {
+                type: 'tea',
+                presetKey: 'keemun',
+                name: { ko: "기문 홍차 하오야", en: "Keemun Hao Ya", ja: "キームン ハオヤ", zh: "祁门红茶 毫芽" },
+                desc: { ko: "은은한 난초 향과 코코아, 말린 과일의 부드러운 여운이 특징인 중국 기문 홍차.", en: "A refined Chinese black tea with gentle orchid aroma, cocoa depth, and a soft dried-fruit finish.", ja: "ほのかな蘭の香りとココア、ドライフルーツの柔らかな余韻が楽しめる中国紅茶。", zh: "兰花香、可可与干果般的柔和尾韵，展现祁门红茶的雅致风味。" },
+                roast: "Black Tea",
+                temp: "95°C",
+                time: "03:30",
+                notes: ["Orchid", "Cocoa", "Dried Fruit"]
             }
         ];
 
@@ -886,7 +946,13 @@
             { key: 'frenchpress', name: 'French Press', duration: 240, step: 'Steeping (04:00)' },
             { key: 'earlgrey', name: 'Earl Grey', duration: 180, step: 'Steeping Tea (03:00)' },
             { key: 'sencha', name: 'Sencha Tea', duration: 120, step: 'Steeping Tea (02:00)' },
-            { key: 'chamomile', name: 'Chamomile', duration: 300, step: 'Infusing Herb (05:00)' }
+            { key: 'chamomile', name: 'Chamomile', duration: 300, step: 'Infusing Herb (05:00)' },
+            { key: 'kenya', name: 'Kenya Pour Over', duration: 165, step: 'Pour Over (02:45)' },
+            { key: 'brazil', name: 'Brazil Immersion', duration: 180, step: 'Immersion Brew (03:00)' },
+            { key: 'guatemala', name: 'Guatemala Pour Over', duration: 165, step: 'Pour Over (02:45)' },
+            { key: 'assam', name: 'Assam', duration: 240, step: 'Steeping Tea (04:00)' },
+            { key: 'darjeeling', name: 'Darjeeling', duration: 180, step: 'Steeping Tea (03:00)' },
+            { key: 'keemun', name: 'Keemun', duration: 210, step: 'Steeping Tea (03:30)' }
         ];
 
         let selectedPreset = timerPresets[0];
@@ -1035,3 +1101,4 @@
     </script>
 </body>
 </html>
+
