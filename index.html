@@ -277,6 +277,7 @@
                 <span class="text-brand-gold text-xs font-bold tracking-widest uppercase block mb-2" data-i18n="archive.sectionTitle">CURATED COLLECTION</span>
                 <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4" data-i18n="archive.heading">음료 아카이브</h2>
                 <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base" data-i18n="archive.subheading">엄선된 프리미엄 원두와 최고급 찻잎의 테이스팅 노트와 추출 스펙을 탐색해보세요.</p>
+                <p class="text-gray-500 max-w-xl mx-auto text-xs mt-2" data-i18n="archive.purchaseNote">구매 링크는 상품 검색 또는 판매처로 연결됩니다. 상품, 재고, 가격, 배송 가능 지역은 판매처에서 확인하세요.</p>
 
                 <!-- Filter Buttons -->
                 <div class="flex justify-center gap-3 mt-8">
@@ -441,7 +442,12 @@
                 archive: {
                     sectionTitle: "CURATED COLLECTION",
                     heading: "음료 아카이브",
-                    subheading: "엄선된 프리미엄 원두와 최고급 찻잎의 테이스팅 노트와 추출 스펙을 탐색해보세요."
+                    subheading: "엄선된 프리미엄 원두와 최고급 찻잎의 테이스팅 노트와 추출 스펙을 탐색해보세요.",
+                    purchaseNote: "구매 링크는 상품 검색 또는 판매처로 연결됩니다. 상품, 재고, 가격, 배송 가능 지역은 판매처에서 확인하세요.",
+                    shopSearchCoffee: "원두 구매 검색",
+                    shopSearchTea: "차 구매 검색",
+                    shopCoffee: "프릳츠 원두몰",
+                    shopTea: "루피시아 공식몰"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -495,7 +501,12 @@
                 archive: {
                     sectionTitle: "CURATED COLLECTION",
                     heading: "Beverage Archive",
-                    subheading: "Explore tasting notes and extraction specs for premium beans and fine tea leaves."
+                    subheading: "Explore tasting notes and extraction specs for premium beans and fine tea leaves.",
+                    purchaseNote: "Purchase links open product searches or retailer stores. Confirm item, stock, price, and shipping availability with the retailer.",
+                    shopSearchCoffee: "Search coffee beans",
+                    shopSearchTea: "Search for this tea",
+                    shopCoffee: "Fritz Coffee Shop",
+                    shopTea: "LUPICIA Official Store"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -549,7 +560,12 @@
                 archive: {
                     sectionTitle: "CURATED COLLECTION",
                     heading: "ドリンク アーカイブ",
-                    subheading: "厳選された豆と茶葉のテイスティングノートと抽出スペックをチェック。"
+                    subheading: "厳選された豆と茶葉のテイスティングノートと抽出スペックをチェック。",
+                    purchaseNote: "購入リンクは商品検索または販売店につながります。在庫・価格・配送地域は販売店でご確認ください。",
+                    shopSearchCoffee: "コーヒー豆を検索",
+                    shopSearchTea: "このお茶を検索",
+                    shopCoffee: "フリッツ コーヒー公式店",
+                    shopTea: "ルピシア公式店"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -603,7 +619,12 @@
                 archive: {
                     sectionTitle: "CURATED COLLECTION",
                     heading: "饮品风味档案",
-                    subheading: "探索精选咖啡豆与特级茶叶的风味轮与萃取参数。"
+                    subheading: "探索精选咖啡豆与特级茶叶的风味轮与萃取参数。",
+                    purchaseNote: "购买链接将打开商品搜索或商店页面。商品、库存、价格和配送地区请以商家信息为准。",
+                    shopSearchCoffee: "搜索咖啡豆",
+                    shopSearchTea: "搜索这款茶",
+                    shopCoffee: "Fritz 咖啡豆商店",
+                    shopTea: "LUPICIA 官方商店"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -896,6 +917,14 @@
                 card.className = "glass-card rounded-2xl p-6 flex flex-col justify-between hover:scale-[1.02] transition-all duration-300";
                 
                 let iconClass = item.type === 'coffee' ? 'fa-mug-hot text-brand-gold' : 'fa-leaf text-emerald-400';
+                const isCoffee = item.type === 'coffee';
+                const productQuery = `${item.name.ko} ${isCoffee ? '원두' : '차'}`;
+                const shoppingUrl = `https://search.shopping.naver.com/search/all?query=${encodeURIComponent(productQuery)}`;
+                const specialtyStoreUrl = isCoffee
+                    ? 'https://fritz.co.kr/product/list.html?cate_no=24'
+                    : 'https://www.lupicia.com/shop/c/c10/?narrow7=11';
+                const shoppingLabel = isCoffee ? i18n[currentLang].archive.shopSearchCoffee : i18n[currentLang].archive.shopSearchTea;
+                const storeLabel = isCoffee ? i18n[currentLang].archive.shopCoffee : i18n[currentLang].archive.shopTea;
 
                 card.innerHTML = `
                     <div>
@@ -917,6 +946,15 @@
 
                         <div class="flex flex-wrap gap-1.5 mb-4">
                             ${item.notes.map(n => `<span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-brand-300">#${n}</span>`).join('')}
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2 mb-3">
+                            <a href="${shoppingUrl}" target="_blank" rel="noopener noreferrer" class="py-2 px-2 rounded-lg bg-white/5 border border-white/10 text-gray-200 hover:border-brand-400 hover:text-brand-gold text-[10px] sm:text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 text-center">
+                                <i class="fa-solid fa-magnifying-glass"></i> ${shoppingLabel}
+                            </a>
+                            <a href="${specialtyStoreUrl}" target="_blank" rel="noopener noreferrer" class="py-2 px-2 rounded-lg bg-white/5 border border-white/10 text-gray-200 hover:border-brand-400 hover:text-brand-gold text-[10px] sm:text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 text-center">
+                                <i class="fa-solid fa-store"></i> ${storeLabel}
+                            </a>
                         </div>
 
                         <button onclick="selectPreset('${item.presetKey}'); window.location.hash='#timer';" class="w-full py-2.5 rounded-xl bg-brand-500/20 border border-brand-500/40 text-brand-gold hover:bg-brand-500 hover:text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2">
@@ -1101,4 +1139,6 @@
     </script>
 </body>
 </html>
+
+
 
