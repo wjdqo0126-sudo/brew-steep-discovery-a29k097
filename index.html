@@ -89,6 +89,9 @@
             transform-origin: 50% 50%;
         }
 
+        #hero-video { filter: brightness(0.58); }
+        @media (prefers-reduced-motion: reduce) { #hero-video { display: none; } }
+
         /* Scrollbar styling */
         ::-webkit-scrollbar {
             width: 8px;
@@ -158,6 +161,10 @@
     </header>
 
     <section id="hero" class="hero-bg min-h-screen flex items-center justify-center relative px-4 pt-24 pb-16">
+        <video id="hero-video" class="absolute inset-0 w-full h-full object-cover z-0" autoplay muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=2000&q=80" aria-hidden="true">
+            <source src="https://videos.pexels.com/video-files/2853788/2853788-hd_1920_1080_24fps.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-black/30 via-black/40 to-[#0f0c08]/95"></div>
         <div class="max-w-5xl mx-auto text-center z-10 space-y-8">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-300 text-xs sm:text-sm tracking-wider uppercase font-semibold animate-pulse">
                 <i class="fa-solid fa-sparkles text-brand-gold"></i>
@@ -208,6 +215,8 @@
                 </div>
             </div>
         </div>
+
+        <a href="https://www.pexels.com/video/slow-motion-footage-of-freshly-brewed-coffee-dripping-into-a-cup-2853788/" target="_blank" rel="noopener noreferrer" class="absolute bottom-8 right-5 z-10 text-[10px] text-white/50 hover:text-white/80 transition-colors" data-i18n="hero.videoCredit">Video: K / Pexels</a>
 
         <!-- Scroll Indicator -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center hidden sm:block">
@@ -454,7 +463,8 @@
                     subtitle: "산미의 경쾌함부터 고소한 바디감, 차의 은은한 향미까지. 당신만을 위한 섬세한 맞춤 테이스팅 가이드와 스마트 추출 타이머.",
                     ctaQuiz: "내 취향 찾기 시작",
                     ctaTimer: "추출 타이머 사용하기",
-                    scroll: "SCROLL DOWN"
+                    scroll: "SCROLL DOWN",
+                    videoCredit: "영상: K / Pexels"
                 },
                 feat: {
                     quiz: "맞춤 프로파일링", quizDesc: "4단계 알고리즘 분석",
@@ -514,7 +524,8 @@
                     subtitle: "From bright acidity to rich nutty notes, or delicate tea aromas. Your personalized tasting guide and precision brew timer.",
                     ctaQuiz: "Start Preference Quiz",
                     ctaTimer: "Use Brew Timer",
-                    scroll: "SCROLL DOWN"
+                    scroll: "SCROLL DOWN",
+                    videoCredit: "Video: K / Pexels"
                 },
                 feat: {
                     quiz: "Custom Profile", quizDesc: "4-Step Smart Matching",
@@ -577,7 +588,8 @@
                     subtitle: "爽やかな酸味から香ばしいコク、お茶の繊細な香りまで。あなただけのパーソナルテイスティングガイドと抽出タイマー。",
                     ctaQuiz: "診断を始める",
                     ctaTimer: "タイマーを使う",
-                    scroll: "SCROLL DOWN"
+                    scroll: "SCROLL DOWN",
+                    videoCredit: "動画: K / Pexels"
                 },
                 feat: {
                     quiz: "パーソナル診断", quizDesc: "4ステップ分析",
@@ -640,7 +652,8 @@
                     subtitle: "从明亮酸度到浓郁醇厚，亦或高雅茶香。为您量身定制的品鉴指南与精准萃取计时器。",
                     ctaQuiz: "开始寻找我的专属风味",
                     ctaTimer: "使用萃取计时器",
-                    scroll: "SCROLL DOWN"
+                    scroll: "SCROLL DOWN",
+                    videoCredit: "视频：K / Pexels"
                 },
                 feat: {
                     quiz: "个性化分析", quizDesc: "4步智能匹配",
