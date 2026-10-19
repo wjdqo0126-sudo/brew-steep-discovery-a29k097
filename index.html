@@ -281,9 +281,9 @@
 
                 <!-- Filter Buttons -->
                 <div class="flex justify-center gap-3 mt-8">
-                    <button onclick="filterCatalog('all')" id="btn-filter-all" class="filter-btn active px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-brand-500 text-white border border-brand-400 transition-all">전체 All</button>
-                    <button onclick="filterCatalog('coffee')" id="btn-filter-coffee" class="filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-gray-800/80 text-gray-300 border border-gray-700 hover:border-brand-500 transition-all">커피 Coffee</button>
-                    <button onclick="filterCatalog('tea')" id="btn-filter-tea" class="filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-gray-800/80 text-gray-300 border border-gray-700 hover:border-brand-500 transition-all">차 Tea</button>
+                    <button onclick="filterCatalog('all')" id="btn-filter-all" data-i18n="archive.filterAll" class="filter-btn active px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-brand-500 text-white border border-brand-400 transition-all">전체</button>
+                    <button onclick="filterCatalog('coffee')" id="btn-filter-coffee" data-i18n="archive.filterCoffee" class="filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-gray-800/80 text-gray-300 border border-gray-700 hover:border-brand-500 transition-all">커피</button>
+                    <button onclick="filterCatalog('tea')" id="btn-filter-tea" data-i18n="archive.filterTea" class="filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-gray-800/80 text-gray-300 border border-gray-700 hover:border-brand-500 transition-all">차</button>
                 </div>
             </div>
 
@@ -447,7 +447,7 @@
                     shopSearchCoffee: "원두 구매 검색",
                     shopSearchTea: "차 구매 검색",
                     shopCoffee: "Square Mile 글로벌 배송",
-                    shopTea: "루피시아 글로벌 스토어"
+                    shopTea: "루피시아 글로벌 스토어", filterAll: "전체", filterCoffee: "커피", filterTea: "차"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -456,7 +456,7 @@
                     selectPreset: "추출 메뉴 선택 (PRESETS)",
                     start: "시작",
                     pause: "일시정지",
-                    reset: "리셋"
+                    reset: "리셋", ready: "준비 완료", paused: "일시정지됨", complete: "추출 완료!"
                 },
                 guide: {
                     sectionTitle: "BREWING MASTERCLASS",
@@ -506,7 +506,7 @@
                     shopSearchCoffee: "Search globally for beans",
                     shopSearchTea: "Search globally for this tea",
                     shopCoffee: "Square Mile Coffee Roasters",
-                    shopTea: "LUPICIA Global Stores"
+                    shopTea: "LUPICIA Global Stores", filterAll: "All", filterCoffee: "Coffee", filterTea: "Tea"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -515,7 +515,7 @@
                     selectPreset: "SELECT PRESET",
                     start: "Start",
                     pause: "Pause",
-                    reset: "Reset"
+                    reset: "Reset", ready: "Ready", paused: "Paused", complete: "Brew complete!"
                 },
                 guide: {
                     sectionTitle: "BREWING MASTERCLASS",
@@ -537,7 +537,7 @@
                 hero: {
                     tagline: "Find Your Perfect Brew",
                     title: "あなたのコーヒーの好みは？",
-                    subtitle: "爽やかな酸味から香ばしいコク、お茶の繊細な香りまで。あなただけのパーソナルテ이스ティングガイドと抽出タイマー。",
+                    subtitle: "爽やかな酸味から香ばしいコク、お茶の繊細な香りまで。あなただけのパーソナルテイスティングガイドと抽出タイマー。",
                     ctaQuiz: "診断を始める",
                     ctaTimer: "タイマーを使う",
                     scroll: "SCROLL DOWN"
@@ -565,7 +565,7 @@
                     shopSearchCoffee: "世界中からコーヒー豆を検索",
                     shopSearchTea: "世界中からこのお茶を検索",
                     shopCoffee: "Square Mile Coffee Roasters",
-                    shopTea: "ルピシア海外向けストア"
+                    shopTea: "ルピシア海外向けストア", filterAll: "すべて", filterCoffee: "コーヒー", filterTea: "お茶"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -574,14 +574,14 @@
                     selectPreset: "プリセット選択",
                     start: "スタート",
                     pause: "一時停止",
-                    reset: "リセット"
+                    reset: "リセット", ready: "準備完了", paused: "一時停止中", complete: "抽出完了！"
                 },
                 guide: {
                     sectionTitle: "BREWING MASTERCLASS",
                     heading: "マスター抽出ガイド",
                     subheading: "基本の原則を守るだけで、ご自宅が本格的なカフェに生まれ変わります。",
                     card1Title: "黄金比率 (Ratio)",
-                    card1Desc: "ド립コーヒーは豆1gに対してお湯15〜16g、お茶は茶葉2〜3gに対してお湯200mlが標準です。",
+                    card1Desc: "ドリップコーヒーは豆1gに対してお湯15〜16g、お茶は茶葉2〜3gに対してお湯200mlが標準です。",
                     card2Title: "お湯の温度 (Temp)",
                     card2Desc: "浅煎り豆や紅茶は高め(92〜95℃)、日本茶は低め(70〜80℃)で抽出するのがコツです。",
                     card3Title: "挽き目と時間 (Grind & Time)",
@@ -595,7 +595,7 @@
                 nav: { quiz: "口味测验", archive: "风味档案", timer: "萃取计时", guide: "冲煮指南" },
                 hero: {
                     tagline: "Find Your Perfect Brew",
-                    title: "您 preferred 咖啡口味是什么？",
+                    title: "您偏好的咖啡口味是什么？",
                     subtitle: "从明亮酸度到浓郁醇厚，亦或高雅茶香。为您量身定制的品鉴指南与精准萃取计时器。",
                     ctaQuiz: "开始寻找我的专属风味",
                     ctaTimer: "使用萃取计时器",
@@ -624,7 +624,7 @@
                     shopSearchCoffee: "全球搜索咖啡豆",
                     shopSearchTea: "全球搜索这款茶",
                     shopCoffee: "Square Mile 咖啡烘焙商",
-                    shopTea: "LUPICIA 全球商店"
+                    shopTea: "LUPICIA 全球商店", filterAll: "全部", filterCoffee: "咖啡", filterTea: "茶"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -633,7 +633,7 @@
                     selectPreset: "选择预设 (PRESETS)",
                     start: "开始",
                     pause: "暂停",
-                    reset: "重置"
+                    reset: "重置", ready: "准备就绪", paused: "已暂停", complete: "冲煮完成！"
                 },
                 guide: {
                     sectionTitle: "BREWING MASTERCLASS",
@@ -655,7 +655,9 @@
         let currentLang = 'ko';
 
         function changeLanguage(lang) {
+            if (!i18n[lang]) lang = 'ko';
             currentLang = lang;
+            document.documentElement.lang = lang;
             const elements = document.querySelectorAll('[data-i18n]');
             elements.forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -667,7 +669,12 @@
                 if (val) el.textContent = val;
             });
             renderQuizStep();
+            if (!document.getElementById('quiz-result').classList.contains('hidden')) showQuizResult();
             renderCatalog();
+            initPresetsUI();
+            document.getElementById('timer-icon').className = isRunning ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+            document.getElementById('timer-btn-text').textContent = i18n[currentLang].timer[isRunning ? 'pause' : 'start'];
+            updateTimerDisplay();
         }
 
         // --- 2. Interactive Preference Quiz Logic ---
@@ -680,7 +687,7 @@
                 ]
             },
             {
-                q: { ko: "어떤 맛의 성향을 원하시나요?", en: "What flavor profile do you lean towards?", ja: " preferred な味の傾向は？", zh: "您喜欢哪种风味走向？" },
+                q: { ko: "어떤 맛의 성향을 원하시나요?", en: "What flavor profile do you lean towards?", ja: " どのような味わいがお好みですか？", zh: "您喜欢哪种风味走向？" },
                 options: [
                     { label: { ko: "화사한 산미 & 과일 향미", en: "Bright Acidity & Fruity Notes", ja: "華やかな酸味＆フルーティー", zh: "明亮酸度与果香" }, flavor: "acidic" },
                     { label: { ko: "고소하고 묵직한 바디감", en: "Nutty, Chocolatey & Deep Body", ja: "香ばしく深みのあるコク", zh: "坚果黑巧与醇厚感" }, flavor: "nutty" }
@@ -694,7 +701,7 @@
                 ]
             },
             {
-                q: { ko: "선호하는 음료 온도와 스타일은?", en: "Preferred serving temperature?", ja: " preferred な温度・スタイルは？", zh: "您偏好的饮用温度？" },
+                q: { ko: "선호하는 음료 온도와 스타일은?", en: "Preferred serving temperature?", ja: " お好みの温度や飲み方は？", zh: "您偏好的饮用温度？" },
                 options: [
                     { label: { ko: "따뜻하고 시원한 드립/우림 (Hot/Ice)", en: "Classic Hot / Gentle Iced Drip", ja: "ホット / 丁寧なドリップ", zh: "经典温热/冰滴" }, style: "hot" },
                     { label: { ko: "강렬하고 짙은 에스프레소/밀크티", en: "Bold Espresso / Rich Milk Tea", ja: "濃厚なエスプレッソ / ミルクティー", zh: "浓缩/奶茶" }, style: "bold" }
@@ -759,7 +766,7 @@
             recommended.notes.forEach(note => {
                 const badge = document.createElement('span');
                 badge.className = "px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/20 border border-brand-500/40 text-brand-gold";
-                badge.textContent = "# " + note;
+                badge.textContent = "# " + localizeCatalogTerm(note);
                 notesContainer.appendChild(badge);
             });
 
@@ -906,6 +913,15 @@
             }
         ];
 
+        const catalogTermTranslations = {
+            ko: { 'Light Roast': '라이트 로스트', 'Medium Roast': '미디엄 로스트', 'Dark Roast': '다크 로스트', 'Black Tea': '홍차', 'Green Tea': '녹차', 'Herbal Tea': '허브차', Jasmine: '자스민', Lemon: '레몬', Bergamot: '베르가못', Hazelnut: '헤이즐넛', 'Milk Chocolate': '밀크 초콜릿', Caramel: '캐러멜', Cacao: '카카오', Smoky: '스모키', Crema: '크레마', Citrus: '시트러스', Ceylon: '실론', Umami: '감칠맛', 'Fresh Grass': '산뜻한 풀향', Sweetness: '단맛', 'Honey Apple': '허니 애플', Floral: '꽃향기', 'Caffeine Free': '카페인 없음', Blackcurrant: '블랙커런트', Grapefruit: '자몽', 'Brown Sugar': '흑설탕', Cocoa: '코코아', Almond: '아몬드', Orange: '오렌지', Malt: '맥아', Honey: '꿀', 'Full-bodied': '묵직한 바디감', Muscat: '머스캣', 'Spring Floral': '봄꽃', Delicate: '섬세함', Orchid: '난초', 'Dried Fruit': '말린 과일' },
+            ja: { 'Light Roast': '浅煎り', 'Medium Roast': '中煎り', 'Dark Roast': '深煎り', 'Black Tea': '紅茶', 'Green Tea': '緑茶', 'Herbal Tea': 'ハーブティー', Jasmine: 'ジャスミン', Lemon: 'レモン', Bergamot: 'ベルガモット', Hazelnut: 'ヘーゼルナッツ', 'Milk Chocolate': 'ミルクチョコレート', Caramel: 'キャラメル', Cacao: 'カカオ', Smoky: 'スモーキー', Crema: 'クレマ', Citrus: '柑橘', Ceylon: 'セイロン', Umami: 'うま味', 'Fresh Grass': '青々しい香り', Sweetness: '甘み', 'Honey Apple': 'ハニーアップル', Floral: '花の香り', 'Caffeine Free': 'ノンカフェイン', Blackcurrant: 'カシス', Grapefruit: 'グレープフルーツ', 'Brown Sugar': '黒糖', Cocoa: 'ココア', Almond: 'アーモンド', Orange: 'オレンジ', Malt: 'モルト', Honey: 'はちみつ', 'Full-bodied': 'しっかりしたコク', Muscat: 'マスカット', 'Spring Floral': '春の花', Delicate: '繊細', Orchid: '蘭', 'Dried Fruit': 'ドライフルーツ' }
+        };
+
+        function localizeCatalogTerm(term) {
+            return catalogTermTranslations[currentLang]?.[term] || term;
+        }
+
         function renderCatalog(filter = 'all') {
             const grid = document.getElementById('catalog-grid');
             grid.innerHTML = '';
@@ -929,7 +945,7 @@
                 card.innerHTML = `
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-brand-900/80 border border-brand-500/30 text-brand-200 uppercase tracking-wider">${item.roast}</span>
+                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-brand-900/80 border border-brand-500/30 text-brand-200 uppercase tracking-wider">${localizeCatalogTerm(item.roast)}</span>
                             <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-sm">
                                 <i class="fa-solid ${iconClass}"></i>
                             </div>
@@ -945,7 +961,7 @@
                         </div>
 
                         <div class="flex flex-wrap gap-1.5 mb-4">
-                            ${item.notes.map(n => `<span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-brand-300">#${n}</span>`).join('')}
+                            ${item.notes.map(n => `<span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-brand-300">#${localizeCatalogTerm(n)}</span>`).join('')}
                         </div>
 
                         <div class="grid grid-cols-2 gap-2 mb-3">
@@ -978,6 +994,7 @@
         }
 
         // --- 4. Smart Timer Engine & Audio Sound simulation ---
+        const presetLabels = { ko: { pourover: '핸드드립', espresso: '에스프레소', frenchpress: '프렌치 프레스', earlgrey: '얼그레이', sencha: '센차', chamomile: '캐모마일', kenya: '케냐 핸드드립', brazil: '브라질 침출식', guatemala: '과테말라 핸드드립', assam: '아삼', darjeeling: '다르질링', keemun: '기문' }, ja: { pourover: 'ハンドドリップ', espresso: 'エスプレッソ', frenchpress: 'フレンチプレス', earlgrey: 'アールグレイ', sencha: '煎茶', chamomile: 'カモミール', kenya: 'ケニア ドリップ', brazil: 'ブラジル 浸漬式', guatemala: 'グアテマラ ドリップ', assam: 'アッサム', darjeeling: 'ダージリン', keemun: 'キームン' }, en: { pourover: 'Hand Drip', espresso: 'Espresso', frenchpress: 'French Press', earlgrey: 'Earl Grey', sencha: 'Sencha Tea', chamomile: 'Chamomile', kenya: 'Kenya Pour Over', brazil: 'Brazil Immersion', guatemala: 'Guatemala Pour Over', assam: 'Assam', darjeeling: 'Darjeeling', keemun: 'Keemun' }, zh: { pourover: '手冲咖啡', espresso: '意式浓缩', frenchpress: '法压壶', earlgrey: '伯爵茶', sencha: '煎茶', chamomile: '洋甘菊', kenya: '肯尼亚手冲', brazil: '巴西浸泡式', guatemala: '危地马拉手冲', assam: '阿萨姆', darjeeling: '大吉岭', keemun: '祁门' } };
         const timerPresets = [
             { key: 'pourover', name: 'Hand Drip', duration: 150, step: 'Pour Over (02:30)' },
             { key: 'espresso', name: 'Espresso', duration: 30, step: 'Extraction (00:30)' },
@@ -1012,7 +1029,7 @@
                         : 'border-gray-800 bg-brand-900/40 text-gray-400 hover:border-gray-700 hover:text-gray-200'
                 }`;
                 btn.onclick = () => selectPreset(preset.key);
-                btn.innerHTML = `<span>${preset.name}</span><span class="text-[10px] opacity-70">${formatTime(preset.duration)}</span>`;
+                btn.innerHTML = `<span>${presetLabels[currentLang][preset.key]}</span><span class="text-[10px] opacity-70">${formatTime(preset.duration)}</span>`;
                 container.appendChild(btn);
             });
         }
@@ -1044,7 +1061,7 @@
 
         function updateTimerDisplay() {
             document.getElementById('timer-display').textContent = formatTime(remainingSeconds);
-            document.getElementById('timer-step-text').textContent = isRunning ? selectedPreset.step : "준비 완료 (Ready)";
+            document.getElementById('timer-step-text').textContent = remainingSeconds <= 0 ? i18n[currentLang].timer.complete : isRunning ? `${presetLabels[currentLang][selectedPreset.key]} ${currentLang === 'ja' ? '抽出中' : currentLang === 'zh' ? '冲煮中' : currentLang === 'en' ? 'brewing' : '추출 중'}` : remainingSeconds < selectedPreset.duration ? i18n[currentLang].timer.paused : i18n[currentLang].timer.ready;
 
             const circle = document.getElementById('timer-progress');
             const pct = remainingSeconds / selectedPreset.duration;
@@ -1077,7 +1094,7 @@
                     playChimeSound();
                     document.getElementById('timer-icon').className = 'fa-solid fa-play';
                     document.getElementById('timer-btn-text').textContent = i18n[currentLang].timer.start;
-                    document.getElementById('timer-step-text').textContent = "추출 완료! Enjoy Your Brew";
+                    document.getElementById('timer-step-text').textContent = i18n[currentLang].timer.complete;
                 }
             }, 1000);
         }
@@ -1087,7 +1104,7 @@
             isRunning = false;
             document.getElementById('timer-icon').className = 'fa-solid fa-play';
             document.getElementById('timer-btn-text').textContent = i18n[currentLang].timer.start;
-            document.getElementById('timer-step-text').textContent = "일시정지됨 (Paused)";
+            document.getElementById('timer-step-text').textContent = i18n[currentLang].timer.paused;
         }
 
         function resetTimer() {
@@ -1139,6 +1156,12 @@
     </script>
 </body>
 </html>
+
+
+
+
+
+
 
 
 
