@@ -361,8 +361,8 @@
                         드립 커피는 원두 1g 당 물 15~16g(1:15~16), 차는 잎 2~3g 당 물 200ml가 표준 기준입니다.
                     </p>
                     <ul class="text-xs text-brand-300 space-y-2 border-t border-white/10 pt-4">
-                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>드립: 18g 원두 + 280ml 물</li>
-                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>잎차: 3g 찻잎 + 250ml 물</li>
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.ratioCoffee">드립: 원두 18g + 물 280ml</span></li>
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.ratioTea">잎차: 찻잎 3g + 물 250ml</span></li>
                     </ul>
                 </div>
 
@@ -376,8 +376,8 @@
                         약배전 원두 및 홍차는 높은 온도(92~95°C), 녹차는 낮은 온도(70~80°C)에서 쓴맛 없이 향이 살아납니다.
                     </p>
                     <ul class="text-xs text-brand-300 space-y-2 border-t border-white/10 pt-4">
-                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>커피: 91°C ~ 94°C</li>
-                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>녹차: 75°C / 홍차: 95°C</li>
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.tempCoffee">커피: 91°C ~ 94°C</span></li>
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.tempTea">녹차: 75°C / 홍차: 95°C</span></li>
                     </ul>
                 </div>
 
@@ -391,8 +391,8 @@
                         굵게 빻을수록 추출 시간을 길게, 가늘게 빻을수록 짧게 가져가 성분의 과다/미달 추출을 방지합니다.
                     </p>
                     <ul class="text-xs text-brand-300 space-y-2 border-t border-white/10 pt-4">
-                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>에스프레소: 극세립 (25-30초)</li>
-                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>핸드드립: 중세립 (2분30초)</li>
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.grindEspresso">에스프레소: 극세립 (25~30초)</span></li>
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.grindDrip">핸드드립: 중세립 (2분 30초)</span></li>
                     </ul>
                 </div>
             </div>
@@ -467,7 +467,7 @@
                     card2Title: "물 온도 (Water Temp)",
                     card2Desc: "약배전 원두 및 홍차는 높은 온도(92~95°C), 녹차는 낮은 온도(70~80°C)에서 쓴맛 없이 향이 살아납니다.",
                     card3Title: "분쇄도 & 시간 (Grind & Time)",
-                    card3Desc: "굵게 빻을수록 추출 시간을 길게, 가늘게 빻을수록 짧게 가져가 성분의 과다/미달 추출을 방지합니다."
+                    card3Desc: "굵게 빻을수록 추출 시간을 길게, 가늘게 빻을수록 짧게 가져가 성분의 과다/미달 추출을 방지합니다.", ratioCoffee: "드립: 원두 18g + 물 280ml", ratioTea: "잎차: 찻잎 3g + 물 250ml", tempCoffee: "커피: 91°C ~ 94°C", tempTea: "녹차: 75°C / 홍차: 95°C", grindEspresso: "에스프레소: 극세립 (25~30초)", grindDrip: "핸드드립: 중세립 (2분 30초)"
                 },
                 footer: {
                     copy: "© 2026 BREW & STEEP. 커피 & 차 탐색 및 정밀 추출 플랫폼. All rights reserved."
@@ -526,7 +526,10 @@
                     card2Title: "Water Temperature",
                     card2Desc: "Light roast coffee & black tea need 92-95°C; green tea thrives at 70-80°C to prevent bitterness.",
                     card3Title: "Grind & Timing",
-                    card3Desc: "Coarser grinds require longer steep times; finer grinds require fast extraction."
+                    card3Desc: "Coarser grinds require longer steep times; finer grinds require fast extraction.",
+                    ratioCoffee: "Drip: 18g coffee + 280ml water", ratioTea: "Loose leaf tea: 3g leaves + 250ml water",
+                    tempCoffee: "Coffee: 91°C–94°C", tempTea: "Green tea: 75°C / Black tea: 95°C",
+                    grindEspresso: "Espresso: extra fine (25–30 sec)", grindDrip: "Hand drip: medium-fine (2 min 30 sec)"
                 },
                 footer: {
                     copy: "© 2026 BREW & STEEP. Craft Coffee & Fine Tea Discovery Platform. All rights reserved."
@@ -585,7 +588,10 @@
                     card2Title: "お湯の温度 (Temp)",
                     card2Desc: "浅煎り豆や紅茶は高め(92〜95℃)、日本茶は低め(70〜80℃)で抽出するのがコツです。",
                     card3Title: "挽き目と時間 (Grind & Time)",
-                    card3Desc: "粗挽きは長めに、細挽きは短時間で抽出してエグみを防ぎます。"
+                    card3Desc: "粗挽きは長めに、細挽きは短時間で抽出してエグみを防ぎます。",
+                    ratioCoffee: "ドリップ：豆18g＋お湯280ml", ratioTea: "リーフティー：茶葉3g＋お湯250ml",
+                    tempCoffee: "コーヒー：91°C～94°C", tempTea: "緑茶：75°C／紅茶：95°C",
+                    grindEspresso: "エスプレッソ：極細挽き（25～30秒）", grindDrip: "ハンドドリップ：中細挽き（2分30秒）"
                 },
                 footer: {
                     copy: "© 2026 BREW & STEEP. Craft Coffee & Fine Tea Discovery Platform. All rights reserved."
@@ -644,7 +650,10 @@
                     card2Title: "萃取水温",
                     card2Desc: "浅焙豆与红茶需 92-95°C 高温；绿茶宜用 70-80°C 水温以避免苦涩。",
                     card3Title: "研磨度与时间",
-                    card3Desc: "颗粒越粗萃取时间需越长；颗粒越细萃取速度宜越快。"
+                    card3Desc: "颗粒越粗萃取时间需越长；颗粒越细萃取速度宜越快。",
+                    ratioCoffee: "手冲：咖啡豆18g＋水280ml", ratioTea: "原叶茶：茶叶3g＋水250ml",
+                    tempCoffee: "咖啡：91°C～94°C", tempTea: "绿茶：75°C／红茶：95°C",
+                    grindEspresso: "意式浓缩：极细研磨（25～30秒）", grindDrip: "手冲：中细研磨（2分30秒）"
                 },
                 footer: {
                     copy: "© 2026 BREW & STEEP. Craft Coffee & Fine Tea Discovery Platform. All rights reserved."
@@ -1156,6 +1165,10 @@
     </script>
 </body>
 </html>
+
+
+
+
 
 
 
