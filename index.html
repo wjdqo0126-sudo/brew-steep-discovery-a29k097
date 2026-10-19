@@ -447,7 +447,7 @@
                     shopSearchCoffee: "원두 구매 검색",
                     shopSearchTea: "차 구매 검색",
                     shopCoffee: "Square Mile 글로벌 배송",
-                    shopTea: "루피시아 글로벌 스토어", filterAll: "전체", filterCoffee: "커피", filterTea: "차"
+                    shopTea: "루피시아 글로벌 스토어", filterAll: "전체", filterCoffee: "커피", filterTea: "차", setTimer: "타이머에 설정하기"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -506,7 +506,7 @@
                     shopSearchCoffee: "Search globally for beans",
                     shopSearchTea: "Search globally for this tea",
                     shopCoffee: "Square Mile Coffee Roasters",
-                    shopTea: "LUPICIA Global Stores", filterAll: "All", filterCoffee: "Coffee", filterTea: "Tea"
+                    shopTea: "LUPICIA Global Stores", filterAll: "All", filterCoffee: "Coffee", filterTea: "Tea", setTimer: "Set timer for this drink"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -568,7 +568,7 @@
                     shopSearchCoffee: "世界中からコーヒー豆を検索",
                     shopSearchTea: "世界中からこのお茶を検索",
                     shopCoffee: "Square Mile Coffee Roasters",
-                    shopTea: "ルピシア海外向けストア", filterAll: "すべて", filterCoffee: "コーヒー", filterTea: "お茶"
+                    shopTea: "ルピシア海外向けストア", filterAll: "すべて", filterCoffee: "コーヒー", filterTea: "お茶", setTimer: "このドリンクでタイマーを設定"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -630,7 +630,7 @@
                     shopSearchCoffee: "全球搜索咖啡豆",
                     shopSearchTea: "全球搜索这款茶",
                     shopCoffee: "Square Mile 咖啡烘焙商",
-                    shopTea: "LUPICIA 全球商店", filterAll: "全部", filterCoffee: "咖啡", filterTea: "茶"
+                    shopTea: "LUPICIA 全球商店", filterAll: "全部", filterCoffee: "咖啡", filterTea: "茶", setTimer: "为此饮品设置计时器"
                 },
                 timer: {
                     sectionTitle: "PRECISION TIMER",
@@ -983,7 +983,7 @@
                         </div>
 
                         <button onclick="selectPreset('${item.presetKey}'); window.location.hash='#timer';" class="w-full py-2.5 rounded-xl bg-brand-500/20 border border-brand-500/40 text-brand-gold hover:bg-brand-500 hover:text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-stopwatch"></i> 타이머에 설정하기
+                            <i class="fa-solid fa-stopwatch"></i> ${i18n[currentLang].archive.setTimer}
                         </button>
                     </div>
                 `;
@@ -1165,6 +1165,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
