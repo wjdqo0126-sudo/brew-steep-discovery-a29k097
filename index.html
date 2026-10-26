@@ -90,6 +90,17 @@
         }
 
         #hero-video { filter: brightness(0.58); }
+        html { scroll-padding-top: 6rem; }
+        section[id] { scroll-margin-top: 5.5rem; }
+        .journey-link { position: relative; }
+        .journey-link[aria-current="location"] { color: #D4AF37; }
+        .journey-link[aria-current="location"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -0.65rem; height: 2px; background: #D4AF37; border-radius: 2px; }
+        .reveal-on-scroll { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+        .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        .taste-choice { animation: choice-in .35s both; }
+        @keyframes choice-in { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @media (prefers-reduced-motion: reduce) { .reveal-on-scroll { opacity: 1; transform: none; transition: none; } .taste-choice { animation: none; } }
+        @media (max-width: 767px) { body { padding-bottom: calc(5.25rem + env(safe-area-inset-bottom)); } }
         @media (prefers-reduced-motion: reduce) { #hero-video { display: none; } }
 
         /* Scrollbar styling */
@@ -124,12 +135,11 @@
             </a>
 
             <!-- Desktop Nav -->
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <a href="#quiz" class="nav-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.quiz">취향 찾기</a>
-                <a href="#philosophy" class="nav-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.philosophy">철학</a>
-                <a href="#archive" class="nav-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.archive">아카이브</a>
-                <a href="#timer" class="nav-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.timer">추출 타이머</a>
-                <a href="#guide" class="nav-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.guide">가이드</a>
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium" aria-label="Explore sections">
+                <a href="#quiz" class="nav-link journey-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.quiz">취향 찾기</a>
+                <a href="#archive" class="nav-link journey-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.archive">아카이브</a>
+                <a href="#timer" class="nav-link journey-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.timer">추출 타이머</a>
+                <a href="#guide" class="nav-link journey-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.guide">가이드</a>
             </nav>
 
             <!-- Language Switcher & Mobile Menu Button -->
@@ -143,22 +153,19 @@
                     </select>
                 </div>
 
-                <!-- Mobile Menu Toggle -->
-                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-300 hover:text-white focus:outline-none">
-                    <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
-                </button>
             </div>
         </div>
 
-        <!-- Mobile Navigation Drawer -->
-        <div id="mobile-menu" class="hidden md:hidden bg-brand-900/95 border-b border-brand-500/20 px-4 pt-2 pb-6 space-y-3 text-center">
-            <a href="#quiz" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-brand-gold font-medium" data-i18n="nav.quiz">취향 찾기</a>
-            <a href="#philosophy" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-brand-gold font-medium" data-i18n="nav.philosophy">철학</a>
-            <a href="#archive" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-brand-gold font-medium" data-i18n="nav.archive">아카이브</a>
-            <a href="#timer" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-brand-gold font-medium" data-i18n="nav.timer">추출 타이머</a>
-            <a href="#guide" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-brand-gold font-medium" data-i18n="nav.guide">가이드</a>
-        </div>
     </header>
+
+    <nav id="mobile-journey" class="md:hidden fixed bottom-0 inset-x-0 z-50 px-3 pt-2 bg-[#0f0c08]/90 backdrop-blur-xl border-t border-brand-500/20" aria-label="Explore sections">
+        <div class="max-w-lg mx-auto grid grid-cols-4 gap-1 pb-[calc(.5rem+env(safe-area-inset-bottom))]">
+            <a href="#quiz" class="journey-link flex flex-col items-center gap-1 py-2 text-[10px] text-gray-300"><i class="fa-solid fa-compass text-base"></i><span data-i18n="nav.quiz">취향 찾기</span></a>
+            <a href="#archive" class="journey-link flex flex-col items-center gap-1 py-2 text-[10px] text-gray-300"><i class="fa-solid fa-mug-hot text-base"></i><span data-i18n="nav.archive">아카이브</span></a>
+            <a href="#timer" class="journey-link flex flex-col items-center gap-1 py-2 text-[10px] text-gray-300"><i class="fa-solid fa-stopwatch text-base"></i><span data-i18n="nav.timer">추출 타이머</span></a>
+            <a href="#guide" class="journey-link flex flex-col items-center gap-1 py-2 text-[10px] text-gray-300"><i class="fa-solid fa-book-open text-base"></i><span data-i18n="nav.guide">가이드</span></a>
+        </div>
+    </nav>
 
     <section id="hero" class="hero-bg min-h-screen flex items-center justify-center relative px-4 pt-24 pb-16">
         <video id="hero-video" class="absolute inset-0 w-full h-full object-cover z-0" autoplay muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=2000&q=80" aria-hidden="true">
@@ -180,79 +187,45 @@
                 산미의 경쾌함부터 고소한 바디감, 차의 은은한 향미까지. 당신만을 위한 섬세한 맞춤 테이스팅 가이드와 스마트 추출 타이머.
             </p>
 
-            <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#quiz" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-500 to-brand-700 text-white font-semibold text-base shadow-lg shadow-brand-900/50 hover:from-brand-400 hover:to-brand-600 transition-all hover:scale-105 flex items-center justify-center gap-3 border border-brand-400/30">
-                    <span data-i18n="hero.ctaQuiz">내 취향 찾기 시작</span>
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-                <a href="#timer" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card text-brand-200 font-semibold text-base hover:bg-brand-900/60 transition-all hover:text-brand-gold flex items-center justify-center gap-3">
-                    <i class="fa-solid fa-stopwatch text-brand-gold"></i>
-                    <span data-i18n="hero.ctaTimer">추출 타이머 사용하기</span>
-                </a>
+            <div class="pt-4 flex items-center justify-center gap-3 text-xs sm:text-sm tracking-wide text-brand-100/90">
+                <span data-i18n="hero.journeyFind">발견하기</span><i class="fa-solid fa-arrow-right text-brand-gold/70"></i>
+                <span data-i18n="hero.journeyBrew">내려보기</span><i class="fa-solid fa-arrow-right text-brand-gold/70"></i>
+                <span data-i18n="hero.journeyEnjoy">즐기기</span>
             </div>
 
-            <!-- Feature Badges -->
-            <div class="pt-12 grid grid-cols-2 md:grid-cols-4 gap-4 text-center border-t border-white/10 mt-12">
-                <div class="p-3">
-                    <div class="text-brand-gold text-xl mb-1"><i class="fa-solid fa-compass"></i></div>
+            <!-- Explore the next part of your coffee journey -->
+            <div class="pt-8 grid grid-cols-2 md:grid-cols-4 gap-3 text-center border-t border-white/10 mt-8">
+                <a href="#quiz" class="p-3 rounded-xl hover:bg-white/5 transition-colors group">
+                    <div class="text-brand-gold text-xl mb-1 group-hover:scale-110 transition-transform"><i class="fa-solid fa-compass"></i></div>
                     <div class="text-sm font-semibold text-gray-200" data-i18n="feat.quiz">맞춤 프로파일링</div>
                     <div class="text-xs text-gray-400" data-i18n="feat.quizDesc">4단계 알고리즘 분석</div>
-                </div>
-                <div class="p-3">
-                    <div class="text-brand-gold text-xl mb-1"><i class="fa-solid fa-seedling"></i></div>
+                </a>
+                <a href="#archive" class="p-3 rounded-xl hover:bg-white/5 transition-colors group">
+                    <div class="text-brand-gold text-xl mb-1 group-hover:scale-110 transition-transform"><i class="fa-solid fa-seedling"></i></div>
                     <div class="text-sm font-semibold text-gray-200" data-i18n="feat.archive">스페셜티 카탈로그</div>
                     <div class="text-xs text-gray-400" data-i18n="feat.archiveDesc">커피 & 파인 티 12종</div>
-                </div>
-                <div class="p-3">
-                    <div class="text-brand-gold text-xl mb-1"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                </a>
+                <a href="#timer" class="p-3 rounded-xl hover:bg-white/5 transition-colors group">
+                    <div class="text-brand-gold text-xl mb-1 group-hover:scale-110 transition-transform"><i class="fa-solid fa-clock-rotate-left"></i></div>
                     <div class="text-sm font-semibold text-gray-200" data-i18n="feat.timer">스마트 추출 타이머</div>
                     <div class="text-xs text-gray-400" data-i18n="feat.timerDesc">프리셋 & 구간 알림</div>
-                </div>
-                <div class="p-3">
-                    <div class="text-brand-gold text-xl mb-1"><i class="fa-solid fa-book-open"></i></div>
+                </a>
+                <a href="#guide" class="p-3 rounded-xl hover:bg-white/5 transition-colors group">
+                    <div class="text-brand-gold text-xl mb-1 group-hover:scale-110 transition-transform"><i class="fa-solid fa-book-open"></i></div>
                     <div class="text-sm font-semibold text-gray-200" data-i18n="feat.guide">마스터 추출 레시피</div>
                     <div class="text-xs text-gray-400" data-i18n="feat.guideDesc">비율 및 온도 가이드</div>
-                </div>
+                </a>
             </div>
         </div>
 
         <a href="https://www.pexels.com/video/slow-motion-footage-of-freshly-brewed-coffee-dripping-into-a-cup-2853788/" target="_blank" rel="noopener noreferrer" class="absolute bottom-8 right-5 z-10 text-[10px] text-white/50 hover:text-white/80 transition-colors" data-i18n="hero.videoCredit">Video: K / Pexels</a>
 
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center hidden sm:block">
-            <a href="#quiz" class="text-gray-400 hover:text-brand-gold transition-colors flex flex-col items-center gap-2">
-                <span class="text-xs uppercase tracking-widest" data-i18n="hero.scroll">SCROLL DOWN</span>
-                <i class="fa-solid fa-chevron-down animate-bounce text-sm"></i>
+        <div class="absolute bottom-7 left-1/2 transform -translate-x-1/2 text-center">
+            <a href="#quiz" class="text-white/80 hover:text-brand-gold transition-colors flex flex-col items-center gap-2">
+                <span class="text-xs uppercase tracking-widest" data-i18n="hero.scroll">아래로 내려 취향 탐험하기</span>
+                <i class="fa-solid fa-angles-down animate-bounce text-lg"></i>
             </a>
-        </div>
-    </section>
-
-    <section id="philosophy" class="py-24 px-4 relative overflow-hidden border-t border-white/5">
-        <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,rgba(167,128,81,0.12),transparent_60%)]"></div>
-        <div class="max-w-7xl mx-auto relative">
-            <div class="max-w-3xl mx-auto text-center mb-14">
-                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase block mb-3" data-i18n="philosophy.eyebrow">우리의 철학</span>
-                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-5" data-i18n="philosophy.heading">좋은 한 잔은 첫 모금보다 훨씬 먼저 시작됩니다.</h2>
-                <p class="text-gray-300 text-sm sm:text-base leading-relaxed" data-i18n="philosophy.intro">맛은 산지와 세심한 손길, 추출 방식에 따라 달라집니다. 그 차이를 쉽게 발견할 수 있도록 정리해, 매일의 한 잔을 조금 더 나답게 만듭니다.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                <article class="glass-card rounded-2xl p-7 sm:p-8">
-                    <span class="font-serif text-4xl text-brand-gold/70">01</span>
-                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-white mt-5 mb-3" data-i18n="philosophy.originTitle">산지에서 시작하기</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="philosophy.originCopy">에티오피아 고지대부터 아삼과 우지까지, 음료가 자란 곳은 그 맛의 성격을 알려주는 첫 단서입니다.</p>
-                </article>
-                <article class="glass-card rounded-2xl p-7 sm:p-8">
-                    <span class="font-serif text-4xl text-brand-gold/70">02</span>
-                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-white mt-5 mb-3" data-i18n="philosophy.craftTitle">만드는 손길을 존중하기</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="philosophy.craftCopy">로스팅, 찻잎, 물, 시간은 한 잔의 맛을 바꿉니다. 맛보는 즐거움은 그대로 두고, 선택에 필요한 정보를 모았습니다.</p>
-                </article>
-                <article class="glass-card rounded-2xl p-7 sm:p-8">
-                    <span class="font-serif text-4xl text-brand-gold/70">03</span>
-                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-white mt-5 mb-3" data-i18n="philosophy.cupTitle">내 취향대로 완성하기</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="philosophy.cupCopy">테이스팅 노트로 취향을 찾고, 기분에 맞는 음료를 골라보세요. 타이머와 가이드가 좋아하는 풍미를 살리는 과정을 도와줍니다.</p>
-                </article>
-            </div>
-            <p class="text-center text-brand-200/80 text-xs sm:text-sm tracking-wide mt-9" data-i18n="philosophy.closing">산지를 발견하고, 손길을 느끼고, 나만의 풍미를 즐겨보세요.</p>
         </div>
     </section>
 
@@ -271,10 +244,11 @@
 
             <!-- Quiz Questions Box -->
             <div id="quiz-box">
-                <div class="text-xs font-semibold text-brand-300 uppercase tracking-wider mb-2">
-                    <span data-i18n="quiz.step">Step</span> <span id="quiz-current-step">1</span> / 4
+                <div class="flex items-center justify-between text-xs font-semibold text-brand-300 uppercase tracking-wider mb-2">
+                    <span><span data-i18n="quiz.step">Step</span> <span id="quiz-current-step">1</span> / 4</span>
+                    <button id="quiz-back-btn" onclick="goBackQuizStep()" class="hidden text-gray-400 hover:text-brand-gold normal-case" data-i18n="quiz.back">← 이전 선택</button>
                 </div>
-                <h3 id="quiz-question" class="text-xl sm:text-2xl font-bold text-white mb-6"></h3>
+                <h3 id="quiz-question" aria-live="polite" class="text-xl sm:text-2xl font-bold text-white mb-6"></h3>
 
                 <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <!-- Options injected via JS -->
@@ -308,6 +282,35 @@
                     </button>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section id="philosophy" class="py-24 px-4 relative overflow-hidden border-t border-white/5">
+        <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,rgba(167,128,81,0.12),transparent_60%)]"></div>
+        <div class="max-w-7xl mx-auto relative">
+            <div class="max-w-3xl mx-auto text-center mb-14">
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase block mb-3" data-i18n="philosophy.eyebrow">우리의 철학</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-5" data-i18n="philosophy.heading">좋은 한 잔은 첫 모금보다 훨씬 먼저 시작됩니다.</h2>
+                <p class="text-gray-300 text-sm sm:text-base leading-relaxed" data-i18n="philosophy.intro">맛은 산지와 세심한 손길, 추출 방식에 따라 달라집니다. 그 차이를 쉽게 발견할 수 있도록 정리해, 매일의 한 잔을 조금 더 나답게 만듭니다.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <article class="glass-card rounded-2xl p-7 sm:p-8">
+                    <span class="font-serif text-4xl text-brand-gold/70">01</span>
+                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-white mt-5 mb-3" data-i18n="philosophy.originTitle">산지에서 시작하기</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="philosophy.originCopy">에티오피아 고지대부터 아삼과 우지까지, 음료가 자란 곳은 그 맛의 성격을 알려주는 첫 단서입니다.</p>
+                </article>
+                <article class="glass-card rounded-2xl p-7 sm:p-8">
+                    <span class="font-serif text-4xl text-brand-gold/70">02</span>
+                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-white mt-5 mb-3" data-i18n="philosophy.craftTitle">만드는 손길을 존중하기</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="philosophy.craftCopy">로스팅, 찻잎, 물, 시간은 한 잔의 맛을 바꿉니다. 맛보는 즐거움은 그대로 두고, 선택에 필요한 정보를 모았습니다.</p>
+                </article>
+                <article class="glass-card rounded-2xl p-7 sm:p-8">
+                    <span class="font-serif text-4xl text-brand-gold/70">03</span>
+                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-white mt-5 mb-3" data-i18n="philosophy.cupTitle">내 취향대로 완성하기</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="philosophy.cupCopy">테이스팅 노트로 취향을 찾고, 기분에 맞는 음료를 골라보세요. 타이머와 가이드가 좋아하는 풍미를 살리는 과정을 도와줍니다.</p>
+                </article>
+            </div>
+            <p class="text-center text-brand-200/80 text-xs sm:text-sm tracking-wide mt-9" data-i18n="philosophy.closing">산지를 발견하고, 손길을 느끼고, 나만의 풍미를 즐겨보세요.</p>
         </div>
     </section>
 
@@ -459,11 +462,12 @@
                 nav: { philosophy: "브랜드 철학", quiz: "취향 찾기", archive: "아카이브", timer: "추출 타이머", guide: "가이드" },
                 hero: {
                     tagline: "Find Your Perfect Brew",
-                    title: "당신의 커피 취향은 어떠십니까?",
-                    subtitle: "산미의 경쾌함부터 고소한 바디감, 차의 은은한 향미까지. 당신만을 위한 섬세한 맞춤 테이스팅 가이드와 스마트 추출 타이머.",
+                    title: "좋아하는 커피를 찾고, 더 즐겁게 한 잔을.",
+                    subtitle: "몇 번의 선택으로 내 취향을 발견하고, 마음에 드는 커피를 직접 내려 즐겨보세요.",
+                    journeyFind: "발견하기", journeyBrew: "내려보기", journeyEnjoy: "즐기기",
                     ctaQuiz: "내 취향 찾기 시작",
                     ctaTimer: "추출 타이머 사용하기",
-                    scroll: "SCROLL DOWN",
+                    scroll: "아래로 내려 취향 탐험하기",
                     videoCredit: "영상: K / Pexels"
                 },
                 feat: {
@@ -475,11 +479,11 @@
                 quiz: {
                     sectionTitle: "INTERACTIVE QUIZ",
                     heading: "나만의 음료 찾기",
-                    subheading: "몇 가지 간단한 질문에 답하고, 당신의 기분과 입맛에 딱 맞는 원두 또는 찻잎을 추천받아보세요.",
+                    subheading: "네 번의 선택으로 취향을 찾아보세요. 마음에 드는 음료를 고르고, 직접 내려 즐길 수 있어요.",
                     step: "단계",
                     resultBadge: "당신만을 위한 추천 음료",
                     brewNow: "이 음료 추출 타이머 시작",
-                    retry: "다시 검사하기"
+                    retry: "다시 검사하기", back: "← 이전 선택"
                 },
                 archive: {
                     sectionTitle: "CURATED COLLECTION",
@@ -520,11 +524,12 @@
                 nav: { philosophy: "Our Philosophy", quiz: "Taste Quiz", archive: "Archive", timer: "Brew Timer", guide: "Guide" },
                 hero: {
                     tagline: "Find Your Perfect Brew",
-                    title: "What is your coffee preference?",
-                    subtitle: "From bright acidity to rich nutty notes, or delicate tea aromas. Your personalized tasting guide and precision brew timer.",
+                    title: "Find a coffee you love. Enjoy every cup.",
+                    subtitle: "Explore your taste in a few simple choices, then brew a coffee that feels like yours.",
+                    journeyFind: "DISCOVER", journeyBrew: "BREW", journeyEnjoy: "ENJOY",
                     ctaQuiz: "Start Preference Quiz",
                     ctaTimer: "Use Brew Timer",
-                    scroll: "SCROLL DOWN",
+                    scroll: "SCROLL TO EXPLORE YOUR TASTE",
                     videoCredit: "Video: K / Pexels"
                 },
                 feat: {
@@ -536,11 +541,11 @@
                 quiz: {
                     sectionTitle: "INTERACTIVE QUIZ",
                     heading: "Find Your Signature Brew",
-                    subheading: "Answer a few simple questions to discover the exact bean or tea leaf profile matching your palate.",
+                    subheading: "Make four quick choices to find your taste. Pick a favorite and brew it yourself.",
                     step: "Step",
                     resultBadge: "RECOMMENDED FOR YOU",
                     brewNow: "Start Timer For This Brew",
-                    retry: "Retake Quiz"
+                    retry: "Retake Quiz", back: "← Previous choice"
                 },
                 archive: {
                     sectionTitle: "CURATED COLLECTION",
@@ -584,11 +589,12 @@
                 nav: { philosophy: "私たちの哲学", quiz: "好み診断", archive: "アーカイブ", timer: "タイマー", guide: "ガイド" },
                 hero: {
                     tagline: "Find Your Perfect Brew",
-                    title: "あなたのコーヒーの好みは？",
-                    subtitle: "爽やかな酸味から香ばしいコク、お茶の繊細な香りまで。あなただけのパーソナルテイスティングガイドと抽出タイマー。",
+                    title: "好きなコーヒーを見つけて、一杯をもっと楽しもう。",
+                    subtitle: "いくつか選ぶだけで好みを発見。自分らしい一杯を淹れて楽しみましょう。",
+                    journeyFind: "見つける", journeyBrew: "淹れる", journeyEnjoy: "楽しむ",
                     ctaQuiz: "診断を始める",
                     ctaTimer: "タイマーを使う",
-                    scroll: "SCROLL DOWN",
+                    scroll: "スクロールして好みを探す",
                     videoCredit: "動画: K / Pexels"
                 },
                 feat: {
@@ -600,11 +606,11 @@
                 quiz: {
                     sectionTitle: "INTERACTIVE QUIZ",
                     heading: "お気に入りの一杯を見つける",
-                    subheading: "いくつかの質問に答えるだけで、今の気分にぴったりのコーヒー豆や茶葉をおすすめします。",
+                    subheading: "4つの質問で好みを発見。お気に入りを選んで、自分で淹れてみましょう。",
                     step: "ステップ",
                     resultBadge: "あなたへのおすすめ",
                     brewNow: "このメニューでタイマー開始",
-                    retry: "もう一度診断する"
+                    retry: "もう一度診断する", back: "← 前の選択へ"
                 },
                 archive: {
                     sectionTitle: "CURATED COLLECTION",
@@ -648,11 +654,12 @@
                 nav: { philosophy: "品牌理念", quiz: "口味测验", archive: "风味档案", timer: "萃取计时", guide: "冲煮指南" },
                 hero: {
                     tagline: "Find Your Perfect Brew",
-                    title: "您偏好的咖啡口味是什么？",
-                    subtitle: "从明亮酸度到浓郁醇厚，亦或高雅茶香。为您量身定制的品鉴指南与精准萃取计时器。",
+                    title: "找到喜欢的咖啡，让每一杯都更享受。",
+                    subtitle: "通过几次简单选择发现自己的口味，再亲手冲一杯喜欢的咖啡。",
+                    journeyFind: "发现", journeyBrew: "冲煮", journeyEnjoy: "享受",
                     ctaQuiz: "开始寻找我的专属风味",
                     ctaTimer: "使用萃取计时器",
-                    scroll: "SCROLL DOWN",
+                    scroll: "向下探索您的口味",
                     videoCredit: "视频：K / Pexels"
                 },
                 feat: {
@@ -664,11 +671,11 @@
                 quiz: {
                     sectionTitle: "INTERACTIVE QUIZ",
                     heading: "寻找您的专属饮品",
-                    subheading: "只需回答几个简单问题，即可探索最符合您此刻味蕾的咖啡豆或茶叶。",
+                    subheading: "通过四次选择发现自己的口味，选一款喜欢的饮品并亲手冲泡。",
                     step: "步骤",
                     resultBadge: "为您推荐",
                     brewNow: "开始此饮品计时",
-                    retry: "重新测试"
+                    retry: "重新测试", back: "← 上一步"
                 },
                 archive: {
                     sectionTitle: "CURATED COLLECTION",
@@ -780,14 +787,24 @@
 
             const optsContainer = document.getElementById('quiz-options');
             optsContainer.innerHTML = '';
+            const back = document.getElementById("quiz-back-btn");
+            if (back) back.classList.toggle("hidden", currentStep === 0);
 
             qData.options.forEach((opt, idx) => {
                 const btn = document.createElement('button');
-                btn.className = "p-5 rounded-xl border border-gray-700 bg-brand-900/30 hover:bg-brand-500/20 hover:border-brand-gold text-left font-semibold text-white transition-all hover:scale-[1.02] flex items-center justify-between";
+                btn.className = "taste-choice group p-5 rounded-2xl border border-gray-700 bg-gradient-to-br from-brand-900/50 to-black/30 hover:from-brand-500/20 hover:border-brand-gold text-left font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center justify-between";
+                btn.style.animationDelay = (idx * 90) + "ms";
                 btn.innerHTML = `<span>${opt.label[currentLang]}</span> <i class="fa-solid fa-chevron-right text-brand-gold text-sm"></i>`;
                 btn.onclick = () => selectQuizOption(opt);
                 optsContainer.appendChild(btn);
             });
+        }
+
+        function goBackQuizStep() {
+            if (currentStep <= 0) return;
+            currentStep--;
+            delete quizAnswers[currentStep];
+            renderQuizStep();
         }
 
         function selectQuizOption(opt) {
@@ -810,9 +827,12 @@
 
             let recommended;
             if (isTea) {
-                recommended = isAcidic ? catalogData[3] : catalogData[4]; // Earl Grey or Sencha/Chamomile
+                const lowCaffeine = quizAnswers[2]?.caf === "low";
+                const boldStyle = quizAnswers[3]?.style === "bold";
+                recommended = lowCaffeine ? catalogData[5] : boldStyle ? catalogData[9] : isAcidic ? catalogData[3] : catalogData[4];
             } else {
-                recommended = isAcidic ? catalogData[0] : catalogData[1]; // Ethiopia Guji or Colombia Huila
+                const boldStyle = quizAnswers[3]?.style === "bold";
+                recommended = boldStyle ? catalogData[2] : isAcidic ? catalogData[0] : catalogData[1];
             }
 
             document.getElementById('result-title').textContent = recommended.name[currentLang];
@@ -1199,10 +1219,24 @@
             }
         }
 
-        // --- 5. Mobile Menu Toggle ---
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+        // --- 5. Guided navigation and gentle scroll reveals ---
+        function initJourney() {
+            const sections = ["quiz", "archive", "timer", "guide"].map(id => document.getElementById(id)).filter(Boolean);
+            const links = document.querySelectorAll(".journey-link");
+            if (!("IntersectionObserver" in window)) return;
+            const activeObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                links.forEach(link => {
+                    if (link.getAttribute("href") === "#" + entry.target.id) link.setAttribute("aria-current", "location");
+                    else link.removeAttribute("aria-current");
+                });
+            }), { rootMargin: "-25% 0px -60% 0px" });
+            sections.forEach(section => activeObserver.observe(section));
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+            const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add("is-visible"); revealObserver.unobserve(entry.target); }
+            }), { threshold: 0.12 });
+            document.querySelectorAll("#philosophy article, #quiz .glass-card, #guide .glass-card").forEach(el => { el.classList.add("reveal-on-scroll"); revealObserver.observe(el); });
         }
 
         // --- 6. Initialization on Load ---
@@ -1211,6 +1245,9 @@
             renderCatalog('all');
             initPresetsUI();
             updateTimerDisplay();
+            initJourney();
+            const initial = location.hash.slice(1);
+            document.querySelectorAll(".journey-link").forEach(link => { if (link.getAttribute("href") === "#" + initial) link.setAttribute("aria-current", "location"); });
         });
     </script>
 </body>
