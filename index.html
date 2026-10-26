@@ -152,6 +152,28 @@
         #guide { background-image: linear-gradient(142deg, rgba(74, 107, 83, .13), transparent 48%, rgba(167, 128, 81, .07)); }
         html { scroll-padding-top: 6rem; }
         section[id] { scroll-margin-top: 5.5rem; }
+        /* Language-aware typography: keep each translation balanced at the same viewport. */
+        .hero-panel h1 { font-size: clamp(2.4rem, 6vw, 4.75rem); line-height: 1.14; text-wrap: balance; }
+        #quiz h2, #philosophy h2, #archive h2, #timer h2, #guide h2 { font-size: clamp(1.75rem, 4vw, 3.125rem); line-height: 1.2; text-wrap: balance; }
+        .hero-panel [data-i18n="hero.subtitle"], #quiz [data-i18n$="subheading"], #philosophy [data-i18n="philosophy.intro"] { font-size: clamp(.92rem, 1.45vw, 1.08rem); line-height: 1.65; text-wrap: pretty; }
+        #quiz-options button, #timer-presets button, #catalog-grid button { font-size: .94rem; line-height: 1.45; text-wrap: balance; }
+        #catalog-grid h3, #guide h3 { line-height: 1.28; text-wrap: balance; }
+        html[lang="en"] .hero-panel h1 { font-size: clamp(2.3rem, 5.2vw, 4.25rem); line-height: 1.12; letter-spacing: -.035em; }
+        html[lang="en"] #quiz h2, html[lang="en"] #philosophy h2, html[lang="en"] #archive h2, html[lang="en"] #timer h2, html[lang="en"] #guide h2 { font-size: clamp(1.65rem, 3.55vw, 2.8rem); line-height: 1.16; letter-spacing: -.025em; }
+        html[lang="en"] .hero-panel [data-i18n="hero.subtitle"], html[lang="en"] #quiz [data-i18n$="subheading"], html[lang="en"] #philosophy [data-i18n="philosophy.intro"] { font-size: clamp(.9rem, 1.3vw, 1rem); line-height: 1.62; }
+        html[lang="ja"] .hero-panel h1 { font-size: clamp(2.2rem, 5vw, 4.1rem); line-height: 1.28; letter-spacing: .015em; }
+        html[lang="ja"] #quiz h2, html[lang="ja"] #philosophy h2, html[lang="ja"] #archive h2, html[lang="ja"] #timer h2, html[lang="ja"] #guide h2 { font-size: clamp(1.65rem, 3.5vw, 2.75rem); line-height: 1.35; letter-spacing: .01em; }
+        html[lang="ja"] .hero-panel [data-i18n="hero.subtitle"], html[lang="ja"] #quiz [data-i18n$="subheading"], html[lang="ja"] #philosophy [data-i18n="philosophy.intro"] { font-size: clamp(.9rem, 1.28vw, 1rem); line-height: 1.85; }
+        html[lang="ja"] #quiz-options button, html[lang="ja"] #timer-presets button { font-size: .88rem; line-height: 1.65; }
+        html[lang="zh"] .hero-panel h1 { font-size: clamp(2.35rem, 5.3vw, 4.35rem); line-height: 1.24; letter-spacing: .01em; }
+        html[lang="zh"] #quiz h2, html[lang="zh"] #philosophy h2, html[lang="zh"] #archive h2, html[lang="zh"] #timer h2, html[lang="zh"] #guide h2 { font-size: clamp(1.7rem, 3.7vw, 2.9rem); line-height: 1.32; letter-spacing: .01em; }
+        html[lang="zh"] .hero-panel [data-i18n="hero.subtitle"], html[lang="zh"] #quiz [data-i18n$="subheading"], html[lang="zh"] #philosophy [data-i18n="philosophy.intro"] { font-size: clamp(.92rem, 1.32vw, 1.02rem); line-height: 1.78; }
+        html[lang="zh"] #quiz-options button, html[lang="zh"] #timer-presets button { font-size: .9rem; line-height: 1.6; }
+        @media (max-width: 640px) {
+            html[lang="en"] .hero-panel h1 { font-size: clamp(2.25rem, 10vw, 3.25rem); }
+            html[lang="ja"] .hero-panel h1 { font-size: clamp(2.1rem, 9vw, 3rem); }
+            html[lang="zh"] .hero-panel h1 { font-size: clamp(2.3rem, 9.5vw, 3.1rem); }
+        }
         .journey-link { position: relative; }
         .journey-link[aria-current="location"] { color: #D4AF37; }
         .journey-link[aria-current="location"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -0.65rem; height: 2px; background: #D4AF37; border-radius: 2px; }
@@ -1362,6 +1384,7 @@
     </script>
 </body>
 </html>
+
 
 
 
