@@ -154,6 +154,7 @@
         section[id] { scroll-margin-top: 5.5rem; }
         /* Language-aware typography: keep each translation balanced at the same viewport. */
         .hero-panel h1 { font-size: clamp(2.4rem, 6vw, 4.75rem); line-height: 1.14; text-wrap: balance; }
+        html[lang="ko"] .hero-panel h1 { word-break: keep-all; }
         #quiz h2, #philosophy h2, #archive h2, #timer h2, #guide h2 { font-size: clamp(1.75rem, 4vw, 3.125rem); line-height: 1.2; text-wrap: balance; }
         .hero-panel [data-i18n="hero.subtitle"], #quiz [data-i18n$="subheading"], #philosophy [data-i18n="philosophy.intro"] { font-size: clamp(.92rem, 1.45vw, 1.08rem); line-height: 1.65; text-wrap: pretty; }
         #quiz-options button, #timer-presets button, #catalog-grid button { font-size: .94rem; line-height: 1.45; text-wrap: balance; }
@@ -1384,6 +1385,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
