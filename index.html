@@ -124,9 +124,8 @@
             background: linear-gradient(180deg, rgba(15, 12, 8, .97) 0%, rgba(15, 12, 8, .91) 64%, rgba(15, 12, 8, .28) 100%);
         }
         #hero { z-index: 1; }
-        .journey-scene { opacity: 1; transition: opacity .85s ease, filter .85s ease; }
-        .journey-scene.is-leaving { opacity: 0; filter: blur(8px); }
-        @media (prefers-reduced-motion: reduce) { .journey-scene { transition: none; } .journey-scene.is-leaving { opacity: 1; filter: none; } }
+        .journey-scene { opacity: 1; transition: opacity .22s linear, filter .22s linear; will-change: opacity, filter; }
+        @media (prefers-reduced-motion: reduce) { .journey-scene { transition: none; will-change: auto; } }
         #quiz { z-index: 2; width: 100%; }
         #philosophy { z-index: 3; }
         #archive { position: relative; z-index: 4; min-height: 100svh; display: flex; align-items: center; }
@@ -1298,12 +1297,21 @@
             sections.forEach(section => activeObserver.observe(section));
             if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
             const pinnedScenes = [...document.querySelectorAll(".journey-scene")];
-            const sceneObserver = new IntersectionObserver(entries => entries.forEach(entry => {
-                const box = entry.target.getBoundingClientRect();
-                const movingPast = box.top <= 0 && box.bottom < window.innerHeight * 0.68;
-                entry.target.classList.toggle("is-leaving", movingPast && entry.intersectionRatio < 0.42);
-            }), { threshold: [0, 0.2, 0.42, 0.7, 1] });
-            pinnedScenes.forEach(scene => sceneObserver.observe(scene));
+            let sceneFrame = 0;
+            const updateSceneFades = () => {
+                sceneFrame = 0;
+                const viewport = window.innerHeight;
+                pinnedScenes.forEach(scene => {
+                    const bottom = scene.getBoundingClientRect().bottom;
+                    const progress = Math.max(0, Math.min(1, (viewport * 0.82 - bottom) / (viewport * 0.58)));
+                    scene.style.opacity = String(1 - progress);
+                    scene.style.filter = `blur(${progress * 8}px)`;
+                });
+            };
+            const queueSceneFades = () => { if (!sceneFrame) sceneFrame = requestAnimationFrame(updateSceneFades); };
+            window.addEventListener("scroll", queueSceneFades, { passive: true });
+            window.addEventListener("resize", queueSceneFades);
+            updateSceneFades();
             const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
                 if (entry.isIntersecting) { entry.target.classList.add("is-visible"); revealObserver.unobserve(entry.target); }
             }), { threshold: 0.12 });
@@ -1346,6 +1354,7 @@
     </script>
 </body>
 </html>
+
 
 
 
