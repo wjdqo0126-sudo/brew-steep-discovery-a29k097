@@ -110,7 +110,7 @@
         .hero-panel::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: radial-gradient(ellipse at center, transparent 12%, rgba(9, 6, 5, .3) 74%, rgba(9, 6, 5, .72) 100%), linear-gradient(90deg, rgba(9, 6, 5, .35), transparent 25%, transparent 75%, rgba(9, 6, 5, .35)); }
         .hero-kicker { background: rgba(112, 32, 25, .58) !important; border-color: rgba(255, 129, 92, .62) !important; color: #FFE5D4 !important; box-shadow: 0 0 30px rgba(237, 85, 53, .22); }
         .hero-panel h1 { filter: drop-shadow(0 4px 28px rgba(255, 121, 77, .24)); }
-        .hero-panel [data-i18n="hero.subtitle"] { color: #fff7ed !important; font-weight: 500; text-shadow: 0 2px 20px rgba(0, 0, 0, .8); }
+        .hero-panel [data-i18n="hero.subtitle"] { color: #fff7ed !important; font-size: clamp(1rem, 1.65vw, 1.25rem) !important; font-weight: 600; text-shadow: 0 2px 20px rgba(0, 0, 0, .8); }
 
         #scroll-flow {
             position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 60;
@@ -294,16 +294,16 @@
         <div class="max-w-5xl mx-auto text-center z-10 space-y-8">
             <div class="hero-kicker inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-300 text-xs sm:text-sm tracking-wider uppercase font-semibold">
                 <i class="fa-solid fa-bolt text-orange-300"></i>
-                <span data-i18n="hero.tagline">NO MORE BAD COFFEE</span>
+                <span data-i18n="hero.tagline">취향 리셋, 지금</span>
             </div>
 
             <!-- Main Catchy Headline -->
             <h1 class="font-serif text-4xl sm:text-6xl md:text-6xl xl:text-7xl font-extrabold text-white leading-tight tracking-normal">
-                <span data-i18n="hero.title" class="gold-gradient-text block mb-3">지금까지 마신 커피, 똥물일지도.</span>
+                <span data-i18n="hero.title" class="gold-gradient-text block mb-3">그 커피, 네 취향 맞아?</span>
             </h1>
 
             <p class="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed" data-i18n="hero.subtitle">
-                괜찮아. 아직 네 취향을 못 만난 것뿐. 네 입맛에 맞는 진짜 한 잔, 지금 찾아줄게.
+                네 번만 골라봐. 네 입맛에 딱 맞는 한 잔, 찾아줄게.
             </p>
 
             <div class="pt-4 flex items-center justify-center gap-3 text-xs sm:text-sm tracking-wide text-brand-100/90">
@@ -585,9 +585,9 @@
                 philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "좋은 한 잔은 첫 모금보다 훨씬 먼저 시작됩니다.", intro: "맛은 산지와 세심한 손길, 추출 방식에 따라 달라집니다. 그 차이를 쉽게 발견할 수 있도록 정리해, 매일의 한 잔을 조금 더 나답게 만듭니다.", originTitle: "산지에서 시작하기", originCopy: "에티오피아 고지대부터 아삼과 우지까지, 음료가 자란 곳은 그 맛의 성격을 알려주는 첫 단서입니다.", craftTitle: "만드는 손길을 존중하기", craftCopy: "로스팅, 찻잎, 물, 시간은 한 잔의 맛을 바꿉니다. 맛보는 즐거움은 그대로 두고, 선택에 필요한 정보를 모았습니다.", cupTitle: "내 취향대로 완성하기", cupCopy: "테이스팅 노트로 취향을 찾고, 기분에 맞는 음료를 골라보세요. 타이머와 가이드가 좋아하는 풍미를 살리는 과정을 도와줍니다.", closing: "산지를 발견하고, 손길을 느끼고, 나만의 풍미를 즐겨보세요." },
                 nav: { philosophy: "브랜드 철학", quiz: "취향 찾기", archive: "아카이브", timer: "추출 타이머", guide: "가이드" },
                 hero: {
-                    tagline: "취향 없는 커피는 여기까지",
-                    title: "지금까지 마신 커피, 똥물일지도.",
-                    subtitle: "괜찮아. 아직 네 취향을 못 만난 것뿐. 네 입맛에 맞는 진짜 한 잔, 지금 찾아줄게.",
+                    tagline: "취향 리셋, 지금",
+                    title: "그 커피, 네 취향 맞아?",
+                    subtitle: "네 번만 골라봐. 네 입맛에 딱 맞는 한 잔, 찾아줄게.",
                     journeyFind: "발견하기", journeyBrew: "내려보기", journeyEnjoy: "즐기기",
                     ctaQuiz: "내 취향 찾기 시작",
                     ctaTimer: "추출 타이머 사용하기",
@@ -647,9 +647,9 @@
                 philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "A good cup begins long before the first sip.", intro: "Flavor is shaped by place, careful craft, and the way you brew. We make those details easier to discover, so every cup feels a little more personal.", originTitle: "Start with the place", originCopy: "From Ethiopia’s highlands to Assam and Uji, a drink’s origin offers the first clues to its character.", craftTitle: "Respect the craft", craftCopy: "Roast, leaf, water, and time each change the cup. We bring the useful details together without hiding the simple pleasure of tasting.", cupTitle: "Make it your own", cupCopy: "Explore tasting notes, find a brew that fits your mood, then use the timer and guide to bring out the flavor you enjoy.", closing: "Discover the origin. Notice the craft. Savor what you find." },
                 nav: { philosophy: "Our Philosophy", quiz: "Taste Quiz", archive: "Archive", timer: "Brew Timer", guide: "Guide" },
                 hero: {
-                    tagline: "NO MORE BAD COFFEE",
-                    title: "Your coffee might be trash.",
-                    subtitle: "No shame. You just haven't found your cup yet. Four quick choices, and we'll find the coffee that actually fits you.",
+                    tagline: "QUESTION YOUR CUP",
+                    title: "Is that really your coffee?",
+                    subtitle: "Four quick picks. One cup that finally tastes like you.",
                     journeyFind: "DISCOVER", journeyBrew: "BREW", journeyEnjoy: "ENJOY",
                     ctaQuiz: "Start Preference Quiz",
                     ctaTimer: "Use Brew Timer",
@@ -712,9 +712,9 @@
                 philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "おいしい一杯は、最初のひと口よりずっと前から始まっています。", intro: "味わいは産地、丁寧なものづくり、そして淹れ方によって変わります。その違いを見つけやすくして、毎日の一杯をもっと自分らしく。", originTitle: "産地から知る", originCopy: "エチオピアの高地からアッサム、宇治まで。育った場所は、その飲みものらしさを知る最初の手がかりです。", craftTitle: "つくり手の技を大切に", craftCopy: "焙煎、茶葉、水、時間が一杯の味わいを変えます。飲む楽しさをそのままに、選ぶための情報をまとめました。", cupTitle: "自分好みの一杯に", cupCopy: "テイスティングノートから好みを見つけ、気分に合う一杯を選びましょう。タイマーとガイドで、好きな味わいを引き出せます。", closing: "産地を知り、技を感じ、自分だけの味わいを楽しむ。" },
                 nav: { philosophy: "私たちの哲学", quiz: "好み診断", archive: "アーカイブ", timer: "タイマー", guide: "ガイド" },
                 hero: {
-                    tagline: "好みじゃない一杯は、もう終わり。",
-                    title: "今までのコーヒー、ハズレかも。",
-                    subtitle: "大丈夫。まだ好みに出会っていないだけ。4つの選択で、あなたに合う本命の一杯を見つけよう。",
+                    tagline: "その一杯、疑ってみよう",
+                    title: "そのコーヒー、本当に好き？",
+                    subtitle: "4つの選択で、あなたにぴったりの一杯を見つけよう。",
                     journeyFind: "見つける", journeyBrew: "淹れる", journeyEnjoy: "楽しむ",
                     ctaQuiz: "診断を始める",
                     ctaTimer: "タイマーを使う",
@@ -777,9 +777,9 @@
                 philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "一杯好饮，从第一口之前就已开始。", intro: "风味由产地、细致工艺与冲煮方式共同塑造。我们把这些线索整理得更清晰，让每一杯都更贴近你的喜好。", originTitle: "从产地开始", originCopy: "从埃塞俄比亚高地到阿萨姆与宇治，产地是认识一款饮品风味的第一条线索。", craftTitle: "尊重制作工艺", craftCopy: "烘焙、茶叶、水与时间都会改变杯中风味。我们汇集实用信息，也保留品尝本身的乐趣。", cupTitle: "冲出自己的风格", cupCopy: "从风味笔记发现喜好，选一杯符合当下心情的饮品，再用计时器和指南冲出喜欢的味道。", closing: "认识产地，感受工艺，享受发现的风味。" },
                 nav: { philosophy: "品牌理念", quiz: "口味测验", archive: "风味档案", timer: "萃取计时", guide: "冲煮指南" },
                 hero: {
-                    tagline: "告别不合口味的咖啡",
-                    title: "你喝的咖啡，可能一直不对味。",
-                    subtitle: "别担心，只是还没找到适合你的那一杯。做四次选择，找到真正合你口味的咖啡。",
+                    tagline: "重新认识你的咖啡",
+                    title: "这杯咖啡，真的是你的口味吗？",
+                    subtitle: "做四次选择，找到真正适合你的那一杯。",
                     journeyFind: "发现", journeyBrew: "冲煮", journeyEnjoy: "享受",
                     ctaQuiz: "开始寻找我的专属风味",
                     ctaTimer: "使用萃取计时器",
@@ -1419,6 +1419,7 @@
     </script>
 </body>
 </html>
+
 
 
 
