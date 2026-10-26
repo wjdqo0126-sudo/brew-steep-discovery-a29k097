@@ -51,6 +51,23 @@
             background-color: #0f0c08;
             color: #f3f4f6;
             overflow-x: hidden;
+            position: relative;
+            isolation: isolate;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -22vh -15vw;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 72% 46% at 14% 8%, rgba(137, 82, 43, .35), transparent 74%),
+                radial-gradient(ellipse 65% 46% at 90% 42%, rgba(194, 126, 60, .19), transparent 72%),
+                radial-gradient(ellipse 80% 54% at 32% 94%, rgba(74, 107, 83, .24), transparent 76%);
+            transform: translate3d(0, var(--aura-shift, 0px), 0);
+            filter: hue-rotate(var(--aura-hue, 0deg));
+            transition: filter .6s linear;
         }
 
         .glass-header {
@@ -61,7 +78,7 @@
         }
 
         .glass-card {
-            background: rgba(28, 23, 18, 0.65);
+            background: linear-gradient(140deg, rgba(167, 128, 81, .20), rgba(28, 23, 18, .72) 38%, rgba(34, 38, 28, .48));
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -90,6 +107,22 @@
         }
 
         #hero-video { filter: brightness(0.58); }
+
+        #scroll-flow {
+            position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 60;
+            background: linear-gradient(90deg, #8A643B 0%, #D4AF37 38%, #CA7953 68%, #4A6B53 100%);
+            box-shadow: 0 0 12px rgba(212, 175, 55, .55);
+            transition: width .12s linear;
+        }
+        #quiz, #philosophy, #archive, #timer, #guide {
+            background-image: linear-gradient(128deg, rgba(167, 128, 81, .045), transparent 36%, rgba(74, 107, 83, .055));
+            transition: background-position .8s ease;
+        }
+        #quiz { background-image: radial-gradient(ellipse at 18% 0%, rgba(194, 126, 60, .12), transparent 60%), linear-gradient(128deg, rgba(167, 128, 81, .045), transparent 36%, rgba(74, 107, 83, .055)); }
+        #philosophy { background-image: linear-gradient(148deg, rgba(167, 128, 81, .035), transparent 45%, rgba(120, 95, 67, .07)); }
+        #archive { background-image: linear-gradient(115deg, rgba(194, 126, 60, .10), transparent 52%, rgba(74, 107, 83, .12)); }
+        #timer { background-image: radial-gradient(ellipse at 76% 28%, rgba(212, 175, 55, .09), transparent 60%), linear-gradient(145deg, rgba(74, 107, 83, .07), transparent 72%); }
+        #guide { background-image: linear-gradient(142deg, rgba(74, 107, 83, .13), transparent 48%, rgba(167, 128, 81, .07)); }
         html { scroll-padding-top: 6rem; }
         section[id] { scroll-margin-top: 5.5rem; }
         .journey-link { position: relative; }
@@ -99,7 +132,7 @@
         .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
         .taste-choice { animation: choice-in .35s both; }
         @keyframes choice-in { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        @media (prefers-reduced-motion: reduce) { .reveal-on-scroll { opacity: 1; transform: none; transition: none; } .taste-choice { animation: none; } }
+        @media (prefers-reduced-motion: reduce) { .reveal-on-scroll { opacity: 1; transform: none; transition: none; } .taste-choice { animation: none; } body::before { transition: none; } #scroll-flow { transition: none; } }
         @media (max-width: 767px) { body { padding-bottom: calc(5.25rem + env(safe-area-inset-bottom)); } }
         @media (prefers-reduced-motion: reduce) { #hero-video { display: none; } }
 
@@ -120,6 +153,7 @@
     </style>
 </head>
 <body class="antialiased text-gray-200">
+    <div id="scroll-flow" aria-hidden="true"></div>
 
     <header class="fixed top-0 left-0 right-0 z-50 glass-header transition-all duration-300" id="main-header">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -314,7 +348,7 @@
         </div>
     </section>
 
-    <section id="archive" class="py-24 px-4 bg-black/40 border-t border-b border-white/5">
+    <section id="archive" class="py-24 px-4 border-t border-b border-white/5">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
                 <span class="text-brand-gold text-xs font-bold tracking-widest uppercase block mb-2" data-i18n="archive.sectionTitle">CURATED COLLECTION</span>
@@ -385,7 +419,7 @@
         </div>
     </section>
 
-    <section id="guide" class="py-24 px-4 bg-black/40 border-t border-white/5">
+    <section id="guide" class="py-24 px-4 border-t border-white/5">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <span class="text-brand-gold text-xs font-bold tracking-widest uppercase block mb-2" data-i18n="guide.sectionTitle">BREWING MASTERCLASS</span>
@@ -1239,6 +1273,28 @@
             document.querySelectorAll("#philosophy article, #quiz .glass-card, #guide .glass-card").forEach(el => { el.classList.add("reveal-on-scroll"); revealObserver.observe(el); });
         }
 
+        function updateScrollFlow() {
+            const root = document.documentElement;
+            const maxScroll = root.scrollHeight - window.innerHeight;
+            const progress = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
+            const flow = document.getElementById("scroll-flow");
+            if (flow) flow.style.width = (progress * 100) + "%";
+            root.style.setProperty("--aura-shift", ((progress - .5) * -110) + "px");
+            root.style.setProperty("--aura-hue", (progress * 38) + "deg");
+        }
+
+        function initScrollFlow() {
+            let queued = false;
+            const schedule = () => {
+                if (queued) return;
+                queued = true;
+                requestAnimationFrame(() => { updateScrollFlow(); queued = false; });
+            };
+            window.addEventListener("scroll", schedule, { passive: true });
+            window.addEventListener("resize", schedule);
+            updateScrollFlow();
+        }
+
         // --- 6. Initialization on Load ---
         window.addEventListener('DOMContentLoaded', () => {
             renderQuizStep();
@@ -1246,6 +1302,7 @@
             initPresetsUI();
             updateTimerDisplay();
             initJourney();
+            initScrollFlow();
             const initial = location.hash.slice(1);
             document.querySelectorAll(".journey-link").forEach(link => { if (link.getAttribute("href") === "#" + initial) link.setAttribute("aria-current", "location"); });
         });
