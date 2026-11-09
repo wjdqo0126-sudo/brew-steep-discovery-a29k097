@@ -234,6 +234,59 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #A78051;
         }
+            /* Editorial visual direction: oversized type, white space, vivid coffee color. */
+        body { background: #fff; color: #151515; }
+        body::before { display: none; }
+        .glass-header { background: rgba(255,255,255,.94); border-bottom: 1px solid #e9e7e2; color: #111; backdrop-filter: blur(16px); }
+        #main-header .gold-gradient-text { background: none; color: #111; -webkit-text-fill-color: #111; }
+        #main-header .text-gray-400 { color: #6c6c6c; }
+        #main-header .bg-brand-500\\/20 { background: #f1eee8; }
+        #main-header .border-brand-500\\/40 { border-color: #ded8cf; }
+        #main-header .text-brand-gold { color: #181818; }
+        #main-header nav a { color: #222; }
+        #lang-select { color: #111; background: #fff; border-color: #d7d4ce; }
+        #mobile-journey { background: rgba(255,255,255,.96); border-color: #dedbd5; }
+        #mobile-journey a { color: #282828; }
+        #scroll-flow { background: linear-gradient(90deg,#06d6b1,#b7ef37,#ffb324,#f54a63,#8e54ff); box-shadow: none; }
+        .journey-hero-track { background: #fff; }
+        .hero-panel { height: 100svh; min-height: 700px; justify-content: flex-start; padding: clamp(7rem, 13vh, 9rem) clamp(1.25rem, 6vw, 6rem) 2rem; background: #fff; color: #111; mask-image: linear-gradient(to bottom,#000 0%,#000 84%,transparent 100%); }
+        .hero-panel::before { content: ""; position: absolute; z-index: 0; left: 0; right: 0; bottom: 0; height: 43%; background: linear-gradient(112deg,#00d6bd 0%,#a8e93e 28%,#ffd34e 53%,#ff874a 75%,#ff4b72 100%); }
+        .hero-panel::after { inset: auto; left: 0; right: 0; bottom: 0; height: 42%; background: linear-gradient(180deg,transparent 66%,rgba(0,0,0,.12)); }
+        #hero-video { top: 54%; left: 9%; width: 82%; height: 37%; border-radius: 2px; filter: brightness(.98) saturate(1.18); box-shadow: 0 24px 70px rgba(30,22,16,.22); }
+        .hero-video-wash { display: none; }
+        .hero-panel > .max-w-5xl { width: 100%; max-width: 1120px; margin-left: 0; margin-right: auto; text-align: left; position: relative; z-index: 4; }
+        .hero-kicker { background: #fff !important; border: 1px solid #ddd !important; color: #222 !important; box-shadow: none; border-radius: 999px; }
+        .hero-kicker i { color: #fa5945 !important; }
+        .hero-panel h1 { margin-top: .55rem; filter: none; font-family: 'Inter','Noto Sans KR','Noto Sans JP','Noto Sans SC',sans-serif; font-size: clamp(4.25rem, 11.3vw, 9.5rem) !important; line-height: .91 !important; letter-spacing: -.075em; font-weight: 800; max-width: 11ch; }
+        .hero-panel h1 .gold-gradient-text { background: none; color: #111; -webkit-text-fill-color: #111; }
+        .hero-panel [data-i18n="hero.subtitle"] { color: #303030 !important; text-shadow: none; font-weight: 500; font-size: clamp(1rem,1.6vw,1.2rem) !important; max-width: 37rem; margin-top: 1rem; }
+        .hero-panel .pt-4 { color: #222; }
+        .hero-panel .pt-4 i { color: #f05d48 !important; }
+        .hero-panel .pt-8.grid-cols-2 { position: absolute; z-index: 5; left: 5%; right: 5%; bottom: .25rem; border: 0; margin: 0; padding: .35rem 0; background: rgba(255,255,255,.94); }
+        .hero-panel .pt-8.grid-cols-2 a { color: #111; border-radius: 0; border-right: 1px solid #dedbd5; }
+        .hero-panel .pt-8.grid-cols-2 a:last-child { border-right: 0; }
+        .hero-panel .pt-8.grid-cols-2 a:hover { background: #f5f3ef; }
+        .hero-panel .pt-8.grid-cols-2 .text-brand-gold { color: #f05d48; }
+        .hero-panel .pt-8.grid-cols-2 .text-gray-200 { color: #171717; }
+        .hero-panel .pt-8.grid-cols-2 .text-gray-400 { color: #656565; }
+        .hero-panel > a[href*="pexels"] { color: rgba(255,255,255,.85); bottom: 12%; right: 10%; }
+        .hero-panel > div.absolute.bottom-7 { display: none; }
+        #quiz, #philosophy, #archive, #timer, #guide { color: #f7f5f1; }
+        #quiz h2, #philosophy h2, #archive h2, #timer h2, #guide h2 { letter-spacing: -.04em; }
+        .glass-card { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.14); border-radius: 1.1rem; }
+        .glass-card:hover { border-color: rgba(255,255,255,.42); box-shadow: 0 18px 48px rgba(0,0,0,.2); }
+        @media (min-width: 768px) { .hero-panel .max-w-5xl { padding-right: 8%; } }
+        @media (max-width: 767px) {
+            .hero-panel { min-height: 740px; padding: 7rem 1.25rem 2rem; }
+            #hero-video { top: 55%; left: 5%; width: 90%; height: 31%; }
+            .hero-panel::before, .hero-panel::after { height: 37%; }
+            .hero-panel h1 { font-size: clamp(3.35rem, 14vw, 6.2rem) !important; max-width: 10ch; letter-spacing: -.07em; }
+            .hero-panel .pt-8.grid-cols-2 { left: 3%; right: 3%; bottom: .15rem; grid-template-columns: repeat(2,minmax(0,1fr)); }
+            .hero-panel .pt-8.grid-cols-2 a { padding: .35rem .2rem; }
+            .hero-panel > a[href*="pexels"] { bottom: 13%; right: 7%; }
+        }
+        @media (max-width: 390px) { .hero-panel h1 { font-size: clamp(3rem,13vw,4rem) !important; } }
+        @media (prefers-reduced-motion: reduce) { .hero-panel { mask-image: none; } }
     </style>
 </head>
 <body class="antialiased text-gray-200">
@@ -290,7 +343,7 @@
         <video id="hero-video" class="absolute inset-0 w-full h-full object-cover z-0" autoplay muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=2000&q=80" aria-hidden="true">
             <source src="https://videos.pexels.com/video-files/2853788/2853788-hd_1920_1080_24fps.mp4" type="video/mp4">
         </video>
-        <div class="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-black/30 via-black/40 to-[#0f0c08]/95"></div>
+        <div class="absolute inset-0 z-[1] pointer-events-none hero-video-wash"></div>
         <div class="max-w-5xl mx-auto text-center z-10 space-y-8">
             <div class="hero-kicker inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-300 text-xs sm:text-sm tracking-wider uppercase font-semibold">
                 <i class="fa-solid fa-bolt text-orange-300"></i>
@@ -1419,6 +1472,7 @@
     </script>
 </body>
 </html>
+
 
 
 
