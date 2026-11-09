@@ -306,6 +306,28 @@
             html[lang="ja"] .hero-panel h1 .gold-gradient-text, html[lang="zh"] .hero-panel h1 .gold-gradient-text { max-width: 100%; }
             #hero-video { top: 64%; height: 24%; }
         }
+        /* Shared grid tracks keep translated cards and controls on matching rows. */
+        #archive { background-color: #14120f; color: #f7f5f1; }
+        #catalog-grid { grid-auto-rows: 1fr; align-items: stretch; }
+        #catalog-grid > .catalog-card { height: 100%; min-width: 0; display: flex; flex-direction: column; gap: 1rem; }
+        #catalog-grid > .catalog-card > div:first-child { flex: 1 0 auto; }
+        #catalog-grid h3 { min-height: 2.55em; display: flex; align-items: flex-start; }
+        #catalog-grid > .catalog-card p { min-height: 5.1em; }
+        #catalog-grid .catalog-notes { min-height: 2.7rem; align-content: start; }
+        #catalog-grid .catalog-buy-link { min-height: 3.1rem; min-width: 0; text-wrap: balance; }
+        #catalog-grid .catalog-card > div:last-child { margin-top: auto; }
+        #quiz-options { align-items: stretch; }
+        #quiz-options button { min-height: 5rem; width: 100%; gap: .75rem; }
+        #timer-presets { grid-auto-rows: 1fr; align-items: stretch; }
+        #timer-presets button { width: 100%; height: 100%; min-width: 0; min-height: 4.25rem; white-space: normal; text-wrap: balance; }
+        #guide .grid { align-items: stretch; }
+        #guide .grid > .glass-card, #philosophy .grid > article { height: 100%; }
+        @media (max-width: 767px) {
+            #catalog-grid { grid-auto-rows: auto; }
+            #catalog-grid > .catalog-card { min-height: 0; }
+            #catalog-grid h3 { min-height: 0; }
+            #catalog-grid > .catalog-card p { min-height: 0; }
+        }
     </style>
 </head>
 <body class="antialiased text-gray-200">
@@ -1204,7 +1226,7 @@
 
             filtered.forEach(item => {
                 const card = document.createElement('div');
-                card.className = "glass-card rounded-2xl p-6 flex flex-col justify-between hover:scale-[1.02] transition-all duration-300";
+                card.className = "catalog-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:scale-[1.02] transition-all duration-300";
                 
                 let iconClass = item.type === 'coffee' ? 'fa-mug-hot text-brand-gold' : 'fa-leaf text-emerald-400';
                 const isCoffee = item.type === 'coffee';
@@ -1235,15 +1257,15 @@
                             <span><i class="fa-solid fa-clock text-brand-gold mr-1"></i> ${item.time}</span>
                         </div>
 
-                        <div class="flex flex-wrap gap-1.5 mb-4">
+                        <div class="catalog-notes flex flex-wrap gap-1.5 mb-4">
                             ${item.notes.map(n => `<span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-brand-300">#${localizeCatalogTerm(n)}</span>`).join('')}
                         </div>
 
                         <div class="grid grid-cols-2 gap-2 mb-3">
-                            <a href="${shoppingUrl}" target="_blank" rel="noopener noreferrer" class="py-2 px-2 rounded-lg bg-white/5 border border-white/10 text-gray-200 hover:border-brand-400 hover:text-brand-gold text-[10px] sm:text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 text-center">
+                            <a href="${shoppingUrl}" target="_blank" rel="noopener noreferrer" class="catalog-buy-link py-2 px-2 rounded-lg bg-white/5 border border-white/10 text-gray-200 hover:border-brand-400 hover:text-brand-gold text-[10px] sm:text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 text-center">
                                 <i class="fa-solid fa-magnifying-glass"></i> ${shoppingLabel}
                             </a>
-                            <a href="${specialtyStoreUrl}" target="_blank" rel="noopener noreferrer" class="py-2 px-2 rounded-lg bg-white/5 border border-white/10 text-gray-200 hover:border-brand-400 hover:text-brand-gold text-[10px] sm:text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 text-center">
+                            <a href="${specialtyStoreUrl}" target="_blank" rel="noopener noreferrer" class="catalog-buy-link py-2 px-2 rounded-lg bg-white/5 border border-white/10 text-gray-200 hover:border-brand-400 hover:text-brand-gold text-[10px] sm:text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 text-center">
                                 <i class="fa-solid fa-store"></i> ${storeLabel}
                             </a>
                         </div>
