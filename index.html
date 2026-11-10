@@ -308,6 +308,7 @@
         }
         /* Shared grid tracks keep translated cards and controls on matching rows. */
         #archive { background-color: #14120f; color: #f7f5f1; }
+        #timer[hidden] { display: none !important; }
         #catalog-grid { grid-auto-rows: 1fr; align-items: stretch; }
         #catalog-grid > .catalog-card { height: 100%; min-width: 0; display: flex; flex-direction: column; gap: 1rem; }
         #catalog-grid > .catalog-card > div:first-child { flex: 1 0 auto; }
@@ -350,8 +351,7 @@
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium" aria-label="Explore sections">
                 <a href="#quiz" class="nav-link journey-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.quiz">취향 찾기</a>
                 <a href="#archive" class="nav-link journey-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.archive">아카이브</a>
-                <a href="#timer" class="nav-link journey-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.timer">추출 타이머</a>
-                <a href="#guide" class="nav-link journey-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.guide">가이드</a>
+                <a href="#guide" class="nav-link journey-link text-gray-300 hover:text-brand-gold transition-colors" data-i18n="nav.guide">카페 주문 팁</a>
             </nav>
 
             <!-- Language Switcher & Mobile Menu Button -->
@@ -371,11 +371,10 @@
     </header>
 
     <nav id="mobile-journey" class="md:hidden fixed bottom-0 inset-x-0 z-50 px-3 pt-2 bg-[#0f0c08]/90 backdrop-blur-xl border-t border-brand-500/20" aria-label="Explore sections">
-        <div class="max-w-lg mx-auto grid grid-cols-4 gap-1 pb-[calc(.5rem+env(safe-area-inset-bottom))]">
+        <div class="max-w-lg mx-auto grid grid-cols-3 gap-1 pb-[calc(.5rem+env(safe-area-inset-bottom))]">
             <a href="#quiz" class="journey-link flex flex-col items-center gap-1 py-2 text-[10px] text-gray-300"><i class="fa-solid fa-compass text-base"></i><span data-i18n="nav.quiz">취향 찾기</span></a>
             <a href="#archive" class="journey-link flex flex-col items-center gap-1 py-2 text-[10px] text-gray-300"><i class="fa-solid fa-mug-hot text-base"></i><span data-i18n="nav.archive">아카이브</span></a>
-            <a href="#timer" class="journey-link flex flex-col items-center gap-1 py-2 text-[10px] text-gray-300"><i class="fa-solid fa-stopwatch text-base"></i><span data-i18n="nav.timer">추출 타이머</span></a>
-            <a href="#guide" class="journey-link flex flex-col items-center gap-1 py-2 text-[10px] text-gray-300"><i class="fa-solid fa-book-open text-base"></i><span data-i18n="nav.guide">가이드</span></a>
+            <a href="#guide" class="journey-link flex flex-col items-center gap-1 py-2 text-[10px] text-gray-300"><i class="fa-solid fa-comments text-base"></i><span data-i18n="nav.guide">카페 주문 팁</span></a>
         </div>
     </nav>
 
@@ -418,11 +417,6 @@
                     <div class="text-sm font-semibold text-gray-200" data-i18n="feat.archive">스페셜티 카탈로그</div>
                     <div class="text-xs text-gray-400" data-i18n="feat.archiveDesc">커피 & 파인 티 12종</div>
                 </a>
-                <a href="#timer" class="p-3 rounded-xl hover:bg-white/5 transition-colors group">
-                    <div class="text-brand-gold text-xl mb-1 group-hover:scale-110 transition-transform"><i class="fa-solid fa-clock-rotate-left"></i></div>
-                    <div class="text-sm font-semibold text-gray-200" data-i18n="feat.timer">스마트 추출 타이머</div>
-                    <div class="text-xs text-gray-400" data-i18n="feat.timerDesc">프리셋 & 구간 알림</div>
-                </a>
                 <a href="#guide" class="p-3 rounded-xl hover:bg-white/5 transition-colors group">
                     <div class="text-brand-gold text-xl mb-1 group-hover:scale-110 transition-transform"><i class="fa-solid fa-book-open"></i></div>
                     <div class="text-sm font-semibold text-gray-200" data-i18n="feat.guide">마스터 추출 레시피</div>
@@ -448,7 +442,7 @@
         <div class="text-center mb-10">
             <span class="text-brand-gold text-xs font-bold tracking-widest uppercase block mb-2" data-i18n="quiz.sectionTitle">INTERACTIVE QUIZ</span>
             <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4" data-i18n="quiz.heading">나만의 음료 찾기</h2>
-            <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base" data-i18n="quiz.subheading">네 번의 선택으로 취향을 찾아보세요. 마음에 드는 음료를 고르고, 직접 내려 즐길 수 있어요.</p>
+                    <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base" data-i18n="quiz.subheading">네 번의 선택으로 취향을 찾고, 추천 음료를 카페에서 즐겨보세요.</p>
         </div>
 
         <div class="glass-card rounded-2xl p-6 sm:p-10 relative overflow-hidden shadow-2xl">
@@ -487,9 +481,9 @@
                 </div>
 
                 <div class="pt-4 flex flex-col sm:flex-row justify-center gap-4">
-                    <button onclick="goToResultTimer()" class="px-6 py-3 rounded-xl bg-brand-500 text-white font-semibold hover:bg-brand-600 transition-colors flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-play"></i>
-                        <span data-i18n="quiz.brewNow">이 음료 추출 타이머 시작</span>
+                    <button onclick="goToResultTimer()" class="px-6 py-3 rounded-xl border border-white/15 bg-white/5 text-gray-300 font-semibold hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-stopwatch"></i>
+                        <span data-i18n="quiz.brewNow">집에서 내릴 때 타이머 보기</span>
                     </button>
                     <button onclick="resetQuiz()" class="px-6 py-3 rounded-xl bg-gray-800 text-gray-300 font-semibold hover:bg-gray-700 transition-colors flex items-center justify-center gap-2">
                         <i class="fa-solid fa-rotate-right"></i>
@@ -523,7 +517,7 @@
                 <article class="glass-card rounded-2xl p-7 sm:p-8">
                     <span class="font-serif text-4xl text-brand-gold/70">03</span>
                     <h3 class="font-serif text-xl sm:text-2xl font-bold text-white mt-5 mb-3" data-i18n="philosophy.cupTitle">내 취향대로 완성하기</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="philosophy.cupCopy">테이스팅 노트로 취향을 찾고, 기분에 맞는 음료를 골라보세요. 타이머와 가이드가 좋아하는 풍미를 살리는 과정을 도와줍니다.</p>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="philosophy.cupCopy">테이스팅 노트로 취향을 찾고, 기분에 맞는 음료를 골라보세요. 카페에서 취향을 말할 때 활용할 수 있습니다. 집에서 내릴 땐 타이머도 선택해 보세요.</p>
                 </article>
             </div>
             <p class="text-center text-brand-200/80 text-xs sm:text-sm tracking-wide mt-9" data-i18n="philosophy.closing">산지를 발견하고, 손길을 느끼고, 나만의 풍미를 즐겨보세요.</p>
@@ -535,7 +529,7 @@
             <div class="text-center mb-12">
                 <span class="text-brand-gold text-xs font-bold tracking-widest uppercase block mb-2" data-i18n="archive.sectionTitle">CURATED COLLECTION</span>
                 <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4" data-i18n="archive.heading">음료 아카이브</h2>
-                <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base" data-i18n="archive.subheading">엄선된 프리미엄 원두와 최고급 찻잎의 테이스팅 노트와 추출 스펙을 탐색해보세요.</p>
+                <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base" data-i18n="archive.subheading">엄선한 원두와 차의 풍미 노트를 살펴보고, 취향에 맞는 한 잔을 찾아보세요.</p>
                 <p class="text-gray-500 max-w-xl mx-auto text-xs mt-2" data-i18n="archive.purchaseNote">구매 링크는 글로벌 상품 검색 또는 판매처로 연결됩니다. 국가별 배송 가능 여부, 재고, 가격과 관세는 판매처에서 확인하세요.</p>
 
                 <!-- Filter Buttons -->
@@ -553,7 +547,7 @@
         </div>
     </section>
 
-    <section id="timer" class="journey-scene journey-timer py-12 px-4 relative">
+    <section id="timer" class="journey-scene journey-timer py-12 px-4 relative" hidden>
         <div class="w-full max-w-5xl mx-auto">
         <div class="text-center mb-8">
             <span class="text-brand-gold text-xs font-bold tracking-widest uppercase block mb-2" data-i18n="timer.sectionTitle">PRECISION TIMER</span>
@@ -606,54 +600,45 @@
     <section id="guide" class="journey-scene journey-guide py-16 px-4 border-t border-white/5">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase block mb-2" data-i18n="guide.sectionTitle">BREWING MASTERCLASS</span>
-                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4" data-i18n="guide.heading">마스터 추출 가이드</h2>
-                <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base" data-i18n="guide.subheading">기본 원칙만 지키면 당신의 홈카페가 전문 에스프레소 바/찻집이 됩니다.</p>
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase block mb-2" data-i18n="guide.sectionTitle">ORDER WITH CONFIDENCE</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4" data-i18n="guide.heading">카페에서 이렇게 주문해 봐요</h2>
+                <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base" data-i18n="guide.subheading">추천 결과를 바리스타에게 보여주고, 취향 한마디를 더해보세요.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Golden Ratio -->
                 <div class="glass-card rounded-2xl p-8 hover:border-brand-gold/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-brand-500/20 text-brand-gold flex items-center justify-center text-2xl mb-6">
-                        <i class="fa-solid fa-scale-balanced"></i>
+                        <i class="fa-solid fa-mug-saucer"></i>
                     </div>
-                    <h3 class="font-serif text-2xl font-bold text-white mb-3" data-i18n="guide.card1Title">황금 비율 (Ratio)</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n="guide.card1Desc">
-                        드립 커피는 원두 1g 당 물 15~16g(1:15~16), 차는 잎 2~3g 당 물 200ml가 표준 기준입니다.
-                    </p>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-3" data-i18n="guide.card1Title">추천 결과 보여주기</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n="guide.card1Desc">퀴즈 결과의 음료 이름과 향미 노트를 바리스타에게 보여주세요.</p>
                     <ul class="text-xs text-brand-300 space-y-2 border-t border-white/10 pt-4">
-                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.ratioCoffee">드립: 원두 18g + 물 280ml</span></li>
-                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.ratioTea">잎차: 찻잎 3g + 물 250ml</span></li>
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.ratioCoffee">이 원두로 만든 메뉴가 있나요?</span></li>
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.ratioTea">이 원두에는 어떤 추출 방식이 잘 어울리나요?</span></li>
                     </ul>
                 </div>
 
-                <!-- Water Temp -->
                 <div class="glass-card rounded-2xl p-8 hover:border-brand-gold/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-brand-500/20 text-brand-gold flex items-center justify-center text-2xl mb-6">
-                        <i class="fa-solid fa-temperature-half"></i>
+                        <i class="fa-solid fa-comment-dots"></i>
                     </div>
-                    <h3 class="font-serif text-2xl font-bold text-white mb-3" data-i18n="guide.card2Title">물 온도 (Water Temp)</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n="guide.card2Desc">
-                        약배전 원두 및 홍차는 높은 온도(92~95°C), 녹차는 낮은 온도(70~80°C)에서 쓴맛 없이 향이 살아납니다.
-                    </p>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-3" data-i18n="guide.card2Title">좋아하는 맛 말하기</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n="guide.card2Desc">과일 향, 초콜릿, 꽃향처럼 아카이브에서 마음에 든 풍미를 골라 말해보세요.</p>
                     <ul class="text-xs text-brand-300 space-y-2 border-t border-white/10 pt-4">
-                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.tempCoffee">커피: 91°C ~ 94°C</span></li>
-                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.tempTea">녹차: 75°C / 홍차: 95°C</span></li>
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.tempCoffee">상큼하고 가벼운 맛을 좋아해요.</span></li>
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.tempTea">고소하고 부드러운 커피를 찾고 있어요.</span></li>
                     </ul>
                 </div>
 
-                <!-- Grind Size & Time -->
                 <div class="glass-card rounded-2xl p-8 hover:border-brand-gold/40 transition-all">
                     <div class="w-12 h-12 rounded-xl bg-brand-500/20 text-brand-gold flex items-center justify-center text-2xl mb-6">
-                        <i class="fa-solid fa-wheat-awn"></i>
+                        <i class="fa-solid fa-sliders"></i>
                     </div>
-                    <h3 class="font-serif text-2xl font-bold text-white mb-3" data-i18n="guide.card3Title">분쇄도 & 시간 (Grind & Time)</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n="guide.card3Desc">
-                        굵게 빻을수록 추출 시간을 길게, 가늘게 빻을수록 짧게 가져가 성분의 과다/미달 추출을 방지합니다.
-                    </p>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-3" data-i18n="guide.card3Title">내 입맛에 맞게 조절하기</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n="guide.card3Desc">처음엔 기본 레시피로 맛보고, 필요하면 단맛이나 우유를 조절해 보세요.</p>
                     <ul class="text-xs text-brand-300 space-y-2 border-t border-white/10 pt-4">
-                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.grindEspresso">에스프레소: 극세립 (25~30초)</span></li>
-                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.grindDrip">핸드드립: 중세립 (2분 30초)</span></li>
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.grindEspresso">시럽은 적게 부탁드려요.</span></li>
+                        <li><i class="fa-solid fa-check text-brand-gold mr-2"></i><span data-i18n="guide.grindDrip">우유는 따로 받을 수 있을까요?</span></li>
                     </ul>
                 </div>
             </div>
@@ -668,7 +653,7 @@
                 </div>
                 <span class="font-serif text-lg font-bold text-white tracking-wider">BREW & STEEP</span>
             </div>
-            <p data-i18n="footer.copy">© 2026 BREW & STEEP. Craft Coffee & Fine Tea Discovery Platform. All rights reserved.</p>
+            <p data-i18n="footer.copy">© 2026 BREW & STEEP. Coffee & Tea Taste Discovery. All rights reserved.</p>
         </div>
     </footer>
 
@@ -676,8 +661,8 @@
         // --- 1. Multilingual Translations Dictionary ---
         const i18n = {
             ko: {
-                philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "좋은 한 잔은 첫 모금보다 훨씬 먼저 시작됩니다.", intro: "맛은 산지와 세심한 손길, 추출 방식에 따라 달라집니다. 그 차이를 쉽게 발견할 수 있도록 정리해, 매일의 한 잔을 조금 더 나답게 만듭니다.", originTitle: "산지에서 시작하기", originCopy: "에티오피아 고지대부터 아삼과 우지까지, 음료가 자란 곳은 그 맛의 성격을 알려주는 첫 단서입니다.", craftTitle: "만드는 손길을 존중하기", craftCopy: "로스팅, 찻잎, 물, 시간은 한 잔의 맛을 바꿉니다. 맛보는 즐거움은 그대로 두고, 선택에 필요한 정보를 모았습니다.", cupTitle: "내 취향대로 완성하기", cupCopy: "테이스팅 노트로 취향을 찾고, 기분에 맞는 음료를 골라보세요. 타이머와 가이드가 좋아하는 풍미를 살리는 과정을 도와줍니다.", closing: "산지를 발견하고, 손길을 느끼고, 나만의 풍미를 즐겨보세요." },
-                nav: { philosophy: "브랜드 철학", quiz: "취향 찾기", archive: "아카이브", timer: "추출 타이머", guide: "가이드" },
+                philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "좋은 한 잔은 첫 모금보다 훨씬 먼저 시작됩니다.", intro: "맛은 산지와 세심한 손길, 추출 방식에 따라 달라집니다. 그 차이를 쉽게 발견할 수 있도록 정리해, 매일의 한 잔을 조금 더 나답게 만듭니다.", originTitle: "산지에서 시작하기", originCopy: "에티오피아 고지대부터 아삼과 우지까지, 음료가 자란 곳은 그 맛의 성격을 알려주는 첫 단서입니다.", craftTitle: "만드는 손길을 존중하기", craftCopy: "로스팅, 찻잎, 물, 시간은 한 잔의 맛을 바꿉니다. 맛보는 즐거움은 그대로 두고, 선택에 필요한 정보를 모았습니다.", cupTitle: "내 취향대로 완성하기", cupCopy: "테이스팅 노트로 취향을 찾고, 기분에 맞는 음료를 골라보세요. 카페에서 취향을 말할 때 활용할 수 있습니다. 집에서 내릴 땐 타이머도 선택해 보세요.", closing: "산지를 발견하고, 손길을 느끼고, 나만의 풍미를 즐겨보세요." },
+                nav: { philosophy: "브랜드 철학", quiz: "취향 찾기", archive: "아카이브", timer: "추출 타이머", guide: "카페 주문 팁" },
                 hero: {
                     tagline: "취향 리셋, 지금",
                     title: "그 커피, 네 취향 맞아?",
@@ -697,16 +682,16 @@
                 quiz: {
                     sectionTitle: "INTERACTIVE QUIZ",
                     heading: "나만의 음료 찾기",
-                    subheading: "네 번의 선택으로 취향을 찾아보세요. 마음에 드는 음료를 고르고, 직접 내려 즐길 수 있어요.",
+                    subheading: "네 번의 선택으로 취향을 찾고, 추천 음료를 카페에서 즐겨보세요.",
                     step: "단계",
                     resultBadge: "당신만을 위한 추천 음료",
-                    brewNow: "이 음료 추출 타이머 시작",
+                    brewNow: "집에서 내릴 때 타이머 보기",
                     retry: "다시 검사하기", back: "← 이전 선택"
                 },
                 archive: {
                     sectionTitle: "CURATED COLLECTION",
                     heading: "음료 아카이브",
-                    subheading: "엄선된 프리미엄 원두와 최고급 찻잎의 테이스팅 노트와 추출 스펙을 탐색해보세요.",
+                    subheading: "엄선한 원두와 차의 풍미 노트를 살펴보고, 취향에 맞는 한 잔을 찾아보세요.",
                     purchaseNote: "구매 링크는 글로벌 상품 검색 또는 판매처로 연결됩니다. 국가별 배송 가능 여부, 재고, 가격과 관세는 판매처에서 확인하세요.",
                     shopSearchCoffee: "원두 구매 검색",
                     shopSearchTea: "차 구매 검색",
@@ -723,23 +708,23 @@
                     reset: "리셋", ready: "준비 완료", paused: "일시정지됨", complete: "추출 완료!"
                 },
                 guide: {
-                    sectionTitle: "BREWING MASTERCLASS",
-                    heading: "마스터 추출 가이드",
-                    subheading: "기본 원칙만 지키면 당신의 홈카페가 전문 에스프레소 바/찻집이 됩니다.",
-                    card1Title: "황금 비율 (Ratio)",
-                    card1Desc: "드립 커피는 원두 1g 당 물 15~16g(1:15~16), 차는 잎 2~3g 당 물 200ml가 표준 기준입니다.",
-                    card2Title: "물 온도 (Water Temp)",
-                    card2Desc: "약배전 원두 및 홍차는 높은 온도(92~95°C), 녹차는 낮은 온도(70~80°C)에서 쓴맛 없이 향이 살아납니다.",
-                    card3Title: "분쇄도 & 시간 (Grind & Time)",
-                    card3Desc: "굵게 빻을수록 추출 시간을 길게, 가늘게 빻을수록 짧게 가져가 성분의 과다/미달 추출을 방지합니다.", ratioCoffee: "드립: 원두 18g + 물 280ml", ratioTea: "잎차: 찻잎 3g + 물 250ml", tempCoffee: "커피: 91°C ~ 94°C", tempTea: "녹차: 75°C / 홍차: 95°C", grindEspresso: "에스프레소: 극세립 (25~30초)", grindDrip: "핸드드립: 중세립 (2분 30초)"
+                    sectionTitle: "ORDER WITH CONFIDENCE",
+                    heading: "카페에서 이렇게 주문해 봐요",
+                    subheading: "추천 결과를 바리스타에게 보여주고, 취향 한마디를 더해보세요.",
+                    card1Title: "추천 결과 보여주기",
+                    card1Desc: "퀴즈 결과의 음료 이름과 향미 노트를 바리스타에게 보여주세요.",
+                    card2Title: "좋아하는 맛 말하기",
+                    card2Desc: "과일 향, 초콜릿, 꽃향처럼 아카이브에서 마음에 든 풍미를 골라 말해보세요.",
+                    card3Title: "내 입맛에 맞게 조절하기",
+                    card3Desc: "처음엔 기본 레시피로 맛보고, 필요하면 단맛이나 우유를 조절해 보세요.", ratioCoffee: "이 원두로 만든 메뉴가 있나요?", ratioTea: "이 원두에는 어떤 추출 방식이 잘 어울리나요?", tempCoffee: "상큼하고 가벼운 맛을 좋아해요.", tempTea: "고소하고 부드러운 커피를 찾고 있어요.", grindEspresso: "시럽은 적게 부탁드려요.", grindDrip: "우유는 따로 받을 수 있을까요?"
                 },
                 footer: {
-                    copy: "© 2026 BREW & STEEP. 커피 & 차 탐색 및 정밀 추출 플랫폼. All rights reserved."
+                    copy: "© 2026 BREW & STEEP. 커피와 차의 취향 발견 플랫폼. All rights reserved."
                 }
             },
             en: {
-                philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "A good cup begins long before the first sip.", intro: "Flavor is shaped by place, careful craft, and the way you brew. We make those details easier to discover, so every cup feels a little more personal.", originTitle: "Start with the place", originCopy: "From Ethiopia’s highlands to Assam and Uji, a drink’s origin offers the first clues to its character.", craftTitle: "Respect the craft", craftCopy: "Roast, leaf, water, and time each change the cup. We bring the useful details together without hiding the simple pleasure of tasting.", cupTitle: "Make it your own", cupCopy: "Explore tasting notes, find a brew that fits your mood, then use the timer and guide to bring out the flavor you enjoy.", closing: "Discover the origin. Notice the craft. Savor what you find." },
-                nav: { philosophy: "Our Philosophy", quiz: "Taste Quiz", archive: "Archive", timer: "Brew Timer", guide: "Guide" },
+                philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "A good cup begins long before the first sip.", intro: "Flavor is shaped by place, careful craft, and the way you brew. We make those details easier to discover, so every cup feels a little more personal.", originTitle: "Start with the place", originCopy: "From Ethiopia’s highlands to Assam and Uji, a drink’s origin offers the first clues to its character.", craftTitle: "Respect the craft", craftCopy: "Roast, leaf, water, and time each change the cup. We bring the useful details together without hiding the simple pleasure of tasting.", cupTitle: "Make it your own", cupCopy: "Explore tasting notes, find a brew that fits your mood, then use those notes to order with confidence. A timer is there if you brew at home.", closing: "Discover the origin. Notice the craft. Savor what you find." },
+                nav: { philosophy: "Our Philosophy", quiz: "Taste Quiz", archive: "Archive", timer: "Brew Timer", guide: "Café order tips" },
                 hero: {
                     tagline: "QUESTION YOUR CUP",
                     title: "Is that really your coffee?",
@@ -759,16 +744,16 @@
                 quiz: {
                     sectionTitle: "INTERACTIVE QUIZ",
                     heading: "Find Your Signature Brew",
-                    subheading: "Make four quick choices to find your taste. Pick a favorite and brew it yourself.",
+                    subheading: "Answer four quick questions, then try your match at a café.",
                     step: "Step",
                     resultBadge: "RECOMMENDED FOR YOU",
-                    brewNow: "Start Timer For This Brew",
+                    brewNow: "Brewing at home? Open the timer",
                     retry: "Retake Quiz", back: "← Previous choice"
                 },
                 archive: {
                     sectionTitle: "CURATED COLLECTION",
                     heading: "Beverage Archive",
-                    subheading: "Explore tasting notes and extraction specs for premium beans and fine tea leaves.",
+                    subheading: "Explore tasting notes and find coffee or tea that suits your preferences.",
                     purchaseNote: "Links open international product searches or retailer stores. Check destination availability, stock, price, and import fees with the retailer.",
                     shopSearchCoffee: "Search globally for beans",
                     shopSearchTea: "Search globally for this tea",
@@ -785,26 +770,26 @@
                     reset: "Reset", ready: "Ready", paused: "Paused", complete: "Brew complete!"
                 },
                 guide: {
-                    sectionTitle: "BREWING MASTERCLASS",
-                    heading: "Master Extraction Guide",
-                    subheading: "Mastering core fundamentals elevates your home café to specialty standards.",
-                    card1Title: "Golden Ratio",
-                    card1Desc: "Drip coffee uses 1:15-16 bean-to-water ratio; fine tea uses 2-3g leaves per 200ml water.",
-                    card2Title: "Water Temperature",
-                    card2Desc: "Light roast coffee & black tea need 92-95°C; green tea thrives at 70-80°C to prevent bitterness.",
-                    card3Title: "Grind & Timing",
-                    card3Desc: "Coarser grinds require longer steep times; finer grinds require fast extraction.",
-                    ratioCoffee: "Drip: 18g coffee + 280ml water", ratioTea: "Loose leaf tea: 3g leaves + 250ml water",
-                    tempCoffee: "Coffee: 91°C–94°C", tempTea: "Green tea: 75°C / Black tea: 95°C",
-                    grindEspresso: "Espresso: extra fine (25–30 sec)", grindDrip: "Hand drip: medium-fine (2 min 30 sec)"
+                    sectionTitle: "ORDER WITH CONFIDENCE",
+                    heading: "How to order at a café",
+                    subheading: "Show your result to the barista and add one detail about what you like.",
+                    card1Title: "Show your recommendation",
+                    card1Desc: "Share the drink name and tasting notes from your quiz result.",
+                    card2Title: "Say what you enjoy",
+                    card2Desc: "Pick a note from the archive, like fruit, chocolate, or flowers.",
+                    card3Title: "Make it yours",
+                    card3Desc: "Try the standard recipe first, then adjust sweetness or milk if you like.",
+                    ratioCoffee: "Do you have a drink made with these beans?", ratioTea: "Which preparation brings out these flavors?",
+                    tempCoffee: "I like bright, fruit-forward coffee.", tempTea: "I'm looking for something smooth and nutty.",
+                    grindEspresso: "Could I have less syrup?", grindDrip: "Could I get the milk on the side?"
                 },
                 footer: {
-                    copy: "© 2026 BREW & STEEP. Craft Coffee & Fine Tea Discovery Platform. All rights reserved."
+                    copy: "© 2026 BREW & STEEP. Coffee & Tea Taste Discovery. All rights reserved."
                 }
             },
             ja: {
-                philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "おいしい一杯は、最初のひと口よりずっと前から始まっています。", intro: "味わいは産地、丁寧なものづくり、そして淹れ方によって変わります。その違いを見つけやすくして、毎日の一杯をもっと自分らしく。", originTitle: "産地から知る", originCopy: "エチオピアの高地からアッサム、宇治まで。育った場所は、その飲みものらしさを知る最初の手がかりです。", craftTitle: "つくり手の技を大切に", craftCopy: "焙煎、茶葉、水、時間が一杯の味わいを変えます。飲む楽しさをそのままに、選ぶための情報をまとめました。", cupTitle: "自分好みの一杯に", cupCopy: "テイスティングノートから好みを見つけ、気分に合う一杯を選びましょう。タイマーとガイドで、好きな味わいを引き出せます。", closing: "産地を知り、技を感じ、自分だけの味わいを楽しむ。" },
-                nav: { philosophy: "私たちの哲学", quiz: "好み診断", archive: "アーカイブ", timer: "タイマー", guide: "ガイド" },
+                philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "おいしい一杯は、最初のひと口よりずっと前から始まっています。", intro: "味わいは産地、丁寧なものづくり、そして淹れ方によって変わります。その違いを見つけやすくして、毎日の一杯をもっと自分らしく。", originTitle: "産地から知る", originCopy: "エチオピアの高地からアッサム、宇治まで。育った場所は、その飲みものらしさを知る最初の手がかりです。", craftTitle: "つくり手の技を大切に", craftCopy: "焙煎、茶葉、水、時間が一杯の味わいを変えます。飲む楽しさをそのままに、選ぶための情報をまとめました。", cupTitle: "自分好みの一杯に", cupCopy: "テイスティングノートから好みを見つけ、気分に合う一杯を選びましょう。カフェで好みを伝えるヒントに。自宅で淹れるならタイマーも使えます。", closing: "産地を知り、技を感じ、自分だけの味わいを楽しむ。" },
+                nav: { philosophy: "私たちの哲学", quiz: "好み診断", archive: "アーカイブ", timer: "タイマー", guide: "カフェでの注文" },
                 hero: {
                     tagline: "その一杯、疑ってみよう",
                     title: "そのコーヒー、本当に好き？",
@@ -824,16 +809,16 @@
                 quiz: {
                     sectionTitle: "INTERACTIVE QUIZ",
                     heading: "お気に入りの一杯を見つける",
-                    subheading: "4つの質問で好みを発見。お気に入りを選んで、自分で淹れてみましょう。",
+                    subheading: "4つの質問で好みを見つけ、カフェでおすすめの一杯を楽しみましょう。",
                     step: "ステップ",
                     resultBadge: "あなたへのおすすめ",
-                    brewNow: "このメニューでタイマー開始",
+                    brewNow: "自宅で淹れる方はこちら：タイマーを使う",
                     retry: "もう一度診断する", back: "← 前の選択へ"
                 },
                 archive: {
                     sectionTitle: "CURATED COLLECTION",
                     heading: "ドリンク アーカイブ",
-                    subheading: "厳選された豆と茶葉のテイスティングノートと抽出スペックをチェック。",
+                    subheading: "厳選した豆と茶葉の風味ノートから、好みに合う一杯を探しましょう。",
                     purchaseNote: "購入リンクは世界向け商品検索または販売店につながります。配送先・在庫・価格・関税は販売店でご確認ください。",
                     shopSearchCoffee: "世界中からコーヒー豆を検索",
                     shopSearchTea: "世界中からこのお茶を検索",
@@ -850,26 +835,26 @@
                     reset: "リセット", ready: "準備完了", paused: "一時停止中", complete: "抽出完了！"
                 },
                 guide: {
-                    sectionTitle: "BREWING MASTERCLASS",
-                    heading: "マスター抽出ガイド",
-                    subheading: "基本の原則を守るだけで、ご自宅が本格的なカフェに生まれ変わります。",
-                    card1Title: "黄金比率 (Ratio)",
-                    card1Desc: "ドリップコーヒーは豆1gに対してお湯15〜16g、お茶は茶葉2〜3gに対してお湯200mlが標準です。",
-                    card2Title: "お湯の温度 (Temp)",
-                    card2Desc: "浅煎り豆や紅茶は高め(92〜95℃)、日本茶は低め(70〜80℃)で抽出するのがコツです。",
-                    card3Title: "挽き目と時間 (Grind & Time)",
-                    card3Desc: "粗挽きは長めに、細挽きは短時間で抽出してエグみを防ぎます。",
-                    ratioCoffee: "ドリップ：豆18g＋お湯280ml", ratioTea: "リーフティー：茶葉3g＋お湯250ml",
-                    tempCoffee: "コーヒー：91°C～94°C", tempTea: "緑茶：75°C／紅茶：95°C",
-                    grindEspresso: "エスプレッソ：極細挽き（25～30秒）", grindDrip: "ハンドドリップ：中細挽き（2分30秒）"
+                    sectionTitle: "ORDER WITH CONFIDENCE",
+                    heading: "カフェでこんなふうに頼んでみよう",
+                    subheading: "診断結果を見せて、好みをひと言添えてみましょう。",
+                    card1Title: "おすすめを見せる",
+                    card1Desc: "診断結果のメニュー名とテイスティングノートをバリスタに見せましょう。",
+                    card2Title: "好きな味を伝える",
+                    card2Desc: "アーカイブから果実、チョコレート、花のような好きな風味を選びましょう。",
+                    card3Title: "自分好みに調整する",
+                    card3Desc: "まずはお店の基本レシピで。甘さやミルクは必要に応じて調整しましょう。",
+                    ratioCoffee: "この豆を使ったメニューはありますか？", ratioTea: "この風味に合う抽出方法はどれですか？",
+                    tempCoffee: "明るくフルーティーな味が好きです。", tempTea: "ナッツのような、まろやかなコーヒーを探しています。",
+                    grindEspresso: "シロップは少なめでお願いします。", grindDrip: "ミルクは別添えにできますか？"
                 },
                 footer: {
-                    copy: "© 2026 BREW & STEEP。コーヒーと上質なお茶の発見・抽出ガイド。すべての権利を保有します。"
+                    copy: "© 2026 BREW & STEEP。コーヒーとお茶の好み発見ガイド。すべての権利を保有します。"
                 }
             },
             zh: {
-                philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "一杯好饮，从第一口之前就已开始。", intro: "风味由产地、细致工艺与冲煮方式共同塑造。我们把这些线索整理得更清晰，让每一杯都更贴近你的喜好。", originTitle: "从产地开始", originCopy: "从埃塞俄比亚高地到阿萨姆与宇治，产地是认识一款饮品风味的第一条线索。", craftTitle: "尊重制作工艺", craftCopy: "烘焙、茶叶、水与时间都会改变杯中风味。我们汇集实用信息，也保留品尝本身的乐趣。", cupTitle: "冲出自己的风格", cupCopy: "从风味笔记发现喜好，选一杯符合当下心情的饮品，再用计时器和指南冲出喜欢的味道。", closing: "认识产地，感受工艺，享受发现的风味。" },
-                nav: { philosophy: "品牌理念", quiz: "口味测验", archive: "风味档案", timer: "萃取计时", guide: "冲煮指南" },
+                philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "一杯好饮，从第一口之前就已开始。", intro: "风味由产地、细致工艺与冲煮方式共同塑造。我们把这些线索整理得更清晰，让每一杯都更贴近你的喜好。", originTitle: "从产地开始", originCopy: "从埃塞俄比亚高地到阿萨姆与宇治，产地是认识一款饮品风味的第一条线索。", craftTitle: "尊重制作工艺", craftCopy: "烘焙、茶叶、水与时间都会改变杯中风味。我们汇集实用信息，也保留品尝本身的乐趣。", cupTitle: "冲出自己的风格", cupCopy: "从风味笔记发现喜好，选一杯符合当下心情的饮品，在咖啡馆点单时参考这些风味；如果在家冲煮，也可以使用计时器。", closing: "认识产地，感受工艺，享受发现的风味。" },
+                nav: { philosophy: "品牌理念", quiz: "口味测验", archive: "风味档案", timer: "萃取计时", guide: "咖啡馆点单" },
                 hero: {
                     tagline: "重新认识你的咖啡",
                     title: "这杯咖啡，真的是你的口味吗？",
@@ -889,16 +874,16 @@
                 quiz: {
                     sectionTitle: "INTERACTIVE QUIZ",
                     heading: "寻找您的专属饮品",
-                    subheading: "通过四次选择发现自己的口味，选一款喜欢的饮品并亲手冲泡。",
+                    subheading: "回答四个问题，找到适合自己的口味，再去咖啡馆试试推荐饮品。",
                     step: "步骤",
                     resultBadge: "为您推荐",
-                    brewNow: "开始此饮品计时",
+                    brewNow: "在家冲煮？打开计时器",
                     retry: "重新测试", back: "← 上一步"
                 },
                 archive: {
                     sectionTitle: "CURATED COLLECTION",
                     heading: "饮品风味档案",
-                    subheading: "探索精选咖啡豆与特级茶叶的风味轮与萃取参数。",
+                    subheading: "浏览精选咖啡豆与茶叶的风味笔记，找到适合自己的选择。",
                     purchaseNote: "购买链接将打开全球商品搜索或商店页面。请向商家确认目的地配送、库存、价格和进口税费。",
                     shopSearchCoffee: "全球搜索咖啡豆",
                     shopSearchTea: "全球搜索这款茶",
@@ -915,21 +900,21 @@
                     reset: "重置", ready: "准备就绪", paused: "已暂停", complete: "冲煮完成！"
                 },
                 guide: {
-                    sectionTitle: "BREWING MASTERCLASS",
-                    heading: "大师冲煮指南",
-                    subheading: "掌握核心萃取要素，在家也能体验精品咖啡馆与茶室的风味。",
-                    card1Title: "黄金粉水比",
-                    card1Desc: "手冲咖啡推荐 1:15~16 粉水比；原叶茶推荐 2~3g 茶叶搭配 200ml 水。",
-                    card2Title: "萃取水温",
-                    card2Desc: "浅焙豆与红茶需 92-95°C 高温；绿茶宜用 70-80°C 水温以避免苦涩。",
-                    card3Title: "研磨度与时间",
-                    card3Desc: "颗粒越粗萃取时间需越长；颗粒越细萃取速度宜越快。",
-                    ratioCoffee: "手冲：咖啡豆18g＋水280ml", ratioTea: "原叶茶：茶叶3g＋水250ml",
-                    tempCoffee: "咖啡：91°C～94°C", tempTea: "绿茶：75°C／红茶：95°C",
-                    grindEspresso: "意式浓缩：极细研磨（25～30秒）", grindDrip: "手冲：中细研磨（2分30秒）"
+                    sectionTitle: "ORDER WITH CONFIDENCE",
+                    heading: "在咖啡馆这样点单",
+                    subheading: "把测验结果给咖啡师看，再补充一句你的口味偏好。",
+                    card1Title: "展示推荐结果",
+                    card1Desc: "把测验推荐的饮品名称和风味笔记给咖啡师看。",
+                    card2Title: "说说喜欢的味道",
+                    card2Desc: "从档案里挑选水果、巧克力或花香等你喜欢的风味。",
+                    card3Title: "按自己的口味调整",
+                    card3Desc: "先试试店里的标准做法，再按需调整甜度或牛奶。",
+                    ratioCoffee: "有用这些咖啡豆制作的饮品吗？", ratioTea: "哪种做法最能体现这些风味？",
+                    tempCoffee: "我喜欢清爽明亮、带果香的咖啡。", tempTea: "我想找一杯顺滑、带坚果香的咖啡。",
+                    grindEspresso: "糖浆可以少放一些吗？", grindDrip: "牛奶可以另外放吗？"
                 },
                 footer: {
-                    copy: "© 2026 BREW & STEEP。咖啡与精品茶探索及精准冲煮平台。保留所有权利。"
+                    copy: "© 2026 BREW & STEEP。咖啡与精品茶风味探索平台。保留所有权利。"
                 }
             }
         };
@@ -1078,6 +1063,7 @@
         }
 
         function goToResultTimer() {
+            document.getElementById('timer').hidden = false;
             if (window.recommendedPreset) {
                 selectPreset(window.recommendedPreset);
             }
@@ -1270,9 +1256,6 @@
                             </a>
                         </div>
 
-                        <button onclick="selectPreset('${item.presetKey}'); window.location.hash='#timer';" class="w-full py-2.5 rounded-xl bg-brand-500/20 border border-brand-500/40 text-brand-gold hover:bg-brand-500 hover:text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-stopwatch"></i> ${i18n[currentLang].archive.setTimer}
-                        </button>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -1439,7 +1422,7 @@
 
         // --- 5. Guided navigation and gentle scroll reveals ---
         function initJourney() {
-            const sections = ["quiz", "archive", "timer", "guide"].map(id => document.getElementById(id)).filter(Boolean);
+            const sections = ["quiz", "archive", "guide"].map(id => document.getElementById(id)).filter(Boolean);
             const links = document.querySelectorAll(".journey-link");
             if (!("IntersectionObserver" in window)) return;
             const activeObserver = new IntersectionObserver(entries => entries.forEach(entry => {
@@ -1513,6 +1496,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
