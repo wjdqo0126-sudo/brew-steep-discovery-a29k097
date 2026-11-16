@@ -329,6 +329,55 @@
             #catalog-grid h3 { min-height: 0; }
             #catalog-grid > .catalog-card p { min-height: 0; }
         }
+
+        /* Keep the composition steady across viewport sizes without clipping translations. */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-padding-top: 5rem; }
+        section[id] { scroll-margin-top: 5rem; }
+        .hero-panel { height: 100svh; min-height: 0; }
+        .hero-panel > .max-w-5xl { width: min(100%, 72rem); }
+        .hero-panel h1 {
+            width: 100%; height: auto; min-height: 2.12em; overflow: visible;
+            max-width: none; font-size: clamp(3rem, 7.1vw, 6.1rem) !important;
+            line-height: 1.04 !important; letter-spacing: -.045em; text-wrap: balance;
+        }
+        .hero-panel h1 .gold-gradient-text { max-width: 12ch; margin: 0; }
+        html[lang="ko"] .hero-panel h1 { font-size: clamp(3rem, 7.4vw, 6.2rem) !important; }
+        html[lang="en"] .hero-panel h1 { font-size: clamp(2.65rem, 6.2vw, 5.2rem) !important; }
+        html[lang="ja"] .hero-panel h1,
+        html[lang="zh"] .hero-panel h1 { font-size: clamp(2.8rem, 6.7vw, 5.7rem) !important; }
+        #quiz h2, #philosophy h2, #archive h2, #guide h2 {
+            text-wrap: balance; max-width: 100%; margin-inline: auto;
+        }
+        #catalog-grid > .catalog-card { min-width: 0; }
+        #catalog-grid .catalog-buy-link { white-space: normal; overflow-wrap: anywhere; }
+
+        @media (max-width: 767px) {
+            .hero-panel {
+                height: 100svh; min-height: 38rem;
+                padding: clamp(5.5rem, 11svh, 7rem) 1.25rem calc(2rem + env(safe-area-inset-bottom));
+            }
+            .hero-panel h1 { min-height: 2.25em; }
+            .hero-panel h1 .gold-gradient-text { max-width: 12ch; }
+            html[lang="ko"] .hero-panel h1 { font-size: clamp(2.55rem, 11vw, 4.15rem) !important; }
+            html[lang="en"] .hero-panel h1 { font-size: clamp(2.2rem, 9vw, 3.2rem) !important; }
+            html[lang="ja"] .hero-panel h1,
+            html[lang="zh"] .hero-panel h1 { font-size: clamp(2.3rem, 9.2vw, 3.3rem) !important; }
+            #hero-video { top: auto; bottom: 5%; height: 24%; }
+            #quiz, #philosophy, #guide { padding-top: clamp(5rem, 10svh, 7rem); padding-bottom: clamp(5rem, 10svh, 7rem); }
+            #archive { padding-top: clamp(5rem, 10svh, 7rem); padding-bottom: clamp(5rem, 10svh, 7rem); }
+        }
+        @media (max-width: 390px) {
+            .hero-panel { padding-left: 1rem; padding-right: 1rem; }
+            .hero-panel h1 { min-height: 2.35em; }
+            #mobile-journey { padding-left: max(.75rem, env(safe-area-inset-left)); padding-right: max(.75rem, env(safe-area-inset-right)); }
+            #mobile-journey a { min-width: 0; text-align: center; line-height: 1.25; }
+        }
+        @media (max-height: 650px) and (min-width: 768px) {
+            .hero-panel { min-height: 0; padding-top: 5rem; padding-bottom: 1rem; overflow-y: auto; }
+            .hero-panel h1 { min-height: 2em; font-size: clamp(2.6rem, 6vh, 4rem) !important; }
+            #hero-video { top: auto; bottom: 3%; height: 22%; }
+        }
     </style>
 </head>
 <body class="antialiased text-gray-200">
