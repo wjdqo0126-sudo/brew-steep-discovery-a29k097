@@ -412,7 +412,7 @@
         body.intro-gated .journey-hero-track {
             height: 100svh !important; min-height: 100svh !important; margin-bottom: 0 !important; overflow: hidden;
         }
-        body.intro-gated .hero-panel { height: 100svh; min-height: 100svh; overflow: hidden; }
+        body.intro-gated .hero-panel { height: 100svh; min-height: 100svh; overflow: hidden; opacity: 1 !important; filter: none !important; }
     </style>
 </head>
 <body class="antialiased text-gray-200 intro-gated">
@@ -1622,6 +1622,11 @@
 
         // --- 6. Initialization on Load ---
         window.addEventListener('DOMContentLoaded', () => {
+            if (document.body.classList.contains("intro-gated")) {
+                if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
+                if (window.location.hash) window.history.replaceState(null, "", window.location.pathname + window.location.search);
+                window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+            }
             renderQuizStep();
             renderCatalog('all');
             initPresetsUI();
