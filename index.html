@@ -359,6 +359,7 @@
             -webkit-text-fill-color: transparent;
         }
         .hero-panel [data-i18n="hero.subtitle"] { color: #fff !important; text-shadow: 0 2px 20px rgba(0, 0, 0, .8); }
+        .hero-start-btn { position: relative; z-index: 5; min-height: 3.5rem; }
         .hero-panel h1 {
             width: 100%; height: auto; min-height: 2.12em; overflow: visible;
             max-width: none; font-size: clamp(3rem, 7.1vw, 6.1rem) !important;
@@ -457,17 +458,22 @@
         <div class="max-w-5xl mx-auto text-center z-10 space-y-8">
             <div class="hero-kicker inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-300 text-xs sm:text-sm tracking-wider uppercase font-semibold">
                 <i class="fa-solid fa-bolt text-orange-300"></i>
-                <span data-i18n="hero.tagline">취향 리셋, 지금</span>
+                <span data-i18n="hero.tagline">나만의 취향 찾기</span>
             </div>
 
             <!-- Main Catchy Headline -->
             <h1 class="font-serif text-4xl sm:text-6xl md:text-6xl xl:text-7xl font-extrabold text-white leading-tight tracking-normal">
-                <span data-i18n="hero.title" class="gold-gradient-text block mb-3">그 커피, 네 취향 맞아?</span>
+                <span data-i18n="hero.title" class="gold-gradient-text block mb-3">내 취향의 커피와 차, 같이 찾아볼까요?</span>
             </h1>
 
             <p class="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed" data-i18n="hero.subtitle">
-                네 번만 골라봐. 네 입맛에 딱 맞는 한 잔, 찾아줄게.
+                좋아하는 맛은 사람마다 다르니까요. MBTI처럼 가볍게 8문항에 답하고, 우리 같이 나만의 원두와 차를 찾아봐요.
             </p>
+
+            <button type="button" onclick="startTasteTest()" class="hero-start-btn mx-auto inline-flex items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-sm sm:text-base font-bold text-gray-950 shadow-2xl shadow-black/30 transition-all hover:scale-[1.03] hover:bg-brand-50 focus:outline-none focus:ring-4 focus:ring-white/40">
+                <span data-i18n="hero.ctaQuiz">취향 검사 시작하기</span>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
 
             <div class="pt-4 flex items-center justify-center gap-3 text-xs sm:text-sm tracking-wide text-brand-100/90">
                 <span data-i18n="hero.journeyFind">발견하기</span><i class="fa-solid fa-arrow-right text-brand-gold/70"></i>
@@ -527,7 +533,7 @@
                     <span><span data-i18n="quiz.step">Step</span> <span id="quiz-current-step">1</span> / <span id="quiz-total-steps">8</span></span>
                     <button id="quiz-back-btn" onclick="goBackQuizStep()" class="hidden text-gray-400 hover:text-brand-gold normal-case" data-i18n="quiz.back">← 이전 선택</button>
                 </div>
-                <h3 id="quiz-question" aria-live="polite" class="text-xl sm:text-2xl font-bold text-white mb-6"></h3>
+                <h3 id="quiz-question" tabindex="-1" aria-live="polite" class="text-xl sm:text-2xl font-bold text-white mb-6"></h3>
 
                 <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <!-- Options injected via JS -->
@@ -544,6 +550,7 @@
                     <h3 id="result-title" class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1 mb-2"></h3>
                     <p id="result-profile" class="text-brand-200 max-w-xl mx-auto text-sm sm:text-base leading-relaxed mb-4"></p>
                     <h4 id="result-drink" class="text-white text-lg font-bold"></h4>
+                    <p id="result-roast" class="text-brand-300 text-xs sm:text-sm font-semibold tracking-wide"></p>
                     <p id="result-desc" class="text-gray-300 max-w-xl mx-auto text-sm sm:text-base leading-relaxed"></p>
                 </div>
 
@@ -736,11 +743,11 @@
                 philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "좋은 한 잔은 첫 모금보다 훨씬 먼저 시작됩니다.", intro: "맛은 산지와 세심한 손길, 추출 방식에 따라 달라집니다. 그 차이를 쉽게 발견할 수 있도록 정리해, 매일의 한 잔을 조금 더 나답게 만듭니다.", originTitle: "산지에서 시작하기", originCopy: "에티오피아 고지대부터 아삼과 우지까지, 음료가 자란 곳은 그 맛의 성격을 알려주는 첫 단서입니다.", craftTitle: "만드는 손길을 존중하기", craftCopy: "로스팅, 찻잎, 물, 시간은 한 잔의 맛을 바꿉니다. 맛보는 즐거움은 그대로 두고, 선택에 필요한 정보를 모았습니다.", cupTitle: "내 취향대로 완성하기", cupCopy: "테이스팅 노트로 취향을 찾고, 기분에 맞는 음료를 골라보세요. 카페에서 취향을 말할 때 활용할 수 있습니다. 집에서 내릴 땐 타이머도 선택해 보세요.", closing: "산지를 발견하고, 손길을 느끼고, 나만의 풍미를 즐겨보세요." },
                 nav: { philosophy: "브랜드 철학", quiz: "취향 찾기", archive: "아카이브", timer: "추출 타이머", guide: "카페 주문 팁" },
                 hero: {
-                    tagline: "취향 찾기, 같이 해볼까?",
-                    title: "우리 같이 네 취향의 한 잔을 찾아볼까?",
-                    subtitle: "좋아하는 맛을 몇 가지 고르면, 네 마음에 가까운 커피와 차를 같이 찾아볼게.",
+                    tagline: "나만의 취향 찾기",
+                    title: "내 취향의 커피와 차, 같이 찾아볼까요?",
+                    subtitle: "좋아하는 맛은 사람마다 다르니까요. MBTI처럼 가볍게 8문항에 답하고, 우리 같이 나만의 원두와 차를 찾아봐요.",
                     journeyFind: "발견하기", journeyBrew: "내려보기", journeyEnjoy: "즐기기",
-                    ctaQuiz: "내 취향 찾기 시작",
+                    ctaQuiz: "취향 검사 시작하기",
                     ctaTimer: "추출 타이머 사용하기",
                     scroll: "아래로 내려 취향 탐험하기",
                     videoCredit: "영상: K / Pexels"
@@ -798,11 +805,11 @@
                 philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "A good cup begins long before the first sip.", intro: "Flavor is shaped by place, careful craft, and the way you brew. We make those details easier to discover, so every cup feels a little more personal.", originTitle: "Start with the place", originCopy: "From Ethiopia’s highlands to Assam and Uji, a drink’s origin offers the first clues to its character.", craftTitle: "Respect the craft", craftCopy: "Roast, leaf, water, and time each change the cup. We bring the useful details together without hiding the simple pleasure of tasting.", cupTitle: "Make it your own", cupCopy: "Explore tasting notes, find a brew that fits your mood, then use those notes to order with confidence. A timer is there if you brew at home.", closing: "Discover the origin. Notice the craft. Savor what you find." },
                 nav: { philosophy: "Our Philosophy", quiz: "Taste Quiz", archive: "Archive", timer: "Brew Timer", guide: "Café order tips" },
                 hero: {
-                    tagline: "LET'S FIND YOUR CUP",
-                    title: "Let's find a cup that feels like you.",
-                    subtitle: "Tell me what flavors you enjoy, and we'll explore your kind of coffee and tea together.",
+                    tagline: "YOUR TASTE, YOUR CUP",
+                    title: "Let's find your kind of coffee and tea.",
+                    subtitle: "We all enjoy different flavors. Answer 8 lighthearted, MBTI-style questions, and let's discover beans and teas that might feel like you.",
                     journeyFind: "DISCOVER", journeyBrew: "BREW", journeyEnjoy: "ENJOY",
-                    ctaQuiz: "Start Preference Quiz",
+                    ctaQuiz: "Start the taste quiz",
                     ctaTimer: "Use Brew Timer",
                     scroll: "SCROLL TO EXPLORE YOUR TASTE",
                     videoCredit: "Video: K / Pexels"
@@ -863,11 +870,11 @@
                 philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "おいしい一杯は、最初のひと口よりずっと前から始まっています。", intro: "味わいは産地、丁寧なものづくり、そして淹れ方によって変わります。その違いを見つけやすくして、毎日の一杯をもっと自分らしく。", originTitle: "産地から知る", originCopy: "エチオピアの高地からアッサム、宇治まで。育った場所は、その飲みものらしさを知る最初の手がかりです。", craftTitle: "つくり手の技を大切に", craftCopy: "焙煎、茶葉、水、時間が一杯の味わいを変えます。飲む楽しさをそのままに、選ぶための情報をまとめました。", cupTitle: "自分好みの一杯に", cupCopy: "テイスティングノートから好みを見つけ、気分に合う一杯を選びましょう。カフェで好みを伝えるヒントに。自宅で淹れるならタイマーも使えます。", closing: "産地を知り、技を感じ、自分だけの味わいを楽しむ。" },
                 nav: { philosophy: "私たちの哲学", quiz: "好み診断", archive: "アーカイブ", timer: "タイマー", guide: "カフェでの注文" },
                 hero: {
-                    tagline: "好みを一緒に見つけよう",
-                    title: "あなたらしい一杯、一緒に見つけよう。",
-                    subtitle: "好きな味を選びながら、ぴったりのコーヒーやお茶を一緒に探そう。",
+                    tagline: "自分らしい好みを見つけよう",
+                    title: "自分らしいコーヒーとお茶、一緒に見つけませんか？",
+                    subtitle: "好きな味は人それぞれ。MBTIのように気軽な8つの質問で、自分に合う豆やお茶を一緒に探しましょう。",
                     journeyFind: "見つける", journeyBrew: "淹れる", journeyEnjoy: "楽しむ",
-                    ctaQuiz: "診断を始める",
+                    ctaQuiz: "好みタイプ診断を始める",
                     ctaTimer: "タイマーを使う",
                     scroll: "スクロールして好みを探す",
                     videoCredit: "動画: K / Pexels"
@@ -928,11 +935,11 @@
                 philosophy: { eyebrow: "OUR PHILOSOPHY", heading: "一杯好饮，从第一口之前就已开始。", intro: "风味由产地、细致工艺与冲煮方式共同塑造。我们把这些线索整理得更清晰，让每一杯都更贴近你的喜好。", originTitle: "从产地开始", originCopy: "从埃塞俄比亚高地到阿萨姆与宇治，产地是认识一款饮品风味的第一条线索。", craftTitle: "尊重制作工艺", craftCopy: "烘焙、茶叶、水与时间都会改变杯中风味。我们汇集实用信息，也保留品尝本身的乐趣。", cupTitle: "冲出自己的风格", cupCopy: "从风味笔记发现喜好，选一杯符合当下心情的饮品，在咖啡馆点单时参考这些风味；如果在家冲煮，也可以使用计时器。", closing: "认识产地，感受工艺，享受发现的风味。" },
                 nav: { philosophy: "品牌理念", quiz: "口味测验", archive: "风味档案", timer: "萃取计时", guide: "咖啡馆点单" },
                 hero: {
-                    tagline: "一起探索你的口味",
-                    title: "一起找到合你口味的那一杯。",
-                    subtitle: "选几个你喜欢的风味，我们一起看看哪款咖啡或茶最适合你。",
+                    tagline: "发现属于自己的口味",
+                    title: "一起找到适合自己的咖啡与茶吧。",
+                    subtitle: "每个人喜欢的风味都不同。像MBTI测验一样轻松回答8个问题，一起发现适合自己的咖啡豆与茶。",
                     journeyFind: "发现", journeyBrew: "冲煮", journeyEnjoy: "享受",
-                    ctaQuiz: "开始寻找我的专属风味",
+                    ctaQuiz: "开始口味类型测试",
                     ctaTimer: "使用萃取计时器",
                     scroll: "向下探索您的口味",
                     videoCredit: "视频：K / Pexels"
@@ -1062,6 +1069,16 @@
         let quizAnswers = {};
         let currentStep = 0;
 
+        function startTasteTest() {
+            resetQuiz();
+            const quizSection = document.getElementById("quiz");
+            const question = document.getElementById("quiz-question");
+            const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            window.history.replaceState(null, "", "#quiz");
+            quizSection.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+            window.setTimeout(() => question.focus({ preventScroll: true }), reducedMotion ? 0 : 450);
+        }
+
         function renderQuizStep() {
             if (currentStep >= quizQuestions.length) return;
             const qData = quizQuestions[currentStep];
@@ -1144,6 +1161,7 @@
             document.getElementById('result-title').textContent = copy.names[typeNameKey];
             document.getElementById('result-profile').textContent = [copy.drink[profile.drink], copy.flavor[profile.flavor], copy.body[profile.body], copy.discovery[profile.discovery]].join(" · ");
             document.getElementById('result-drink').textContent = `${copy.recommendation}: ${recommended.name[currentLang]}`;
+            document.getElementById('result-roast').textContent = `${localizeCatalogTerm(recommended.roast)} · ${recommended.temp}`;
             document.getElementById('result-desc').textContent = recommended.desc[currentLang];
             
             const notesContainer = document.getElementById('result-notes');
