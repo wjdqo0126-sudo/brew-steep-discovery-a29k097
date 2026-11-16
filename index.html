@@ -336,6 +336,29 @@
         section[id] { scroll-margin-top: 5rem; }
         .hero-panel { height: 100svh; min-height: 0; }
         .hero-panel > .max-w-5xl { width: min(100%, 72rem); }
+        /* Full-bleed coffee footage fills the entire opening viewport. */
+        .hero-panel { mask-image: none; background: #100b08; color: #fff; }
+        .hero-panel::before {
+            inset: 0; height: auto;
+            background: linear-gradient(90deg, rgba(10, 7, 5, .64) 0%, rgba(10, 7, 5, .28) 56%, rgba(10, 7, 5, .12) 100%),
+                        linear-gradient(180deg, rgba(10, 7, 5, .16) 0%, transparent 38%, rgba(10, 7, 5, .36) 100%);
+        }
+        .hero-panel::after {
+            inset: 0; height: auto;
+            background: radial-gradient(ellipse at center, transparent 20%, rgba(10, 7, 5, .08) 62%, rgba(10, 7, 5, .38) 100%);
+        }
+        #hero-video {
+            position: absolute; inset: 0; top: 0; right: 0; bottom: 0; left: 0;
+            width: 100%; height: 100%; object-fit: cover; object-position: center 55%;
+            border-radius: 0; filter: brightness(.78) saturate(1.16); box-shadow: none; z-index: 0;
+        }
+        .hero-panel h1 { color: #fff; text-shadow: 0 3px 28px rgba(0, 0, 0, .5); }
+        .hero-panel h1 .gold-gradient-text {
+            background: linear-gradient(100deg, #fff 0%, #ffe1b6 58%, #edb474 100%);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-panel [data-i18n="hero.subtitle"] { color: #fff !important; text-shadow: 0 2px 20px rgba(0, 0, 0, .8); }
         .hero-panel h1 {
             width: 100%; height: auto; min-height: 2.12em; overflow: visible;
             max-width: none; font-size: clamp(3rem, 7.1vw, 6.1rem) !important;
