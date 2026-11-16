@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" class="scroll-smooth">
+<html lang="ko" class="scroll-smooth intro-gated">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -400,9 +400,22 @@
             .hero-panel { min-height: 0; padding-top: 5rem; padding-bottom: 1rem; overflow-y: auto; }
             .hero-panel h1 { min-height: 2em; font-size: clamp(2.6rem, 6vh, 4rem) !important; }
         }
+        /* Gate the opening screen until the visitor chooses to start the quiz. */
+        html.intro-gated, body.intro-gated {
+            height: 100svh; min-height: 100svh; overflow: hidden; overscroll-behavior: none;
+        }
+        body.intro-gated #main-header nav,
+        body.intro-gated #mobile-journey,
+        body.intro-gated > section:not(#hero),
+        body.intro-gated > footer { display: none !important; }
+        body.intro-gated #hero,
+        body.intro-gated .journey-hero-track {
+            height: 100svh !important; min-height: 100svh !important; margin-bottom: 0 !important; overflow: hidden;
+        }
+        body.intro-gated .hero-panel { height: 100svh; min-height: 100svh; overflow: hidden; }
     </style>
 </head>
-<body class="antialiased text-gray-200">
+<body class="antialiased text-gray-200 intro-gated">
     <div id="scroll-flow" aria-hidden="true"></div>
 
     <header class="fixed top-0 left-0 right-0 z-50 glass-header transition-all duration-300" id="main-header">
@@ -1071,6 +1084,8 @@
 
         function startTasteTest() {
             resetQuiz();
+            document.documentElement.classList.remove("intro-gated");
+            document.body.classList.remove("intro-gated");
             const quizSection = document.getElementById("quiz");
             const question = document.getElementById("quiz-question");
             const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
